@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IOS 本地音乐播放 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="概述  首先是了解一下 iPod Library Access ，知道本地音乐文件的来源。接着就是知道如何使用播放器的类实例 MPMusicPlayerController ，去播放本地的音乐文件。这样基本就可以了，为了把Apple的文档使用多一些。尝试使用 Media item picker，深入">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">IOS 本地音乐播放</h1>
+  
+
+    <time datetime="2016-03-08T02:47:59.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>  首先是了解一下 <code>iPod Library Access</code> ，知道本地音乐文件的来源。接着就是知道如何使用播放器的类实例 <code>MPMusicPlayerController</code> ，去播放本地的音乐文件。这样基本就可以了，为了把Apple的文档使用多一些。尝试使用 <code>Media item picker</code>，深入再操作一下 <code>iPod Library</code>.</p>
+<p>  接触的类有:</p>
+<ul>
+<li>MPMediaItem</li>
+<li>MPMusicPlayerController</li>
+<li>MPMediaQuery</li>
+</ul>
+<p>  其他参考类</p>
+<ul>
+<li>MPMediaGroupingAlbum</li>
+<li>MPMediaLibrary</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#about">关于 iPod Library </a></li>
+<li><a href="#play">使用播放器放音乐</a></li>
+</ul>
+<h2 id="使用前提醒"><a href="#使用前提醒" class="headerlink" title="使用前提醒"></a>使用前提醒</h2><p>   需要头文件</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 在项目的 `General` 的 `Linked Frameworks and Libraries` 里面加入 `MediaPlayer.framework`</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">#import &lt;MediaPlayer/MediaPlayer.h&gt; /* 在你需要播放器的文件里加上这个头文件 */</span><br></pre></td></tr></table></figure>
+<h2 id="About-iPod-Library-Access"><a href="#About-iPod-Library-Access" class="headerlink" title="About iPod Library Access"></a><span id="about"><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/AboutiPodLibraryAccess/AboutiPodLibraryAccess.html#//apple_ref/doc/uid/TP40008765-CH103-SW9" target="_blank" rel="external">About iPod Library Access</a></span></h2><p>  如果你想播放本地的音乐，首先你要知道它存放的位置，iPod Library 就是存放它的地方。</p>
+<p>  而这个地方也是一个数据库</p>
+<hr>
+<ul>
+<li><p>先看图 <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/iPodLibraryAccessOverview.jpg" alt="Using iPod library access"></p>
+<p>然后就是，我们的应用使用 <code>Media Query</code> 去获取 <code>iPod Library</code> 的音乐文件，然后应用交给 <code>Music Player</code> 去播放它们。</p>
+<p>然后在对照上图，就可以大概知道一个情况了。</p>
+<p>了解数据库的状态的改变，这需要 <a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaLibrary_ClassReference/index.html#//apple_ref/c/data/MPMediaLibraryDidChangeNotification" target="_blank" rel="external"><code>MPMediaLibraryDidChangeNotification</code></a> 来作为通知。</p>
+</li>
+</ul>
+<hr>
+<p>  返回的内容是一个 <code>MPMediaItem</code> 的数组，<code>MPMediaItem</code> 包含了一个媒体文件所有信息。</p>
+<p>  获取所有的音乐文件，我们还需要一个 <a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaQuery_ClassReference/index.html#//apple_ref/occ/cl/MPMediaQuery" target="_blank" rel="external"><code>MPMediaQuery</code></a>, 这个类的实例可以用于初始化播放器的播放内容。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MPMediaQuery *mySong = [MPMediaQuery songsQuery]; // 这样我们就可以得到了本地音乐文件的所有内容啦</span><br><span class="line"></span><br><span class="line">MPMediaItem *item =  [mySong items][0]; // 获取本地音乐文件的第一个文件</span><br></pre></td></tr></table></figure>
+<p>  <a href="#mediaQuery">想对 MPMediaQuery 有更多的使用有更多的了解</a><br>  <a href="#moreAboutPlay">更多关于播放队列</a></p>
+<hr>
+<h2 id="Media-playback"><a href="#Media-playback" class="headerlink" title="Media playback"></a><span id="play"><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingMediaPlayback/UsingMediaPlayback.html#//apple_ref/doc/uid/TP40008765-CH100-SW1" target="_blank" rel="external">Media playback</a></span></h2><ul>
+<li>播放的一些概念术语 <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/musicPlayer.jpg" alt="Schematic representation of a music player object"></li>
+</ul>
+<p>   说好的播放器，就需要一个播放器实例啦。那就是 <code>MPMusicPlayerController</code>.<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* 生成一个播放器的实例 */</span><br><span class="line">MPMusicPlayerController *player = [MPMusicPlayerController applicationMusicPlayer];</span><br></pre></td></tr></table></figure></p>
+<p>   但是，有了播放器，还需要播放的文件呢！上面我们的到了播放文件列表的一个 MPMediaQuery 实例。Just do it<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[player setQueueWithQuery: [MPMediaQuery songsQuery]];</span><br><span class="line">/**</span><br><span class="line">或者是</span><br><span class="line">  [player setQueueWithQuery: mySong];</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+<p>   还没有完哦，如果播放器的播放状态改变了，我们也需要这个消息通知<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">( handle_NowPlayingItemChanged: ) 和 ( handle_PlaybackStateChanged: ) 是自定义的方法。</span><br><span class="line"></span><br><span class="line">在注销的时候，记得也把通知给注销掉哦。。。。。</span><br><span class="line">*/</span><br><span class="line">// now playing</span><br><span class="line">[notificationCenter addObserver:self</span><br><span class="line">                       selector:@selector(handle_NowPlayingItemChanged:)</span><br><span class="line">                           name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:_myPlayer];</span><br><span class="line"></span><br><span class="line"> // playback state change</span><br><span class="line"> [notificationCenter addObserver:self</span><br><span class="line">                        selector:@selector(handle_PlaybackStateChanged:)</span><br><span class="line">                            name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:_myPlayer];</span><br><span class="line"></span><br><span class="line"> [player beginGeneratingPlaybackNotifications]; // player set the notification</span><br></pre></td></tr></table></figure></p>
+<p>   然后就可以开始播放了。。。<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">遵循了 `MPMediaPlayback` Delegate,</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">[player play]; // 播放</span><br><span class="line"></span><br><span class="line">[_myPlayer pause]; // 暂停</span><br><span class="line"></span><br><span class="line">[_myPlayer stop]; // 停止</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToBeginning]; // 重新开始播放</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToNextItem]; // 下一首</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToPreviousItem]; // 上一首</span><br><span class="line"></span><br><span class="line">... (还有一些都在这个实例里面的)</span><br></pre></td></tr></table></figure></p>
+<p><strong>到这里基本就没有了,一个简单的没有界面的播放器就完成了</strong></p>
+<hr>
+<h2 id="更多关于-Media-Query"><a href="#更多关于-Media-Query" class="headerlink" title="更多关于 Media Query"></a><span id="mediaQuery">更多关于 Media Query</span></h2><ul>
+<li><p>Using a media query to access the device iPod library <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/mediaQuery.jpg" alt="Using a media query to access the device iPod library"></p>
+<p>上文我们得到的 MPMediaQuery 的实例 mySong.和图中的 myQuery 一样的。</p>
+</li>
+</ul>
+<p>  <code>media query</code> 提供了一个对于 <code>iPod Library</code> 的一个搜索描述，告诉数据库如何去获取相应的 <code>media item</code>，并且还有如何组织这些 <code>item</code></p>
+<p>  有两个配置属性</p>
+<pre><code>- The `filter` is the description of what to retrieve. The filter is optional; a filterless query matches the entire iPod library.
+
+- The `grouping` type is an optional key that specifies the arrangement to use for retrieved collections of media items.
+</code></pre><h2 id="更多关于播放队列"><a href="#更多关于播放队列" class="headerlink" title="更多关于播放队列"></a><span id="moreAboutPlay">更多关于播放队列</span></h2><p><strong>有两种方法去设置播放的队列内容</strong></p>
+<ul>
+<li><p>Use a media item <code>collection</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">musicPlayer 是 MPMusicPlayerController 的实例</span><br><span class="line">*/</span><br><span class="line">[musicPlayer setQueueWithItemCollection: userMediaItemCollection];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use a <code>media query</code>, which implicitly defines a collection</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">musicPlayer 是 MPMusicPlayerController 的实例</span><br><span class="line">*/</span><br><span class="line">[musicPlayer setQueueWithQuery: [MPMediaQuery songsQuery]];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="更多关于使用iPod-Library"><a href="#更多关于使用iPod-Library" class="headerlink" title="更多关于使用iPod Library "></a><span id="moreLibrary">更多关于使用iPod Library </span></h2><ul>
+<li>如何使用更好的使用iPod Library <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/database_access_classes.jpg" alt="Using the iPod library database access classes"><br>参考<a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingTheiPodLibrary/UsingTheiPodLibrary.html" target="_blank" rel="external">官方文档</a></li>
+</ul>
+<h2 id="关于如何使用item-picker"><a href="#关于如何使用item-picker" class="headerlink" title="关于如何使用item picker"></a><span id="itemPicker">关于如何使用item picker</span></h2><ul>
+<li>使用 Item Picker <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/mediaPicker.jpg" alt=" The user interface of the media item picker"></li>
+</ul>
+<p><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingtheMediaItemPicker/UsingtheMediaItemPicker.html#//apple_ref/doc/uid/TP40008765-CH104-SW1" target="_blank" rel="external">Using the Media Item Picker</a></p>
+<hr>
+<h2 id="参考链接信息"><a href="#参考链接信息" class="headerlink" title="参考链接信息"></a>参考链接信息</h2><p><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008765" target="_blank" rel="external">iPod Library Access Programming Guide</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MediaPlayer_Framework/index.html#//apple_ref/doc/uid/TP40006952" target="_blank" rel="external">Media Player Framework Reference</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMusicPlayerController_ClassReference/index.html#//apple_ref/occ/cl/MPMusicPlayerController" target="_blank" rel="external">MPMusicPlayerController</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaPlayback_protocol/index.html#//apple_ref/occ/intf/MPMediaPlayback" target="_blank" rel="external">MPMediaPlayback</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaLibrary_ClassReference/index.html#//apple_ref/occ/cl/MPMediaLibrary" target="_blank" rel="external">MPMediaLibrary</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/audio-player/">audio player</a><a href="/tags/local/">local</a><a href="/tags/MPMusicPlayerController/">MPMusicPlayerController</a><a href="/tags/MPMediaQuery/">MPMediaQuery</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

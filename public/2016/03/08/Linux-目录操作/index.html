@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 目录操作 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="简单说明一下  目录是文件的列表，在Linux下对于目录来说是有系统调用可以使用来操作目录的。
+  目录的操作需要一个目录文件绝对路径或者当前目录的相对路径。
+  目录操作的大概过程为：打开目录，读取目录内容放入目录的结构体里面，然后对于结构体的数据进行呈现，最后不需要的时候关闭目录。
+  打开目录">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Linux 目录操作</h1>
+  
+
+    <time datetime="2016-03-08T08:09:48.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简单说明一下"><a href="#简单说明一下" class="headerlink" title="简单说明一下"></a>简单说明一下</h2><p>  <strong>目录是文件的列表，在Linux下对于目录来说是有系统调用可以使用来操作目录的。</strong></p>
+<p>  <strong>目录的操作需要一个目录文件绝对路径或者当前目录的相对路径。</strong></p>
+<p>  <strong>目录操作的大概过程为：打开目录，读取目录内容放入目录的结构体里面，然后对于结构体的数据进行呈现，最后不需要的时候关闭目录。</strong></p>
+<p>  <strong>打开目录，会得到一个打开的目录文件描述符 <code>DIR</code> (一个无符号整数)，读取目录内容需要目录的文件描述符.</strong></p>
+<p>  <strong><code>DIR</code> 作为 打开目录的文件描述符的宏参数</strong></p>
+<hr>
+<h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2><ul>
+<li>函数参考<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DIR *opendir(const char *name); /* name: 目录的绝对路径或者相对路径 */</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>开始打开文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用该函数打开目录，返回的目录文件描述符可以用于读取目录内容。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">DIR *dir_ptr ; /* 目录文件描述符指针 */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((dir_ptr = opendir(<span class="string">"/"</span>)) == NULL) &#123; /* 打开目录 */</span><br><span class="line">  fprintf(stderr, <span class="string">"something error: %s"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<hr>
+</li>
+</ul>
+<h2 id="read"><a href="#read" class="headerlink" title="read"></a>read</h2><ul>
+<li><p>函数参考</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int readdir(unsigned int fd, struct old_linux_dirent *dirp,</span><br><span class="line">                 unsigned int count);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始读取目录内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用该目录文件描述符，读取目录文件的内容，放入结构体指针中。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">struct dirent *direntp; /* 目录结构体指针 */</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> ((direntp = readdir(dir_ptr)) != NULL) &#123; /* 读取存入结构体 */</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, direntp-&gt;d_name);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><a href="http://scofieldwyq.github.io/2016/03/08/Linux-%E7%9B%AE%E5%BD%95%E5%86%85%E5%AE%B9%E7%9A%84%E7%BB%93%E6%9E%84/" target="_blank" rel="external">dirent 结构体的内容</a></p>
+</li>
+</ul>
+<h2 id="close"><a href="#close" class="headerlink" title="close"></a>close</h2><ul>
+<li><p>函数参考</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int closedir(DIR *dirp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用目录文件描述符关闭目录。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">closedir(dir_ptr);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="move-curser"><a href="#move-curser" class="headerlink" title="move curser"></a>move curser</h2>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/Directory/">Directory</a><a href="/tags/opendir/">opendir</a><a href="/tags/readdir/">readdir</a><a href="/tags/closedir/">closedir</a><a href="/tags/seekdir/">seekdir</a><a href="/tags/Directory-operation/">Directory_operation</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

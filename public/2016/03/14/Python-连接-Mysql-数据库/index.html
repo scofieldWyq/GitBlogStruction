@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python 连接 Mysql 数据库 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="连接 mysql 数据库 使用 MySQLdb 来做为连接 mysql 数据库。
+ 123456789101112131415 import MySQLdb  try:      # host 表示主机类型      # user 登录的用户      # passwd 登录密码      # db">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Python 连接 Mysql 数据库</h1>
+  
+
+    <time datetime="2016-03-14T07:01:19.000Z">
+  <span class="day">14</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="连接-mysql-数据库"><a href="#连接-mysql-数据库" class="headerlink" title="连接 mysql 数据库"></a>连接 mysql 数据库</h2><p> 使用 MySQLdb 来做为连接 mysql 数据库。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> MySQLdb</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">try</span>:</span><br><span class="line">      <span class="comment"># host 表示主机类型</span></span><br><span class="line">      <span class="comment"># user 登录的用户</span></span><br><span class="line">      <span class="comment"># passwd 登录密码</span></span><br><span class="line">      <span class="comment"># db 登录的数据库</span></span><br><span class="line">      <span class="comment"># port 端口号，在本地情况下可以不用写</span></span><br><span class="line">      conn=MySQLdb.connect(host=<span class="string">'localhost'</span>,user=<span class="string">'root'</span>,passwd=<span class="string">'root'</span>,db=<span class="string">'test'</span>,port=<span class="number">3306</span>) <span class="comment"># 连接数据库</span></span><br><span class="line">      cur=conn.cursor() <span class="comment"># 获取数据库的指针</span></span><br><span class="line">      cur.execute(<span class="string">'select * from user'</span>) <span class="comment"># 数据库操作</span></span><br><span class="line">      cur.close() <span class="comment"># 关闭数据库的指针</span></span><br><span class="line">      conn.close() <span class="comment"># 关闭数据库</span></span><br><span class="line"><span class="keyword">except</span> MySQLdb.Error,e: <span class="comment"># 数据库连接失败。</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"Mysql Error %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  如果出现了这种情况<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"db_test.py"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="keyword">import</span> MySQLdb</span><br><span class="line">ImportError: No module named MySQLdb</span><br></pre></td></tr></table></figure></p>
+<p> 说明没有安装相应的库</p>
+<h2 id="安装-MySQLdb"><a href="#安装-MySQLdb" class="headerlink" title="安装 MySQLdb"></a>安装 MySQLdb</h2><p><a href="http://www.jb51.net/article/48827.htm" target="_blank" rel="external">Python下的Mysql模块MySQLdb安装详解</a><br><a href="https://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/MySQL-python-1.2.3.tar.gz/download" target="_blank" rel="external">下载Mysql模块MySQLdb</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.cnblogs.com/rollenholt/archive/2012/05/29/2524327.html" target="_blank" rel="external">python操作MySQL数据库</a></li>
+<li><a href="http://www.jb51.net/article/48827.htm" target="_blank" rel="external">Python下的Mysql模块MySQLdb安装详解</a></li>
+<li><a href="https://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/MySQL-python-1.2.3.tar.gz/download" target="_blank" rel="external">MySQL-python-1.2.3.tar.gz</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据库/">数据库</a><a href="/tags/Python/">Python</a><a href="/tags/MySQLdb/">MySQLdb</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

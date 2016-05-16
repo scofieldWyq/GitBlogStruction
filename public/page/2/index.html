@@ -1,0 +1,697 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/16/Mysql-表内容的插入/">Mysql 表内容的插入</a></h1>
+  
+
+    <time datetime="2016-03-16T09:07:00.000Z">
+  <span class="day">16</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h2><p>  表插入的语法：<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">DELAYED</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</span><br><span class="line">    [<span class="keyword">INTO</span>] tbl_name [(col_name,...)]</span><br><span class="line">    <span class="keyword">VALUES</span> (&#123;expr | <span class="keyword">DEFAULT</span>&#125;,...),(...),...</span><br><span class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> col_name=expr, ... ]</span><br><span class="line">  或：</span><br><span class="line">  <span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">DELAYED</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</span><br><span class="line">    [<span class="keyword">INTO</span>] tbl_name</span><br><span class="line">    <span class="keyword">SET</span> col_name=&#123;expr | <span class="keyword">DEFAULT</span>&#125;, ...</span><br><span class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> col_name=expr, ... ]</span><br><span class="line">  或：</span><br><span class="line"><span class="keyword">INSERT</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">HIGH_PRIORITY</span>] [<span class="keyword">IGNORE</span>]</span><br><span class="line">    [<span class="keyword">INTO</span>] tbl_name [(col_name,...)]</span><br><span class="line">    <span class="keyword">SELECT</span> ...</span><br><span class="line">    [ <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span> col_name=expr, ... ]</span><br></pre></td></tr></table></figure></p>
+<h2 id="实验证明"><a href="#实验证明" class="headerlink" title="实验证明"></a>实验证明</h2><ul>
+<li><p>如果列清单和VALUES清单均为空清单，则INSERT会创建一个行，每个列都被设置为默认值：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tbl_name () <span class="keyword">VALUES</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>假设worker表只有name和email,插入一条数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> worker <span class="keyword">VALUES</span>(“tom”,”tom@yahoo.com”);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>批量插入多条数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> worker <span class="keyword">VALUES</span>(‘tom<span class="string">','</span>tom@yahoo.com<span class="string">'),(‘paul'</span>,<span class="string">'paul@yahoo.com'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给出要赋值的那个列，然后再列出值的插入数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> worker (<span class="keyword">name</span>) <span class="keyword">values</span> (<span class="string">'tom'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.jb51.net/article/58087.htm" target="_blank" rel="external">mysql insert语句操作实例讲解</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/INSERT/">INSERT</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/16/Mysql-视图创建/">Mysql 视图创建</a></h1>
+  
+
+    <time datetime="2016-03-16T07:15:50.000Z">
+  <span class="day">16</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="关于视图-简单看看-如果不想知道视图用来干嘛的，那就跳过咯"><a href="#关于视图-简单看看-如果不想知道视图用来干嘛的，那就跳过咯" class="headerlink" title="关于视图 - 简单看看(如果不想知道视图用来干嘛的，那就跳过咯)"></a>关于视图 - 简单看看(<a href="#create">如果不想知道视图用来干嘛的，那就跳过咯</a>)</h2><p>  <code>SQL</code> 中，视图时基于SQL语句的结果集的可视化的表</p>
+<p>  <code>视图</code>包含行和列，就像一个真实的表一样。</p>
+<p>  <code>视图</code>中的字段来自于一个或者多个数据库中的表的字段。</p>
+<p>  结果就是感觉就是单一的一张表，也可以说是间接的表啦。</p>
+<p>  使用<code>视图</code>，主要是为在操作数据库的时候，不在需要频繁多次去读取和处理不同字段，再进行第二次的处理形成我们所需要的数据。在这一步上面，我们可以提高效率，得到我们所需要的内容哦。</p>
+<p>  这样，我们可以把多张表合并成一张表，经过过滤之后的一张表哦。</p>
+<p>  <code>视图</code>是一种虚拟的表。<code>视图</code>从数据库中的一个或多个表导出来的表。<code>视图</code>还可以从已经存在的视图的基础上定义。数据库中只存放了视图的定义，而并没有存放视图中的数据。这些数据存放在原来的表中。使用视图查询数据时，数据库系统会从原来的表中取出对应的数据。因此，视图中的数据是依赖于原来的表中的数据的。一旦表中的数据发生改变，显示在视图中的数据也会发生改变。</p>
+<p>  <code>视图</code>是在原有的表或者视图的基础上重新定义的虚拟表，这可以从原有的表上选取对用户有用的信息。那些对用户没有用，或者用户没有权限了解的信息，都可以直接屏蔽掉。这样做既使应用简单化，也保证了系统的安全。视图起着类似于筛选的作用。视图的作用归纳为如下几点：<br>    1．使操作简单化<br>    2．增加数据的安全性<br>    3．提高表的逻辑独立性</p>
+<p>  [<code>注释</code>：数据库的设计和结构不会受到视图中的函数、where 或 join 语句的影响。]</p>
+<p>  <strong>OK,实际上。意思就是把多张表经过处理后的到一张整理过的，有需要的一张表，但是这个表的操作不会影响到原表的完整性，读它就可以啦。</strong></p>
+<h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a><span id="create">创建视图</span></h2><p><strong>语法：</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> viewName <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> condition</span><br></pre></td></tr></table></figure></p>
+<p>[<code>注释</code>：视图总是显示最近的数据。每当用户查询视图时，数据库引擎通过使用 SQL 语句来重建数据。]</p>
+<h2 id="实践检验问题"><a href="#实践检验问题" class="headerlink" title="实践检验问题"></a>实践检验问题</h2><p>   <strong>可以从某个查询内部、某个存储过程内部，或者从另一个视图内部来使用视图。通过向视图添加函数、join 等等，我们可以向用户精确地提交我们希望提交的数据。</strong></p>
+<p>   需要<a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/mysql_create_view_database_prepare.sql" target="_blank" rel="external">准备数据文件</a>来做好操作的准备,里面是关于教师和学生的一个数据库表。</p>
+<h3 id="走起"><a href="#走起" class="headerlink" title="走起"></a>走起</h3><p> <strong>创建视图</strong><br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE VIEW student_teacher AS</span><br><span class="line">    -&gt; SELECT sname, tname</span><br><span class="line">    -&gt; FROM student, teacher</span><br><span class="line">    -&gt; WHERE student.tno=teacher.tno;</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.13 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from student_teacher;</span><br><span class="line">+-------+-------+</span><br><span class="line">| sname | tname |</span><br><span class="line">+-------+-------+</span><br><span class="line">| sa    | wa    |</span><br><span class="line">| sb    | wa    |</span><br><span class="line">| sc    | wa    |</span><br><span class="line">| sd    | wa    |</span><br><span class="line">| se    | wa    |</span><br><span class="line">| sf    | wa    |</span><br><span class="line">| sg    | wa    |</span><br><span class="line">| sh    | wa    |</span><br><span class="line">| si    | wa    |</span><br><span class="line">| sj    | wa    |</span><br><span class="line">| sk    | wa    |</span><br><span class="line">| sl    | wa    |</span><br><span class="line">| sm    | wa    |</span><br><span class="line">| sn    | wa    |</span><br><span class="line">+-------+-------+</span><br><span class="line">14 rows in set (0.06 sec)</span><br></pre></td></tr></table></figure></p>
+<p>  这样，我们就可以得到了关于教师和学生的一个列表，但是我们并不知道这个是来自于两个表哦。</p>
+<p> <strong>更新视图</strong><br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SQL <span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> Syntax</span><br><span class="line"></span><br><span class="line"> <span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span></span><br><span class="line"> <span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"> <span class="keyword">FROM</span> table_name</span><br><span class="line"> <span class="keyword">WHERE</span> condition</span><br><span class="line"></span><br><span class="line"> <span class="comment">------------------------</span></span><br></pre></td></tr></table></figure></p>
+<p>  这个是一个简单的例子。</p>
+<p> <strong>撤销视图</strong><br> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQL <span class="keyword">DROP</span> <span class="keyword">VIEW</span> Syntax</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> view_name</span><br><span class="line"></span><br><span class="line"><span class="comment">------------------------</span></span><br><span class="line">mysql&gt; <span class="keyword">DROP</span> <span class="keyword">VIEW</span> student_teacher;</span><br><span class="line">Query OK, 0 rows affected (0.30 sec)</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.360doc.com/content/13/1117/22/7669533_330092770.shtml" target="_blank" rel="external">MySQL 视图的创建，修改与删除</a></li>
+<li><a href="http://www.linuxidc.com/Linux/2012-02/53842.htm" target="_blank" rel="external">MySQL视图表创建与修改</a></li>
+<li><a href="http://zhangzhenyihi.blog.163.com/blog/static/13548809420141104122391/" target="_blank" rel="external">mysql的视图操作</a></li>
+<li><a href="http://www.php186.com/content/article/mysql/22726.html" target="_blank" rel="external">mysql中create view创建、更新和删除视图</a></li>
+<li><a href="http://www.blogjava.net/midnightPigMan/archive/2014/12/15/421406.html" target="_blank" rel="external">MySQL中INSERT的一般用法</a></li>
+<li><a href="http://c.biancheng.net/cpp/html/1452.html" target="_blank" rel="external">Mysql命令insert into：向表中插入数据（记录）</a></li>
+<li><a href="http://jingyan.baidu.com/article/9f7e7ec05c5ad76f281554ab.html" target="_blank" rel="external">insert 出错</a></li>
+<li><a href="http://wenku.baidu.com/link?url=SJeXJhp0ZgeTQnFfJhc4WUQL5Ov_34l57QKeUcW6nkcY0-GJO5ImFQHUuZpDeB-jTJ6buU87_AAJ2ix8ZWX0J0fwKIcqmWei7HKQd1RMopy" target="_blank" rel="external">Mysql列约束,字段属性</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/VIEW/">VIEW</a><a href="/tags/视图/">视图</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/16/Mysql-建立表和删除表/">Mysql 建立表和删除表</a></h1>
+  
+
+    <time datetime="2016-03-16T04:05:59.000Z">
+  <span class="day">16</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><ul>
+<li><p>CREATE TABLE <code>tableName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE person (</span><br><span class="line">            number INT(11),</span><br><span class="line">            name VARCHAR(255),</span><br><span class="line">            birthday DATE</span><br><span class="line">            );</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CREATE TABLE IF NOT EXISTS <code>tableName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE IF NOT EXISTS person (</span><br><span class="line">                number INT(11),</span><br><span class="line">                name VARCHAR(255),</span><br><span class="line">                birthday DATE</span><br><span class="line">                );</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><ul>
+<li><p>DROP TABLE <code>tableName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP TABLE  tbl_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DROP TABLE IF EXISTS <code>tableName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP TABLE IF EXISTS tbl_name;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.cnblogs.com/ggjucheng/archive/2012/11/03/2752082.html" target="_blank" rel="external">mysql创建和删除表</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/table/">table</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/16/Mysql-建立数据库和删除数据库/">Mysql 建立数据库和删除数据库</a></h1>
+  
+
+    <time datetime="2016-03-16T04:05:37.000Z">
+  <span class="day">16</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><ul>
+<li><p>CREATE DATABASE <code>databaseName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> mysql&gt; CREATE DATABASE test;</span><br><span class="line"> Query OK, 1 row affected (0.05 sec)</span><br><span class="line"> mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| demo               |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| studentSystem      |</span><br><span class="line">| sys                |</span><br><span class="line">| test               |</span><br><span class="line">| zh                 |</span><br><span class="line">+--------------------+</span><br><span class="line">8 rows in set (0.03 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CREATE DATABASE IF NOT EXISTS <code>databaseName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE DATABASE IF NOT EXISTS test1;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| demo               |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| studentSystem      |</span><br><span class="line">| sys                |</span><br><span class="line">| test               |</span><br><span class="line">| test1              |</span><br><span class="line">| zh                 |</span><br><span class="line">+--------------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><ul>
+<li><p>DROP DATABASE <code>databaseName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP DATABASE test;</span><br><span class="line">Query OK, 0 rows affected (0.05 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| demo               |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| studentSystem      |</span><br><span class="line">| sys                |</span><br><span class="line">| test1              |</span><br><span class="line">| zh                 |</span><br><span class="line">+--------------------+</span><br><span class="line">8 rows in set (0.03 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DROP DATABASE IF EXISTS <code>databaseName</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DROP DATABASE IF EXISTS test1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| demo               |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| studentSystem      |</span><br><span class="line">| sys                |</span><br><span class="line">| zh                 |</span><br><span class="line">+--------------------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://c.biancheng.net/cpp/html/1446.html" target="_blank" rel="external">Mysql命令drop database：删除数据库</a></li>
+<li><a href="http://outofmemory.cn/code-snippet/2533/mysql-create-database-specify-utf-8-coding" target="_blank" rel="external">mysql create database 指定utf-8编码</a></li>
+<li><a href="http://c.biancheng.net/cpp/html/1444.html" target="_blank" rel="external">Mysql命令create：创建数据库</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/14/Python-连接-Mysql-数据库/">Python 连接 Mysql 数据库</a></h1>
+  
+
+    <time datetime="2016-03-14T07:01:19.000Z">
+  <span class="day">14</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="连接-mysql-数据库"><a href="#连接-mysql-数据库" class="headerlink" title="连接 mysql 数据库"></a>连接 mysql 数据库</h2><p> 使用 MySQLdb 来做为连接 mysql 数据库。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> MySQLdb</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">try</span>:</span><br><span class="line">      <span class="comment"># host 表示主机类型</span></span><br><span class="line">      <span class="comment"># user 登录的用户</span></span><br><span class="line">      <span class="comment"># passwd 登录密码</span></span><br><span class="line">      <span class="comment"># db 登录的数据库</span></span><br><span class="line">      <span class="comment"># port 端口号，在本地情况下可以不用写</span></span><br><span class="line">      conn=MySQLdb.connect(host=<span class="string">'localhost'</span>,user=<span class="string">'root'</span>,passwd=<span class="string">'root'</span>,db=<span class="string">'test'</span>,port=<span class="number">3306</span>) <span class="comment"># 连接数据库</span></span><br><span class="line">      cur=conn.cursor() <span class="comment"># 获取数据库的指针</span></span><br><span class="line">      cur.execute(<span class="string">'select * from user'</span>) <span class="comment"># 数据库操作</span></span><br><span class="line">      cur.close() <span class="comment"># 关闭数据库的指针</span></span><br><span class="line">      conn.close() <span class="comment"># 关闭数据库</span></span><br><span class="line"><span class="keyword">except</span> MySQLdb.Error,e: <span class="comment"># 数据库连接失败。</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"Mysql Error %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>  如果出现了这种情况<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"db_test.py"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="keyword">import</span> MySQLdb</span><br><span class="line">ImportError: No module named MySQLdb</span><br></pre></td></tr></table></figure></p>
+<p> 说明没有安装相应的库</p>
+<h2 id="安装-MySQLdb"><a href="#安装-MySQLdb" class="headerlink" title="安装 MySQLdb"></a>安装 MySQLdb</h2><p><a href="http://www.jb51.net/article/48827.htm" target="_blank" rel="external">Python下的Mysql模块MySQLdb安装详解</a><br><a href="https://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/MySQL-python-1.2.3.tar.gz/download" target="_blank" rel="external">下载Mysql模块MySQLdb</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.cnblogs.com/rollenholt/archive/2012/05/29/2524327.html" target="_blank" rel="external">python操作MySQL数据库</a></li>
+<li><a href="http://www.jb51.net/article/48827.htm" target="_blank" rel="external">Python下的Mysql模块MySQLdb安装详解</a></li>
+<li><a href="https://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/MySQL-python-1.2.3.tar.gz/download" target="_blank" rel="external">MySQL-python-1.2.3.tar.gz</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据库/">数据库</a><a href="/tags/Python/">Python</a><a href="/tags/MySQLdb/">MySQLdb</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/14/Python-函数返回多值的分析/">Python 函数返回多值的分析</a></h1>
+  
+
+    <time datetime="2016-03-14T03:16:16.000Z">
+  <span class="day">14</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="函数返回多值的原理"><a href="#函数返回多值的原理" class="headerlink" title="函数返回多值的原理"></a>函数返回多值的原理</h2><p>   实际上，函数返回多值的内容就是一个 <code>tuple</code></p>
+<h2 id="我们来看看表面"><a href="#我们来看看表面" class="headerlink" title="我们来看看表面"></a>我们来看看表面</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(x, y, step, angle=<span class="number">0</span>)</span>:</span></span><br><span class="line">    nx = x + step * math.cos(angle)</span><br><span class="line">    ny = y - step * math.sin(angle)</span><br><span class="line">    <span class="keyword">return</span> nx, ny</span><br></pre></td></tr></table></figure>
+<p>这样我们就可以同时获得返回值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x, y = move(<span class="number">100</span>, <span class="number">100</span>, <span class="number">60</span>, math.pi / <span class="number">6</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> x, y</span><br><span class="line"><span class="number">151.961524227</span> <span class="number">70.0</span></span><br></pre></td></tr></table></figure>
+<p>哟呵，真的可以返回多值耶。</p>
+<h2 id="实际的原理"><a href="#实际的原理" class="headerlink" title="实际的原理"></a>实际的原理</h2><p>  Python函数返回的仍然是单一值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = move(<span class="number">100</span>, <span class="number">100</span>, <span class="number">60</span>, math.pi / <span class="number">6</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> r</span><br><span class="line">(<span class="number">151.96152422706632</span>, <span class="number">70.0</span>)</span><br></pre></td></tr></table></figure>
+<p>  其实就是一个 <code>tuple</code>，实际就是这样，并没有那么神秘嘛。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/00137473843313062a8b0e7c19b40aa8f31bdc4db5f6498000" target="_blank" rel="external">廖雪峰python教程</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Python/">Python</a><a href="/tags/函数/">函数</a><a href="/tags/多值返回/">多值返回</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/14/KVO/">KVO</a></h1>
+  
+
+    <time datetime="2016-03-14T02:02:48.000Z">
+  <span class="day">14</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="KVO-基础"><a href="#KVO-基础" class="headerlink" title="KVO 基础"></a>KVO 基础</h2><p>   <strong>解释</strong>: <code>Key-Value observing</code> 就是某个对象的属性改变时通知其他对象的机制。对于<a href="#e1">被观察</a>对象来说，<code>键值观察(KVO)就是注册想要监视的属性的键路径和观察者</code>。</p>
+<p>   <strong>目的</strong>: 为了在GUI组件和程序之间调整值</p>
+<p>   <strong>过程</strong>: 当<code>属性改变</code>的时候，<a href="#e2">观察者</a>就会接收到消息，虽然和 <code>NSNotification</code> 通知相似，但是 KVO 不存在通知中心的对象，所以不可以指定消息的选择器。</p>
+<p>   <code>KVO</code> 可以实现监视属性， 一对一的关系， 一对多关系等各种形式的属性，可以使用 <code>NSObject</code> 来实现的。</p>
+<h2 id="KVO-准则"><a href="#KVO-准则" class="headerlink" title="KVO 准则"></a>KVO 准则</h2><blockquote>
+<p>使用 <code>键值编码的准则</code> 来访问 <code>访问器</code> 或者 <code>实例变量</code> 的情况下，才可以监视属性的变化。</p>
+</blockquote>
+<p>   <strong>在方法内直接改变实例变量的变量值是不能被监视的</strong> > <a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/kvo_%E6%96%B9%E6%B3%95%E5%86%85%E8%B0%83%E7%94%A8%E4%BB%A3%E7%A0%81.m" target="_blank" rel="external">实例验证代码</a></p>
+<p>   结果显示：<br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ clang kvcsample.m -fobjc-arc -framework Foundation</span><br><span class="line">$ ./a.out</span><br><span class="line">$</span><br></pre></td></tr></table></figure></p>
+<p>   <em>并没有结果</em></p>
+<p>   <strong>准则具体如下</strong>：</p>
+<ol>
+<li>随<code>访问器</code>方法而改变 - 这个时候访问器就是 @proeprty 所产生的 get 和 set 的方法名字。</li>
+<li>使用 <code>setValue:forKey:</code> 和键进行改变。此时可能不经过访问器</li>
+<li>使用 <code>setValue:forKeyPath:</code> 和键路径进行变化，也可能不经过访问器。不仅仅是最终的监视对象的属性，当路径中的属性发生变化时也会被通知。</li>
+</ol>
+<h2 id="KVO-的方法"><a href="#KVO-的方法" class="headerlink" title="KVO 的方法"></a>KVO 的方法</h2><ul>
+<li><strong>注册监视</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) addObserver:(NSObject \*) anObserver</span><br><span class="line">   forKeyPath:(NSString \*) keyPath</span><br><span class="line">      options:(NSKeyValueObservingOptions) options</span><br><span class="line">      context:(<span class="keyword">void</span> *)context**</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>监视键路径 <code>keyPath</code> 中的某个属性，<a href="#e2">观察者</a>为 <code>anObserver</code>，消息的发送者为<a href="#e1">被观察者</a></p>
+<p>属性发生变化的时候，就会发送通知消息。</p>
+<p>消息包含变化内容的字典数据，context 中指定的任意指针。</p>
+<p>options 指定字典数据包含什么样的值。<br>   <code>NSKeyValueObservingOptionNew</code> … 提供改变后的属性值<br>   <code>NSKeyValueObservingOptionOld</code> … 提供改变前的属性值。</p>
+<p>当属性改变的时候，下面的消息将会发送给观察者。   </p>
+<ul>
+<li><strong>获取监视通知</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(NSString *) keyPath</span><br><span class="line">                      ofObject:(id)object</span><br><span class="line">                        change:(NSDictionary *)change</span><br><span class="line">                       context:(<span class="keyword">void</span> *)context</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>change</code> 保存着改变的相关信息，context 返回注册观察者时指定的值。</p>
+<p>如果要停止监视，实现一下方法</p>
+<ul>
+<li><p><strong>停止监视</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)removeObserver: (NSObject *) anObserver</span><br><span class="line">            forKeyPath: (NSString *) keyPath</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>change 字典中保存的入口</strong><br><code>NSKeyValueChangeKindKey</code></p>
+<pre><code>属性改变的种类
+</code></pre><p><code>NSKeyValueChangeNewKey</code></p>
+<pre><code>属性的新对象的值
+</code></pre><p><code>NSKeyValueChangeOldKey</code></p>
+<pre><code>属性旧对象的值
+</code></pre><p><code>NSKeyValueChangeIndexesKey</code></p>
+<pre><code>动态数组中进行了插入，删除，置换。表示执行了这些操作的索引集合 --- NSIndexSet 类
+的实例为入口值
+</code></pre></li>
+</ul>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>   <a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/KVOsample.m" target="_blank" rel="external">用于验证的代码</a></p>
+<p>   <strong>结果显示:</strong><br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">--- Received by &lt;&lt;Person, Jiro, HP=140&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Person, Taro, HP=800&gt;&gt;, Path=hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 800;</span><br><span class="line">     old = 500;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 800;</span><br><span class="line">     old = 500;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 140;</span><br><span class="line">     old = 600;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Person, Jiro, HP=140&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Person, Taro, HP=500&gt;&gt;, Path=hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 500;</span><br><span class="line">     old = 600;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 340;</span><br><span class="line">     old = 140;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>  <strong>代码的结果分析</strong><br>   (1) 改变 p1 的 hitPoint，并确实向 p2 和 dra 发送了消息<br>   (2) 虽然调用了更改 hitPoint 的消息，但是没有收到相应的消息<br>   (3) 改变了 master ，收到了 master.hitPoint 的消息。即使不是指定的键路径的属性，在产生改变时也会被通知<br>   (4)，(5) 使用声明属性改变了 p2, p1 的 hitPoint 也可以被监视。<br>   (6) 删除了通知后就收不到了。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="被观察者"><a href="#被观察者" class="headerlink" title="被观察者"></a><span id="e1">被观察者</span></h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">属性值发生改变的时候，会被观察者了解到它的发生情况</span><br></pre></td></tr></table></figure>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a><span id="e2">观察者</span></h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设置观察对象的主动者</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVO/">KVO</a><a href="/tags/键值观察/">键值观察</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/KVC-键路径的访问/">KVC 键路径的访问</a></h1>
+  
+
+    <time datetime="2016-03-13T15:03:47.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="路径访问简介"><a href="#路径访问简介" class="headerlink" title="路径访问简介"></a>路径访问简介</h2><p>   路径访问就是在类中还有类的实例，那么如何深层次的去访问呢？<br>   通过路径访问的方式去实现</p>
+<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">以点切分键路径，并使用第一个键接收器发送 valueForKey: 方法，然后再使用键路径的下一个键，向</span><br><span class="line">得到的对象发送 valueForKey: 的方法，反复直到返回最后获得的对象。</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKeyPath: (NSString *)keyPath</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">与 valueForKeyPath: 方法同样取出对象，这里只对路径中的最后一个键调用 setValue:forKey:</span><br><span class="line">方法，并设定其属性 value.</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">       forKeyPath: (NSString *) keyPath</span><br></pre></td></tr></table></figure>
+<h2 id="实验证明"><a href="#实验证明" class="headerlink" title="实验证明"></a>实验证明</h2><h3 id="两个类"><a href="#两个类" class="headerlink" title="两个类"></a>两个类</h3><ul>
+<li><p>Person</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> Person: NSObject</span><br><span class="line">&#123;</span><br><span class="line">    NSString  *name;</span><br><span class="line">    NSString *email;</span><br><span class="line">    <span class="keyword">int</span>         age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"><span class="meta">@implementation</span> Person</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WorkingGroup</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> WorkingGroup: NSObject</span><br><span class="line">&#123;</span><br><span class="line">   Person          *leader;   <span class="comment">// the leader</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@implementation</span> WorkingGroup</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="main-m"><a href="#main-m" class="headerlink" title="main.m"></a>main.m</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@autoreleasepool</span>&#123;</span><br><span class="line">        NSLog(@<span class="string">"start"</span>);</span><br><span class="line"></span><br><span class="line">       Person *p = [[Person alloc] init];</span><br><span class="line">       [p setValue:@<span class="string">"hehe"</span> forKey:@<span class="string">"name"</span>];</span><br><span class="line"></span><br><span class="line">       WorkingGroup *aGroup = [[WorkingGroup alloc] init];</span><br><span class="line">       [aGroup setValue:p forKey:@<span class="string">"leader"</span>];</span><br><span class="line"></span><br><span class="line">       NSLog(@<span class="string">"start to move"</span>);</span><br><span class="line"></span><br><span class="line">        id aPerson = [aGroup valueForKey:@<span class="string">"leader"</span>];</span><br><span class="line">        id name = [aPerson valueForKey:@<span class="string">"name"</span>];</span><br><span class="line"></span><br><span class="line">        NSLog(@<span class="string">"without path =&gt; name: %@"</span>, name);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里实现 键路径的查询</span></span><br><span class="line">        id p_name = [aGroup valueForKeyPath:@<span class="string">"leader.name"</span>];</span><br><span class="line"></span><br><span class="line">        NSLog(@<span class="string">"with path =&gt; name: %@"</span>, p_name);</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ clang keyPathOperation.m -framework Foundation</span><br><span class="line">$ ./a.out</span><br><span class="line">2016-03-14 00:30:52.111 a.out[3880:429793] start</span><br><span class="line">2016-03-14 00:30:52.112 a.out[3880:429793] start to move</span><br><span class="line">2016-03-14 00:30:52.113 a.out[3880:429793] without path =&gt; name: hehe</span><br><span class="line">2016-03-14 00:30:52.113 a.out[3880:429793] with path =&gt; name: hehe</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/keyPath/">keyPath</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/KVC-字典对象和数组对象的键值编码/">KVC 字典对象和数组对象的键值编码</a></h1>
+  
+
+    <time datetime="2016-03-13T15:00:49.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="字典对象的键值编码"><a href="#字典对象的键值编码" class="headerlink" title="字典对象的键值编码"></a>字典对象的键值编码</h2><p>   <code>NSDictionary</code> 定义了两个方法</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">如果字符串不是以 @ 开头的，将会调用 objectForKey: ; 如果有 @ 开头的就会以剩余的字符串</span><br><span class="line">作为键，调用超类方法 alueForKey:</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *)key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">一般会调用 setObject:forKey: , value 为 nil 时，就会调用 removeObjectForKey: 删除</span><br><span class="line">键对应的对象</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">           forKey:(NSString *)key</span><br></pre></td></tr></table></figure>
+<h2 id="数组对象的键值编码"><a href="#数组对象的键值编码" class="headerlink" title="数组对象的键值编码"></a>数组对象的键值编码</h2><p>   <code>NSArray</code> 和 <code>NSMutableArray</code> 以及 集合类 <code>NSSet</code> 和 <code>NSMutableSet</code> 也定义了两个方法<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">以 key 为参数，对于各个元素调用 valueForKey: 后返回数组，对各成员使用方法 valueForKey:,</span><br><span class="line">当返回 nil 时，包含 NSNull 的实例。</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *)key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">对所有的元素调用 setValue:forKey: . 需要注意的是集合对象本身不可以改变，也可以调用这个</span><br><span class="line">方法</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">           forKey:(NSString *)key</span><br></pre></td></tr></table></figure></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/字典/">字典</a><a href="/tags/数组/">数组</a><a href="/tags/键值编码/">键值编码</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/Mysql-数据类型的属性/">Mysql 数据类型的属性</a></h1>
+  
+
+    <time datetime="2016-03-13T08:00:16.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="AUTO-INCREMENT"><a href="#AUTO-INCREMENT" class="headerlink" title="AUTO_INCREMENT"></a>AUTO_INCREMENT</h2><p>auto_increment能为新插入的行赋一个唯一的整数标识符。为列赋此属性将为每个新插入的行赋值为上一次插入的ID+1。<br>MySQL要求将auto_increment属性用于作为主键的列。此外，每个表只允许有一个auto_increment列。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id smallint not null auto_increment primary key</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="BINARY"><a href="#BINARY" class="headerlink" title="BINARY"></a>BINARY</h2><p>binary属性只用于char和varchar值。当为列指定了该属性时，将以区分大小写的方式排序。与之相反，忽略binary<br>属性时，将使用不区分大小写的方式排序。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname char(25) binary not null</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="DEFAULT"><a href="#DEFAULT" class="headerlink" title="DEFAULT"></a>DEFAULT</h2><p>default属性确保在没有任何值可用的情况下，赋予某个常量值，这个值必须是常量，因为MySQL不允许插入函数或表达式值。<br>此外，此属性无法用于BLOB或TEXT列。如果已经为此列指定了NULL属性，没有指定默认值时默认值将为NULL，否则默认值将<br>依赖于字段的数据类型。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subscribed enum('0', '1') not null default '0'</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="INDEX"><a href="#INDEX" class="headerlink" title="INDEX"></a>INDEX</h2><p>如果所有其他因素都相同，要加速数据库查询，使用索引通常是最重要的一个步骤。索引一个列会为该列创建一个有序的键数<br>组，每个键指向其相应的表行。以后针对输入条件可以搜索这个有序的键数组，与搜索整个未索引的表相比，这将在性能方面<br>得到极大的提升。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> employees</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">varchar</span>(<span class="number">9</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    firstname <span class="built_in">varchar</span>(<span class="number">15</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    lastname <span class="built_in">varchar</span>(<span class="number">25</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    email <span class="built_in">varchar</span>(<span class="number">45</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    phone <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">index</span> lastname(lastname),</span><br><span class="line">    primary <span class="keyword">key</span>(<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="NOT-NULL"><a href="#NOT-NULL" class="headerlink" title="NOT NULL"></a>NOT NULL</h2><p>如果将一个列定义为not null，将不允许向该列插入null值。建议在重要情况下始终使用not null属性，因为它提供了<br>一个基本验证，确保已经向查询传递了所有必要的值。</p>
+<hr>
+<h2 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h2><p>为列指定null属性时，该列可以保持为空，而不论行中其它列是否已经被填充。记住，null精确的说法是“无”，而不是空字符串或0。</p>
+<hr>
+<h2 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h2><p>primary key属性用于确保指定行的唯一性。指定为主键的列中，值不能重复，也不能为空。为指定为主键的列赋予auto_increment属性<br>是很常见的，因为此列不必与行数据有任何关系，而只是作为一个唯一标识符。主键又分为以下两种：</p>
+<p>(1)单字段主键<br>如果输入到数据库中的每行都已经有不可修改的唯一标识符，一般会使用单字段主键。注意，此主键一旦设置就不能再修改。<br>(2)多字段主键<br>如果记录中任何一个字段都不可能保证唯一性，就可以使用多字段主键。这时，多个字段联合起来确保唯一性。如果出现这种情况，指定一<br>个auto_increment整数作为主键是更好的办法。</p>
+<hr>
+<h2 id="UNIQUE"><a href="#UNIQUE" class="headerlink" title="UNIQUE"></a>UNIQUE</h2><p>被赋予unique属性的列将确保所有值都有不同的值，只是null值可以重复。一般会指定一个列为unique，以确保该列的所有值都不同。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">email varchar(45) unique</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="ZEROFILL"><a href="#ZEROFILL" class="headerlink" title="ZEROFILL"></a>ZEROFILL</h2><p>zerofill属性可用于任何数值类型，用0填充所有剩余字段空间。例如，无符号int的默认宽度是10；因此，当“零填充”的int值为4时，将<br>表示它为0000000004。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">orderid int unsigned zerofill not null</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="引用参考"><a href="#引用参考" class="headerlink" title="引用参考"></a>引用参考</h2><ul>
+<li><a href="http://www.jellythink.com/archives/642" target="_blank" rel="external">MySQL数据类型和属性</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据类型/">数据类型</a><a href="/tags/数据库/">数据库</a><a href="/tags/属性/">属性</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+<nav id="pagenavi">
+  
+    <a href="/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/3/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

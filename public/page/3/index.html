@@ -1,0 +1,670 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 3 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/Mysql-数据类型/">Mysql 数据类型</a></h1>
+  
+
+    <time datetime="2016-03-13T07:27:00.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><a href="#int">INT</a></li>
+<li><a href="#float">FLOAT</a></li>
+<li><a href="#char">CHAR</a></li>
+<li><a href="#time">TIME</a></li>
+<li><a href="#set">SET</a></li>
+</ul>
+<h2 id="1-INT"><a href="#1-INT" class="headerlink" title="1.INT"></a><span id="int">1.INT</span></h2><ul>
+<li><p><strong>SMALLINT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：2</span><br><span class="line">描述：整数，从-32000到 +32000范围</span><br><span class="line">推荐使用：存储相对比较小的整数。 比如: 年纪，数量</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>INT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：整数，从-2000000000 到 +2000000000 范围</span><br><span class="line">推荐使用： 存储中等整数 例如: 距离</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>BIGINT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：不能用SMALLINT 或 INT描述的超大整数。</span><br><span class="line">推荐使用：存储超大的整数 例如: 科学/数学数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-FLOAT"><a href="#2-FLOAT" class="headerlink" title="2.FLOAT"></a><span id="float">2.FLOAT</span></h2><ul>
+<li><p><strong>FLOAT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：单精度浮点型数据</span><br><span class="line">推荐使用：存储小数数据 例如:测量，温度</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DOUBLE</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：双精度浮点型数据</span><br><span class="line">推荐使用：需要双精度存储的小数数据 例如:科学数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DECIMAL</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量;取决于精度与长度</span><br><span class="line">描述：用户自定义精度的浮点型数据</span><br><span class="line">推荐使用：以特别高的精度存储小数数据。  例如:货币数额，科学数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-CHAR"><a href="#3-CHAR" class="headerlink" title="3.CHAR"></a><span id="char">3.CHAR</span></h2><ul>
+<li><p><strong>CHAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：特定字符串长度(高达255字 符)</span><br><span class="line">描述：固定长度的字符串</span><br><span class="line">推荐使用：存储通常包含预定义字符串的变量 例如: 定期航线，国家或邮编</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>VARCHAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量; 1 + 实际字符串长度 (高达 255 字 符)</span><br><span class="line">描述：具有最大限制的可变长度的字符串  </span><br><span class="line">推荐使用：存储不同长度的字符串值(高达一个特定的最大限度). 例如:名字，密码，短文标签</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TEXT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：Variable; 2 +聽 actual string length</span><br><span class="line">描述：没有最大长度限制的可变长度的字符串</span><br><span class="line">推荐使用：存储大型文本数据,例如: 新闻故事，产品描述</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>BLOB</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量；2 + 实际字符串长度</span><br><span class="line">描述：二进制字符串</span><br><span class="line">推荐使用：存储二进制数据 例如:图片，附件，二进制文档</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-TIME"><a href="#4-TIME" class="headerlink" title="4.TIME"></a><span id="time">4.TIME</span></h2><ul>
+<li><p><strong>DATE</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：3</span><br><span class="line">描述：以 yyyy-mm-dd格式的日期</span><br><span class="line">推荐使用：存储日期  例如:生日，产品满期</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TIME</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：3</span><br><span class="line">描述：以 hh:mm:ss格式的时间</span><br><span class="line">推荐使用：存储时间或时间间隔  例如:报警声，两时间之间的间隔，任务开始/结束时间</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DATETIME</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：以yyyy-mm-ddhh:mm:ss格式结合日期和时间</span><br><span class="line">推荐使用：存储包含日期和时间的数据 例如:提醒的人，事件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TIMESTAMP</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：以yyyy-mm-ddhh:mm:ss格式结合日期和时间</span><br><span class="line">推荐使用：记录即时时间  例如：事件提醒器，“最后进入”的时间标记</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>YEAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：1</span><br><span class="line">描述：以 yyyy格式的年份</span><br><span class="line">推荐使用：存储年份  例如:毕业年，出生年</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-集合"><a href="#5-集合" class="headerlink" title="5.集合"></a><span id="set">5.集合</span></h2><ul>
+<li><p><strong>ENUM</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：1或 2个字节</span><br><span class="line">描述：一组数据，用户可从中选择其中一个</span><br><span class="line">推荐使用：存储字符属性，只能从中选择之一 例如:布尔量选择，如性别</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>SET</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：从1到8字节;取决于设置的大小</span><br><span class="line">描述：一组数据，用户可从中选择其中0，1或更多。</span><br><span class="line">推荐使用：存储字符属性，可从中选择多个字符的联合。  例如:多选项选择，比如业余爱好和兴趣</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据类型/">数据类型</a><a href="/tags/数据库/">数据库</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/Mysql-连接数据库/">Mysql 连接数据库</a></h1>
+  
+
+    <time datetime="2016-03-13T07:19:50.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="数据库的连接-for-Mysql"><a href="#数据库的连接-for-Mysql" class="headerlink" title="数据库的连接 for Mysql"></a>数据库的连接 for Mysql</h2><p><strong>格式：mysql -u&lt;用户名&gt; －p&lt;密码&gt;</strong><br>或者<br><strong>格式：mysql -u&lt;用户名&gt; －p</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -uroot -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 13</span><br><span class="line">Server version: 5.7.11 MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据库/">数据库</a><a href="/tags/login/">login</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/Git-获取远端分支/">Git 获取远端分支</a></h1>
+  
+
+    <time datetime="2016-03-13T03:27:58.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="将远程分支信息获取到本地"><a href="#将远程分支信息获取到本地" class="headerlink" title="将远程分支信息获取到本地"></a>将远程分支信息获取到本地</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch</span><br></pre></td></tr></table></figure>
+<h2 id="将远程分支映射到本地"><a href="#将远程分支映射到本地" class="headerlink" title="将远程分支映射到本地"></a>将远程分支映射到本地</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b changeCodeStruct_<span class="built_in">local</span> origin/changeCodeStruct</span><br><span class="line">Branch changeCodeStruct_<span class="built_in">local</span> <span class="built_in">set</span> up to track remote branch changeCodeStruct from origin.</span><br><span class="line">Switched to a new branch <span class="string">'changeCodeStruct_local'</span></span><br><span class="line">$ git branch</span><br><span class="line">* changeCodeStruct_<span class="built_in">local</span></span><br><span class="line">  dev</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>这样就可以把远端的分支获取到了。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Git/">Git</a><a href="/tags/branch/">branch</a><a href="/tags/fetch/">fetch</a><a href="/tags/checkout/">checkout</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/Git-查询远端分支/">Git 查询远端分支</a></h1>
+  
+
+    <time datetime="2016-03-13T03:24:09.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch <span class="_">-a</span></span><br><span class="line">* dev</span><br><span class="line">  master</span><br><span class="line">  remotes/origin/HEAD -&gt; origin/master</span><br><span class="line">  remotes/origin/changeCodeStruct</span><br><span class="line">  remotes/origin/dev</span><br><span class="line">  remotes/origin/master</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Git/">Git</a><a href="/tags/branch/">branch</a><a href="/tags/search/">search</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/KVC-键值设置编码的行为/">KVC 键值设置编码的行为</a></h1>
+  
+
+    <time datetime="2016-03-13T02:40:28.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="调用的过程"><a href="#调用的过程" class="headerlink" title="调用的过程"></a>调用的过程</h2><p> 以属性 <code>name</code> 来说明</p>
+<ol>
+<li>接收器中有setName:的访问器(或者是 <code>_setName</code>)就调用它</li>
+<li>没有访问器，则使用接收器的类方法 <code>accessInstanceVariablesDirectly</code> ，返回 YES 时，如果存在实例变量 name (或者 <code>_name</code>, <code>isName</code>, <code>_isName</code> 等)就设定值。如果使用计数引用，那么旧值就会被释放啦，新的被保存并带入</li>
+<li>如果都不行，就会调用 <code>setValue:ForUndefinedKey:</code></li>
+<li>返回的值如果不是对象，则切换到合适的值。</li>
+</ol>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">不能设置键字符串 key 时，从 setValue:forKey 中调用这个方法。默认情况下</span><br><span class="line">会触发异常 NSUndefinedKeyException</span><br><span class="line">在子类的定义中修改就可以返回其他对象了</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">-(<span class="keyword">void</span>)setValue: (id)value</span><br><span class="line">forUndefinedKey: (NSString *)key</span><br></pre></td></tr></table></figure>
+<hr>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/Objective-c/">Objective-c</a><a href="/tags/setValue/">setValue</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/KVC-键值访问编码的行为/">KVC 键值访问编码的行为</a></h1>
+  
+
+    <time datetime="2016-03-13T02:40:16.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="调用的过程"><a href="#调用的过程" class="headerlink" title="调用的过程"></a>调用的过程</h2><p> 以属性 <code>name</code> 来说明</p>
+<ol>
+<li>接收器中有name的访问器(或者是 <code>getName</code>, <code>isName</code>, <code>_name</code>, <code>_getName</code>)就调用它。</li>
+<li>没有访问器，则使用接收器的类方法 <code>accessInstanceVariablesDirectly</code> 来确定是否(YES / NO)可以返回值</li>
+<li>如果都不行，就会调用 <code>valueForUndefinedKey</code>:</li>
+<li>返回的值如果不是对象，那么返回被适当的封装的对象。</li>
+</ol>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">通常定义为返回 YES，可以在子类中改变。</span><br><span class="line">返回 YES 时，说明可以访问实例变量</span><br><span class="line">返回 NO 时，不可以访问</span><br><span class="line">即使为 <span class="doctag">@Private</span> 也可以访问</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">+ (BOOL) accessInstanceVariablesDirectly</span><br><span class="line"><span class="comment">/**</span><br><span class="line">不能取得键字符串的值时，从方法 valueForKey: 中调用该方法</span><br><span class="line">默认情况下会触发异常 NSUndefinedKeyException</span><br><span class="line">在子类的定义中修改就可以返回其他对象了</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForUndefinedKey:(NSString *)key</span><br></pre></td></tr></table></figure>
+<hr>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/Objective-c/">Objective-c</a><a href="/tags/valueForKey/">valueForKey</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/13/IOS-Key-Value-Code-的基本操作/">IOS Key-Value Code 的基本操作</a></h1>
+  
+
+    <time datetime="2016-03-13T01:45:24.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简单说一下"><a href="#简单说一下" class="headerlink" title="简单说一下"></a>简单说一下</h2><p>  键值编码必须的方法在非正式协议 <code>NSKeyValueCoding</code> 中声明 <code>&lt;Foundation/NSKeyValueCoding.h&gt;</code><br>  默认在 <code>NSObject</code> 中实现。</p>
+<p>  这样我们可以不用通过访问器去访问和设置属性。</p>
+<p>  我们可以通过<code>属性的字符串名称</code>去 <strong>访问</strong> 和 <strong>设置</strong> 它。</p>
+<hr>
+<h2 id="两个方法"><a href="#两个方法" class="headerlink" title="两个方法"></a>两个方法</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">返回表示属性的键字符串相应的值，如果没有将会调用 valueForUndefinedKey: 的方法。</span><br><span class="line">@ param key 属性的键字符串</span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *) key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">设置键字符串对应的值为value，如果不能将会调用方法 setValue:ForUndefinedKey:</span><br><span class="line"></span><br><span class="line"><span class="doctag">@param</span> value 要设置的值</span><br><span class="line"><span class="doctag">@param</span> key 属性的键字符串</span><br><span class="line">*/</span></span><br><span class="line">- (id) setValue: (id)value</span><br><span class="line">         forKey: (NSString *) key</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="简单的实验证明"><a href="#简单的实验证明" class="headerlink" title="简单的实验证明"></a>简单的实验证明</h2><h3 id="代码例子"><a href="#代码例子" class="headerlink" title="代码例子"></a>代码例子</h3>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Person: NSObject // Use ARC</span><br><span class="line">&#123;</span><br><span class="line">    NSString *name; // Person 的 name 属性</span><br><span class="line">    NSString *email; // Person 的 email 属性</span><br><span class="line">    int age;</span><br><span class="line">&#125;</span><br><span class="line">- (void)setName:(NSString *)aName;</span><br><span class="line">- (NSString *)email;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation Person</span><br><span class="line"></span><br><span class="line">- (void)setName:(NSString *)aName</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@"Access: setName:");</span><br><span class="line">    name = aName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)email</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@"Access: email:");</span><br><span class="line">    return email;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    static NSString *keys[] = &#123;@"name", @"email", @"age", nil&#125;;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        id obj = [[Person alloc] init];</span><br><span class="line"></span><br><span class="line">        /* setValue:forKey: */</span><br><span class="line">        [obj setValue:@"Taro" forKey:@"name"];</span><br><span class="line">        [obj setValue:@"tar@ryugu-jo" forKey:@"email"];</span><br><span class="line">        [obj setValue:[NSNumber numberWithInt:16] forKey:@"age"];</span><br><span class="line"></span><br><span class="line">        /* valueForKey: */</span><br><span class="line">        for (int i=0; keys[i]; i++)</span><br><span class="line">             NSLog(@"%@: %@", keys[i], [obj valueForKey:keys[i]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ clang kvcsimple.m -framework Foundation</span><br><span class="line">$ ls</span><br><span class="line">a.out		kvcsimple.m</span><br></pre></td></tr></table></figure>
+<h3 id="结果显示"><a href="#结果显示" class="headerlink" title="结果显示"></a>结果显示</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">2016-03-13 10:05:36.105 a.out[656:17248] Access: <span class="built_in">set</span>Name:</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] name: Taro</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] Access: email:</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] email: tar@ryugu-jo</span><br><span class="line">2016-03-13 10:05:36.107 a.out[656:17248] age: 16</span><br></pre></td></tr></table></figure>
+<hr>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/Key-Value/">Key-Value</a><a href="/tags/编程/">编程</a><a href="/tags/KVC/">KVC</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/12/软件下载的网站/">软件下载的网站</a></h1>
+  
+
+    <time datetime="2016-03-12T01:16:07.000Z">
+  <span class="day">12</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="国外的比较好的下载软件的网站"><a href="#国外的比较好的下载软件的网站" class="headerlink" title="国外的比较好的下载软件的网站"></a>国外的比较好的下载软件的网站</h2><ul>
+<li><p><a href="http://www.soft32.com/?rel=logo" target="_blank" rel="external">soft32</a></p>
+</li>
+<li><p><a href="http://www.kaspersky.com" target="_blank" rel="external">卡巴斯基官方网站</a></p>
+</li>
+<li><p><a href="https://sourceforge.net" target="_blank" rel="external">SourceForge</a><br> 快速，安全和免费下载最大的开放源码应用程序和软件目录。</p>
+</li>
+<li><p><a href="http://www.brothersoft.com" target="_blank" rel="external">BrotherSoft</a><br> 超过60000免费软件下载，共享软件下载。</p>
+</li>
+<li><p><a href="http://www.download3k.com" target="_blank" rel="external">Download3K</a><br> 免费Windows软件下载。</p>
+</li>
+<li><p><a href="http://www.softpedia.com" target="_blank" rel="external">Softpedia</a><br> 超过500000免费软件及试用软件下载，为Windows, Unix系统/Linux系统, 苹果机，</p>
+</li>
+<li><p><a href="http://www.toocharger.com" target="_blank" rel="external">Toocharger.com</a><br> 下载成千上万的免费软件。</p>
+</li>
+<li><p><a href="http://www.jetelecharge.com" target="_blank" rel="external">Jetelecharge.com</a><br> 法国免费软件下载网站。</p>
+</li>
+<li><p><a href="http://www.baiju.org/i/c-all-40-1.html" target="_blank" rel="external">其他参考这个</a></p>
+</li>
+</ul>
+<h2 id="国内软件下载的网站"><a href="#国内软件下载的网站" class="headerlink" title="国内软件下载的网站"></a>国内软件下载的网站</h2><ul>
+<li><p><a href="http://www.cr173.com/top/" target="_blank" rel="external">西西软件园</a></p>
+</li>
+<li><p><a href="http://xiazai.zol.com.cn" target="_blank" rel="external">ZOL软件下载</a></p>
+</li>
+<li><p><a href="http://www.xiazaiba.com" target="_blank" rel="external">下载吧</a><br> 虽然软件不是很多，但基本上你需要的它里面都有，软件质量很高，也都无毒，很安全，大多收费的都是经过破解的.</p>
+</li>
+<li><p><a href="http://www.onlinedown.net" target="_blank" rel="external">华军软件园</a></p>
+</li>
+<li><p><a href="http://dl.pconline.com.cn/sort/1.html" target="_blank" rel="external">太平洋电脑网</a></p>
+</li>
+<li><p><a href="http://www.xdowns.com" target="_blank" rel="external">绿色联盟</a></p>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/网站/">网站</a><a href="/tags/软件下载/">软件下载</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/08/Linux-文件属性读取/">Linux 文件属性读取</a></h1>
+  
+
+    <time datetime="2016-03-08T08:10:09.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简单说一下"><a href="#简单说一下" class="headerlink" title="简单说一下"></a>简单说一下</h2><p>  <strong>使用 stat 函数，通过文件的绝对路径或者相对路径的文件名去打开相应文件的属性</strong></p>
+<h2 id="包含的头文件"><a href="#包含的头文件" class="headerlink" title="包含的头文件"></a>包含的头文件</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;sys/stat.h&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考函数"><a href="#参考函数" class="headerlink" title="参考函数"></a>参考函数</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">stat</span>(const char *path, struct <span class="built_in">stat</span> *buf);</span><br></pre></td></tr></table></figure>
+<h2 id="读取文件属性"><a href="#读取文件属性" class="headerlink" title="读取文件属性"></a>读取文件属性</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">struct <span class="built_in">stat</span> *infobuf;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">stat</span>(<span class="string">"/etc/passwd"</span>, &amp;infobuf) == -1) &#123;</span><br><span class="line">  perror(<span class="string">"/etc/passwd"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The size of /etc/passwod is %d\n"</span>, infobuf.st_size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>  <a href="http://scofieldwyq.github.io/2016/03/08/Linux-%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93/" target="_blank" rel="external">stat 结构</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/stat/">stat</a><a href="/tags/file-attribute/">file attribute</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/08/Linux-目录操作/">Linux 目录操作</a></h1>
+  
+
+    <time datetime="2016-03-08T08:09:48.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简单说明一下"><a href="#简单说明一下" class="headerlink" title="简单说明一下"></a>简单说明一下</h2><p>  <strong>目录是文件的列表，在Linux下对于目录来说是有系统调用可以使用来操作目录的。</strong></p>
+<p>  <strong>目录的操作需要一个目录文件绝对路径或者当前目录的相对路径。</strong></p>
+<p>  <strong>目录操作的大概过程为：打开目录，读取目录内容放入目录的结构体里面，然后对于结构体的数据进行呈现，最后不需要的时候关闭目录。</strong></p>
+<p>  <strong>打开目录，会得到一个打开的目录文件描述符 <code>DIR</code> (一个无符号整数)，读取目录内容需要目录的文件描述符.</strong></p>
+<p>  <strong><code>DIR</code> 作为 打开目录的文件描述符的宏参数</strong></p>
+<hr>
+<h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2><ul>
+<li>函数参考<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DIR *opendir(const char *name); /* name: 目录的绝对路径或者相对路径 */</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>开始打开文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用该函数打开目录，返回的目录文件描述符可以用于读取目录内容。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">DIR *dir_ptr ; /* 目录文件描述符指针 */</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((dir_ptr = opendir(<span class="string">"/"</span>)) == NULL) &#123; /* 打开目录 */</span><br><span class="line">  fprintf(stderr, <span class="string">"something error: %s"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<hr>
+</li>
+</ul>
+<h2 id="read"><a href="#read" class="headerlink" title="read"></a>read</h2><ul>
+<li><p>函数参考</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int readdir(unsigned int fd, struct old_linux_dirent *dirp,</span><br><span class="line">                 unsigned int count);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始读取目录内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用该目录文件描述符，读取目录文件的内容，放入结构体指针中。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">struct dirent *direntp; /* 目录结构体指针 */</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> ((direntp = readdir(dir_ptr)) != NULL) &#123; /* 读取存入结构体 */</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, direntp-&gt;d_name);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><a href="http://scofieldwyq.github.io/2016/03/08/Linux-%E7%9B%AE%E5%BD%95%E5%86%85%E5%AE%B9%E7%9A%84%E7%BB%93%E6%9E%84/" target="_blank" rel="external">dirent 结构体的内容</a></p>
+</li>
+</ul>
+<h2 id="close"><a href="#close" class="headerlink" title="close"></a>close</h2><ul>
+<li><p>函数参考</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int closedir(DIR *dirp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">使用目录文件描述符关闭目录。</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">...</span><br><span class="line">closedir(dir_ptr);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="move-curser"><a href="#move-curser" class="headerlink" title="move curser"></a>move curser</h2>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/Directory/">Directory</a><a href="/tags/opendir/">opendir</a><a href="/tags/readdir/">readdir</a><a href="/tags/closedir/">closedir</a><a href="/tags/seekdir/">seekdir</a><a href="/tags/Directory-operation/">Directory_operation</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+<nav id="pagenavi">
+  
+    <a href="/page/2/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/4/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

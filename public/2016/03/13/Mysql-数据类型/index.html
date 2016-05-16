@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mysql 数据类型 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="数据类型
+INT
+FLOAT
+CHAR
+TIME
+SET
+
+1.INT
+SMALLINT
+123字节：2描述：整数，从-32000到 +32000范围推荐使用：存储相对比较小的整数。 比如: 年纪，数量
+
+INT
+123字节：4描述：整数，从-2000000000 到 +2000000000 范围推">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Mysql 数据类型</h1>
+  
+
+    <time datetime="2016-03-13T07:27:00.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><a href="#int">INT</a></li>
+<li><a href="#float">FLOAT</a></li>
+<li><a href="#char">CHAR</a></li>
+<li><a href="#time">TIME</a></li>
+<li><a href="#set">SET</a></li>
+</ul>
+<h2 id="1-INT"><a href="#1-INT" class="headerlink" title="1.INT"></a><span id="int">1.INT</span></h2><ul>
+<li><p><strong>SMALLINT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：2</span><br><span class="line">描述：整数，从-32000到 +32000范围</span><br><span class="line">推荐使用：存储相对比较小的整数。 比如: 年纪，数量</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>INT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：整数，从-2000000000 到 +2000000000 范围</span><br><span class="line">推荐使用： 存储中等整数 例如: 距离</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>BIGINT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：不能用SMALLINT 或 INT描述的超大整数。</span><br><span class="line">推荐使用：存储超大的整数 例如: 科学/数学数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-FLOAT"><a href="#2-FLOAT" class="headerlink" title="2.FLOAT"></a><span id="float">2.FLOAT</span></h2><ul>
+<li><p><strong>FLOAT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：单精度浮点型数据</span><br><span class="line">推荐使用：存储小数数据 例如:测量，温度</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DOUBLE</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：双精度浮点型数据</span><br><span class="line">推荐使用：需要双精度存储的小数数据 例如:科学数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DECIMAL</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量;取决于精度与长度</span><br><span class="line">描述：用户自定义精度的浮点型数据</span><br><span class="line">推荐使用：以特别高的精度存储小数数据。  例如:货币数额，科学数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-CHAR"><a href="#3-CHAR" class="headerlink" title="3.CHAR"></a><span id="char">3.CHAR</span></h2><ul>
+<li><p><strong>CHAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：特定字符串长度(高达255字 符)</span><br><span class="line">描述：固定长度的字符串</span><br><span class="line">推荐使用：存储通常包含预定义字符串的变量 例如: 定期航线，国家或邮编</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>VARCHAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量; 1 + 实际字符串长度 (高达 255 字 符)</span><br><span class="line">描述：具有最大限制的可变长度的字符串  </span><br><span class="line">推荐使用：存储不同长度的字符串值(高达一个特定的最大限度). 例如:名字，密码，短文标签</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TEXT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：Variable; 2 +聽 actual string length</span><br><span class="line">描述：没有最大长度限制的可变长度的字符串</span><br><span class="line">推荐使用：存储大型文本数据,例如: 新闻故事，产品描述</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>BLOB</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：变量；2 + 实际字符串长度</span><br><span class="line">描述：二进制字符串</span><br><span class="line">推荐使用：存储二进制数据 例如:图片，附件，二进制文档</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-TIME"><a href="#4-TIME" class="headerlink" title="4.TIME"></a><span id="time">4.TIME</span></h2><ul>
+<li><p><strong>DATE</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：3</span><br><span class="line">描述：以 yyyy-mm-dd格式的日期</span><br><span class="line">推荐使用：存储日期  例如:生日，产品满期</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TIME</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：3</span><br><span class="line">描述：以 hh:mm:ss格式的时间</span><br><span class="line">推荐使用：存储时间或时间间隔  例如:报警声，两时间之间的间隔，任务开始/结束时间</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>DATETIME</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：8</span><br><span class="line">描述：以yyyy-mm-ddhh:mm:ss格式结合日期和时间</span><br><span class="line">推荐使用：存储包含日期和时间的数据 例如:提醒的人，事件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TIMESTAMP</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：4</span><br><span class="line">描述：以yyyy-mm-ddhh:mm:ss格式结合日期和时间</span><br><span class="line">推荐使用：记录即时时间  例如：事件提醒器，“最后进入”的时间标记</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>YEAR</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：1</span><br><span class="line">描述：以 yyyy格式的年份</span><br><span class="line">推荐使用：存储年份  例如:毕业年，出生年</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-集合"><a href="#5-集合" class="headerlink" title="5.集合"></a><span id="set">5.集合</span></h2><ul>
+<li><p><strong>ENUM</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：1或 2个字节</span><br><span class="line">描述：一组数据，用户可从中选择其中一个</span><br><span class="line">推荐使用：存储字符属性，只能从中选择之一 例如:布尔量选择，如性别</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>SET</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字节：从1到8字节;取决于设置的大小</span><br><span class="line">描述：一组数据，用户可从中选择其中0，1或更多。</span><br><span class="line">推荐使用：存储字符属性，可从中选择多个字符的联合。  例如:多选项选择，比如业余爱好和兴趣</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Mysql/">Mysql</a><a href="/tags/database/">database</a><a href="/tags/数据类型/">数据类型</a><a href="/tags/数据库/">数据库</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

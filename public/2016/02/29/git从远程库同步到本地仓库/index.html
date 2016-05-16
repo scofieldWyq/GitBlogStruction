@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git从远程库同步到本地仓库 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="目录
+远程仓库发生改变，本地仓库没有改变
+远程仓库没有改变，本地仓库发生改变
+远程仓库，本地仓库都发生改变
+
+有三种方式的情况下，如何做到没有Bug的合并代码。。。
+远程仓库发生改变，本地仓库没有改变
+首先，查看远程仓库 git remote -v
+123$ git remote -vorigin	">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">git从远程库同步到本地仓库</h1>
+  
+
+    <time datetime="2016-02-28T17:38:04.000Z">
+  <span class="day">29</span><span class="month">Feb</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><a href="#d1">远程仓库发生改变，本地仓库没有改变</a></li>
+<li><a href="#d2">远程仓库没有改变，本地仓库发生改变</a></li>
+<li><a href="#d3">远程仓库，本地仓库都发生改变</a></li>
+</ol>
+<h1 id="有三种方式的情况下，如何做到没有Bug的合并代码。。。"><a href="#有三种方式的情况下，如何做到没有Bug的合并代码。。。" class="headerlink" title="有三种方式的情况下，如何做到没有Bug的合并代码。。。"></a>有三种方式的情况下，如何做到没有Bug的合并代码。。。</h1><hr>
+<h2 id="远程仓库发生改变，本地仓库没有改变"><a href="#远程仓库发生改变，本地仓库没有改变" class="headerlink" title="远程仓库发生改变，本地仓库没有改变"></a><span id="d1">远程仓库发生改变，本地仓库没有改变</span></h2><ul>
+<li><p>首先，查看远程仓库 <code>git remote -v</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin	git@github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming.git (fetch)</span><br><span class="line">origin	git@github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming.git (push)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把远程库更新到本地 <code>git fetch origin master</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin master</span><br><span class="line">Warning: Permanently added the RSA host key for IP address &apos;&#123;IP address such as: 192.168.1.1 &#125;&apos; to the list of known hosts.</span><br><span class="line">From github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming</span><br><span class="line"> * branch            master     -&gt; FETCH_HEAD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较远程更新和本地版本库的差异 <code>git log master.. origin/master</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git log master.. origin/master</span><br><span class="line">commit ce39f8b3eeee898a2a038444f897f2aef3673493</span><br><span class="line">Author: &#123;User&#125; &lt;794870409@qq.com&gt;</span><br><span class="line">Date:   Fri Feb 26 14:14:39 2016 +0800</span><br><span class="line"></span><br><span class="line">    &#123;The context origin added ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并远程库 <code>git merge origin/master</code></p>
+<ul>
+<li><p>有差异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line">Updating eb32b20..ce39f8b</span><br><span class="line">Fast-forward</span><br><span class="line"> README.md | 2 +-</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无差异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line">Already up-to-date</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="远程仓库没有改变，本地仓库发生改变"><a href="#远程仓库没有改变，本地仓库发生改变" class="headerlink" title="远程仓库没有改变，本地仓库发生改变"></a><span id="d2">远程仓库没有改变，本地仓库发生改变</span></h2><p><strong>命令推荐</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git status // 查看版本库的状态</span><br><span class="line">git add .|[file you want add like README.md] // 添加修改的文件进入版本库</span><br><span class="line">git commit -m &quot;the content of your modify&quot; // 提交版本库</span><br><span class="line">git push -u origin master // 上传到远程版本库</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>首先你的文件出现了修改 <code>git status</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &apos;origin/master&apos;.</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	modified:   README.md</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>你的文件被修改后就会出现这样的显示</p>
+<ul>
+<li>添加文件 <code>git add .|[或者某个文件]|like: README.md</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git add README.md</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &apos;origin/master&apos;.</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">	modified:   README.md</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>文件添加后，就会出现这种</p>
+<ul>
+<li>提交文件 <code>git commit -m &quot;content&quot;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;update content&quot;</span><br><span class="line">[master 7456161] update content</span><br><span class="line"> Committer: &#123;User&#125; &lt;wuyingqiang@wuyingqiangs-MacBook-Pro.local&gt;</span><br><span class="line">Your name and email address were configured automatically based</span><br><span class="line">on your username and hostname. Please check that they are accurate.</span><br><span class="line">You can suppress this message by setting them explicitly. Run the</span><br><span class="line">following command and follow the instructions in your editor to edit</span><br><span class="line">your configuration file:</span><br><span class="line"></span><br><span class="line">    git config --global --edit</span><br><span class="line"></span><br><span class="line">After doing this, you may fix the identity used for this commit with:</span><br><span class="line"></span><br><span class="line">    git commit --amend --reset-author</span><br><span class="line"></span><br><span class="line"> 1 file changed, 8 insertions(+), 3 deletions(-)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>文件提交到你的版本库，这样本地版本就更新了</p>
+<ul>
+<li>和远程库进行同步 <code>git push -u origin master</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Delta compression using up to 8 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 417 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 1), reused 0 (delta 0)</span><br><span class="line">To git@github.com:scofieldWyq/Understanding_Unix-Linux_Programming.git</span><br><span class="line">   ce39f8b..7456161  master -&gt; master</span><br><span class="line">Branch master set up to track remote branch master from origin.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样我们的版本库同步也就好了。</p>
+<hr>
+<h2 id="远程仓库，本地仓库都发生改变"><a href="#远程仓库，本地仓库都发生改变" class="headerlink" title="远程仓库，本地仓库都发生改变"></a><span id="d3">远程仓库，本地仓库都发生改变</span></h2><p>  以后再说咯。。。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>掌握 <code>git</code> 远程和本地的同步很重要的。</li>
+<li>还有解决同步产生的问题也是锻炼自己的一个机会。</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/git/">git</a><a href="/tags/远程仓库/">远程仓库</a><a href="/tags/merge/">merge</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

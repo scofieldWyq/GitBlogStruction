@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>KVO | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="KVO 基础   解释: Key-Value observing 就是某个对象的属性改变时通知其他对象的机制。对于被观察对象来说，键值观察(KVO)就是注册想要监视的属性的键路径和观察者。
+   目的: 为了在GUI组件和程序之间调整值
+   过程: 当属性改变的时候，观察者就会接收到消息，虽然和 ">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">KVO</h1>
+  
+
+    <time datetime="2016-03-14T02:02:48.000Z">
+  <span class="day">14</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="KVO-基础"><a href="#KVO-基础" class="headerlink" title="KVO 基础"></a>KVO 基础</h2><p>   <strong>解释</strong>: <code>Key-Value observing</code> 就是某个对象的属性改变时通知其他对象的机制。对于<a href="#e1">被观察</a>对象来说，<code>键值观察(KVO)就是注册想要监视的属性的键路径和观察者</code>。</p>
+<p>   <strong>目的</strong>: 为了在GUI组件和程序之间调整值</p>
+<p>   <strong>过程</strong>: 当<code>属性改变</code>的时候，<a href="#e2">观察者</a>就会接收到消息，虽然和 <code>NSNotification</code> 通知相似，但是 KVO 不存在通知中心的对象，所以不可以指定消息的选择器。</p>
+<p>   <code>KVO</code> 可以实现监视属性， 一对一的关系， 一对多关系等各种形式的属性，可以使用 <code>NSObject</code> 来实现的。</p>
+<h2 id="KVO-准则"><a href="#KVO-准则" class="headerlink" title="KVO 准则"></a>KVO 准则</h2><blockquote>
+<p>使用 <code>键值编码的准则</code> 来访问 <code>访问器</code> 或者 <code>实例变量</code> 的情况下，才可以监视属性的变化。</p>
+</blockquote>
+<p>   <strong>在方法内直接改变实例变量的变量值是不能被监视的</strong> > <a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/kvo_%E6%96%B9%E6%B3%95%E5%86%85%E8%B0%83%E7%94%A8%E4%BB%A3%E7%A0%81.m" target="_blank" rel="external">实例验证代码</a></p>
+<p>   结果显示：<br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ clang kvcsample.m -fobjc-arc -framework Foundation</span><br><span class="line">$ ./a.out</span><br><span class="line">$</span><br></pre></td></tr></table></figure></p>
+<p>   <em>并没有结果</em></p>
+<p>   <strong>准则具体如下</strong>：</p>
+<ol>
+<li>随<code>访问器</code>方法而改变 - 这个时候访问器就是 @proeprty 所产生的 get 和 set 的方法名字。</li>
+<li>使用 <code>setValue:forKey:</code> 和键进行改变。此时可能不经过访问器</li>
+<li>使用 <code>setValue:forKeyPath:</code> 和键路径进行变化，也可能不经过访问器。不仅仅是最终的监视对象的属性，当路径中的属性发生变化时也会被通知。</li>
+</ol>
+<h2 id="KVO-的方法"><a href="#KVO-的方法" class="headerlink" title="KVO 的方法"></a>KVO 的方法</h2><ul>
+<li><strong>注册监视</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>) addObserver:(NSObject \*) anObserver</span><br><span class="line">   forKeyPath:(NSString \*) keyPath</span><br><span class="line">      options:(NSKeyValueObservingOptions) options</span><br><span class="line">      context:(<span class="keyword">void</span> *)context**</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>监视键路径 <code>keyPath</code> 中的某个属性，<a href="#e2">观察者</a>为 <code>anObserver</code>，消息的发送者为<a href="#e1">被观察者</a></p>
+<p>属性发生变化的时候，就会发送通知消息。</p>
+<p>消息包含变化内容的字典数据，context 中指定的任意指针。</p>
+<p>options 指定字典数据包含什么样的值。<br>   <code>NSKeyValueObservingOptionNew</code> … 提供改变后的属性值<br>   <code>NSKeyValueObservingOptionOld</code> … 提供改变前的属性值。</p>
+<p>当属性改变的时候，下面的消息将会发送给观察者。   </p>
+<ul>
+<li><strong>获取监视通知</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(NSString *) keyPath</span><br><span class="line">                      ofObject:(id)object</span><br><span class="line">                        change:(NSDictionary *)change</span><br><span class="line">                       context:(<span class="keyword">void</span> *)context</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>change</code> 保存着改变的相关信息，context 返回注册观察者时指定的值。</p>
+<p>如果要停止监视，实现一下方法</p>
+<ul>
+<li><p><strong>停止监视</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)removeObserver: (NSObject *) anObserver</span><br><span class="line">            forKeyPath: (NSString *) keyPath</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>change 字典中保存的入口</strong><br><code>NSKeyValueChangeKindKey</code></p>
+<pre><code>属性改变的种类
+</code></pre><p><code>NSKeyValueChangeNewKey</code></p>
+<pre><code>属性的新对象的值
+</code></pre><p><code>NSKeyValueChangeOldKey</code></p>
+<pre><code>属性旧对象的值
+</code></pre><p><code>NSKeyValueChangeIndexesKey</code></p>
+<pre><code>动态数组中进行了插入，删除，置换。表示执行了这些操作的索引集合 --- NSIndexSet 类
+的实例为入口值
+</code></pre></li>
+</ul>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>   <a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/KVOsample.m" target="_blank" rel="external">用于验证的代码</a></p>
+<p>   <strong>结果显示:</strong><br>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">--- Received by &lt;&lt;Person, Jiro, HP=140&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Person, Taro, HP=800&gt;&gt;, Path=hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 800;</span><br><span class="line">     old = 500;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 800;</span><br><span class="line">     old = 500;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 140;</span><br><span class="line">     old = 600;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Person, Jiro, HP=140&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Person, Taro, HP=500&gt;&gt;, Path=hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 500;</span><br><span class="line">     old = 600;</span><br><span class="line"> &#125;</span><br><span class="line"> --- Received by &lt;&lt;Dragon, Choco, HP=400&gt;&gt; ---</span><br><span class="line"> Object=&lt;&lt;Dragon, Choco, HP=400&gt;&gt;, Path=master.hitPoint</span><br><span class="line"> Change=&#123;</span><br><span class="line">     kind = 1;</span><br><span class="line">     new = 340;</span><br><span class="line">     old = 140;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>  <strong>代码的结果分析</strong><br>   (1) 改变 p1 的 hitPoint，并确实向 p2 和 dra 发送了消息<br>   (2) 虽然调用了更改 hitPoint 的消息，但是没有收到相应的消息<br>   (3) 改变了 master ，收到了 master.hitPoint 的消息。即使不是指定的键路径的属性，在产生改变时也会被通知<br>   (4)，(5) 使用声明属性改变了 p2, p1 的 hitPoint 也可以被监视。<br>   (6) 删除了通知后就收不到了。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="被观察者"><a href="#被观察者" class="headerlink" title="被观察者"></a><span id="e1">被观察者</span></h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">属性值发生改变的时候，会被观察者了解到它的发生情况</span><br></pre></td></tr></table></figure>
+<h3 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a><span id="e2">观察者</span></h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设置观察对象的主动者</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVO/">KVO</a><a href="/tags/键值观察/">键值观察</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

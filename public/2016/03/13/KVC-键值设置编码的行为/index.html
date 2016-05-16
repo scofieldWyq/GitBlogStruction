@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>KVC 键值设置编码的行为 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="调用的过程 以属性 name 来说明
+
+接收器中有setName:的访问器(或者是 _setName)就调用它
+没有访问器，则使用接收器的类方法 accessInstanceVariablesDirectly ，返回 YES 时，如果存在实例变量 name (或者 _name, isName, _i">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">KVC 键值设置编码的行为</h1>
+  
+
+    <time datetime="2016-03-13T02:40:28.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="调用的过程"><a href="#调用的过程" class="headerlink" title="调用的过程"></a>调用的过程</h2><p> 以属性 <code>name</code> 来说明</p>
+<ol>
+<li>接收器中有setName:的访问器(或者是 <code>_setName</code>)就调用它</li>
+<li>没有访问器，则使用接收器的类方法 <code>accessInstanceVariablesDirectly</code> ，返回 YES 时，如果存在实例变量 name (或者 <code>_name</code>, <code>isName</code>, <code>_isName</code> 等)就设定值。如果使用计数引用，那么旧值就会被释放啦，新的被保存并带入</li>
+<li>如果都不行，就会调用 <code>setValue:ForUndefinedKey:</code></li>
+<li>返回的值如果不是对象，则切换到合适的值。</li>
+</ol>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">不能设置键字符串 key 时，从 setValue:forKey 中调用这个方法。默认情况下</span><br><span class="line">会触发异常 NSUndefinedKeyException</span><br><span class="line">在子类的定义中修改就可以返回其他对象了</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">-(<span class="keyword">void</span>)setValue: (id)value</span><br><span class="line">forUndefinedKey: (NSString *)key</span><br></pre></td></tr></table></figure>
+<hr>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/Objective-c/">Objective-c</a><a href="/tags/setValue/">setValue</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

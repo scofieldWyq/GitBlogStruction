@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IOS Key-Value Code 的基本操作 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="简单说一下  键值编码必须的方法在非正式协议 NSKeyValueCoding 中声明 &amp;lt;Foundation/NSKeyValueCoding.h&amp;gt;  默认在 NSObject 中实现。
+  这样我们可以不用通过访问器去访问和设置属性。
+  我们可以通过属性的字符串名称去 访问 和 设">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">IOS Key-Value Code 的基本操作</h1>
+  
+
+    <time datetime="2016-03-13T01:45:24.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简单说一下"><a href="#简单说一下" class="headerlink" title="简单说一下"></a>简单说一下</h2><p>  键值编码必须的方法在非正式协议 <code>NSKeyValueCoding</code> 中声明 <code>&lt;Foundation/NSKeyValueCoding.h&gt;</code><br>  默认在 <code>NSObject</code> 中实现。</p>
+<p>  这样我们可以不用通过访问器去访问和设置属性。</p>
+<p>  我们可以通过<code>属性的字符串名称</code>去 <strong>访问</strong> 和 <strong>设置</strong> 它。</p>
+<hr>
+<h2 id="两个方法"><a href="#两个方法" class="headerlink" title="两个方法"></a>两个方法</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">返回表示属性的键字符串相应的值，如果没有将会调用 valueForUndefinedKey: 的方法。</span><br><span class="line">@ param key 属性的键字符串</span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *) key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">设置键字符串对应的值为value，如果不能将会调用方法 setValue:ForUndefinedKey:</span><br><span class="line"></span><br><span class="line"><span class="doctag">@param</span> value 要设置的值</span><br><span class="line"><span class="doctag">@param</span> key 属性的键字符串</span><br><span class="line">*/</span></span><br><span class="line">- (id) setValue: (id)value</span><br><span class="line">         forKey: (NSString *) key</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="简单的实验证明"><a href="#简单的实验证明" class="headerlink" title="简单的实验证明"></a>简单的实验证明</h2><h3 id="代码例子"><a href="#代码例子" class="headerlink" title="代码例子"></a>代码例子</h3>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Person: NSObject // Use ARC</span><br><span class="line">&#123;</span><br><span class="line">    NSString *name; // Person 的 name 属性</span><br><span class="line">    NSString *email; // Person 的 email 属性</span><br><span class="line">    int age;</span><br><span class="line">&#125;</span><br><span class="line">- (void)setName:(NSString *)aName;</span><br><span class="line">- (NSString *)email;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation Person</span><br><span class="line"></span><br><span class="line">- (void)setName:(NSString *)aName</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@"Access: setName:");</span><br><span class="line">    name = aName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)email</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@"Access: email:");</span><br><span class="line">    return email;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    static NSString *keys[] = &#123;@"name", @"email", @"age", nil&#125;;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        id obj = [[Person alloc] init];</span><br><span class="line"></span><br><span class="line">        /* setValue:forKey: */</span><br><span class="line">        [obj setValue:@"Taro" forKey:@"name"];</span><br><span class="line">        [obj setValue:@"tar@ryugu-jo" forKey:@"email"];</span><br><span class="line">        [obj setValue:[NSNumber numberWithInt:16] forKey:@"age"];</span><br><span class="line"></span><br><span class="line">        /* valueForKey: */</span><br><span class="line">        for (int i=0; keys[i]; i++)</span><br><span class="line">             NSLog(@"%@: %@", keys[i], [obj valueForKey:keys[i]]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ clang kvcsimple.m -framework Foundation</span><br><span class="line">$ ls</span><br><span class="line">a.out		kvcsimple.m</span><br></pre></td></tr></table></figure>
+<h3 id="结果显示"><a href="#结果显示" class="headerlink" title="结果显示"></a>结果显示</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out</span><br><span class="line">2016-03-13 10:05:36.105 a.out[656:17248] Access: <span class="built_in">set</span>Name:</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] name: Taro</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] Access: email:</span><br><span class="line">2016-03-13 10:05:36.106 a.out[656:17248] email: tar@ryugu-jo</span><br><span class="line">2016-03-13 10:05:36.107 a.out[656:17248] age: 16</span><br></pre></td></tr></table></figure>
+<hr>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/Key-Value/">Key-Value</a><a href="/tags/编程/">编程</a><a href="/tags/KVC/">KVC</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

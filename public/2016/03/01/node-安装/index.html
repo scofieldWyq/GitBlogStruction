@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>node 安装 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="关于Node
+Node 是一个服务器端 JavaScript 解释器，它将改变服务器应该如何工作的概念。它的目标是帮助程序员构建高度可伸缩的应用程序，编写能够处理数万条同时连接到一个（只有一个）物理机的连接代码。
+
+
+
+Node.js® is a JavaScript runtime built o">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">node 安装</h1>
+  
+
+    <time datetime="2016-03-01T03:15:33.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="关于Node"><a href="#关于Node" class="headerlink" title="关于Node"></a>关于Node</h1><blockquote>
+<p>Node 是一个服务器端 JavaScript 解释器，它将改变服务器应该如何工作的概念。它的目标是帮助程序员构建高度可伸缩的应用程序，编写能够处理数万条同时连接到一个（只有一个）物理机的连接代码。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</p>
+</blockquote>
+<hr>
+<h1 id="安装Node"><a href="#安装Node" class="headerlink" title="安装Node"></a>安装Node</h1><h2 id="Node-for-Mac"><a href="#Node-for-Mac" class="headerlink" title="Node for Mac"></a>Node for Mac</h2><ul>
+<li>安装 <code>Homebrew</code><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/node_install_p_2.png?raw=true" alt="node_install_p_2"><br><a href="http://brew.sh/" target="_blank" rel="external">安装Homebrew</a></li>
+<li><p>安装 node</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install node</span><br><span class="line">$ node --version</span><br><span class="line">v5.5.0</span><br></pre></td></tr></table></figure>
+<p><strong>这样在 Mac 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<h2 id="Node-for-Windows"><a href="#Node-for-Windows" class="headerlink" title="Node for Windows"></a>Node for Windows</h2><ul>
+<li><p>下载安装文件</p>
+<p><img src="https://nodejs.org/static/images/logos/nodejs-new-white-pantone.png" alt="image"><br><a href="http://www.nodejs.org/download/" target="_blank" rel="external">官网</a><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/node_install_p_1.png?raw=true" alt="node_install_p_1"></p>
+</li>
+<li><p>安装Node</p>
+<p>双击它，默认是安装在<code>C:\Program Files\nodejs</code>下面</p>
+<p>打开<code>C:\Program Files\nodejs</code>目录你会发现里面自带了npm,直接用npm安装相环境既可进入<code>node.js command prompt</code> 命令窗口进入nodejs 安装目录 <code>C:\Program Files\nodejs</code></p>
+<p>键入命令：<code>cd C:\Program Files\nodejs</code> 既可</p>
+</li>
+<li><p>现在开始安装相关环境</p>
+<p>键入命令：<code>npm install express</code> 回车等待安装 <code>express</code>……..</p>
+<p>键入命令：<code>npm install mysql</code> 回车等待安装 <code>mysql</code>……..</p>
+<p>……..安装什么组件，取决于环境搭建需求</p>
+<p>默认情况下上述组件都是安装在<code>C:\Program Files\nodejs\node_modules</code>文件夹下 这也是nodejs相关组件的自动查找路径</p>
+<p><strong>这样在 Windows 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<h2 id="Node-for-Linux"><a href="#Node-for-Linux" class="headerlink" title="Node for Linux"></a>Node for Linux</h2><ul>
+<li><p>下载 <code>Node</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nodejs.org/dist/v0.8.7/node-v0.8.7.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf node-v0.8.7.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查所需要配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure</span><br><span class="line"></span><br><span class="line"> 出现错误提示：</span><br><span class="line"> Exception: Call to &apos;(echo | $(echo $&#123;CXX_host:-$(which g++)&#125;) -m32 -E -</span><br><span class="line"></span><br><span class="line"> &gt; /dev/null 2&gt;&amp;1) &amp;&amp; echo &quot;-m32&quot; || true&apos; returned exit status 0. while</span><br><span class="line"></span><br><span class="line">loading dependencies of /opt/node-v0.8.7/node.gyp while trying to load</span><br><span class="line"></span><br><span class="line">/opt/node-v0.8.7/node.gyp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如出现以上错误，安装gcc-c++<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install gcc-c++</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>进行安装(时间比较长)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查是否成功安装，输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v5.5.0</span><br></pre></td></tr></table></figure>
+<p><strong>这样在 Linux 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<p><strong>安装完 node 后 npm 也就安装完了</strong></p>
+<hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></li>
+<li><a href="https://nodejs.org/en/download/" target="_blank" rel="external">下载Node</a></li>
+<li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="external">Node.js 教程</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/opensource/os-nodejs/" target="_blank" rel="external">Node.js 究竟是什么？</a></li>
+<li><a href="http://www.cnblogs.com/pigtail/archive/2013/01/08/2850486.html" target="_blank" rel="external">windows 下安装nodejs及其配置环境</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/install/">install</a><a href="/tags/node/">node</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

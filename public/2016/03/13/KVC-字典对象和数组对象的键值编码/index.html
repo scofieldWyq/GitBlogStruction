@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>KVC 字典对象和数组对象的键值编码 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="字典对象的键值编码   NSDictionary 定义了两个方法
+   1234567891011121314/**如果字符串不是以 @ 开头的，将会调用 objectForKey: ; 如果有 @ 开头的就会以剩余的字符串作为键，调用超类方法 alueForKey:*/- (id) valueFo">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">KVC 字典对象和数组对象的键值编码</h1>
+  
+
+    <time datetime="2016-03-13T15:00:49.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="字典对象的键值编码"><a href="#字典对象的键值编码" class="headerlink" title="字典对象的键值编码"></a>字典对象的键值编码</h2><p>   <code>NSDictionary</code> 定义了两个方法</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">如果字符串不是以 @ 开头的，将会调用 objectForKey: ; 如果有 @ 开头的就会以剩余的字符串</span><br><span class="line">作为键，调用超类方法 alueForKey:</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *)key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">一般会调用 setObject:forKey: , value 为 nil 时，就会调用 removeObjectForKey: 删除</span><br><span class="line">键对应的对象</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">           forKey:(NSString *)key</span><br></pre></td></tr></table></figure>
+<h2 id="数组对象的键值编码"><a href="#数组对象的键值编码" class="headerlink" title="数组对象的键值编码"></a>数组对象的键值编码</h2><p>   <code>NSArray</code> 和 <code>NSMutableArray</code> 以及 集合类 <code>NSSet</code> 和 <code>NSMutableSet</code> 也定义了两个方法<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">以 key 为参数，对于各个元素调用 valueForKey: 后返回数组，对各成员使用方法 valueForKey:,</span><br><span class="line">当返回 nil 时，包含 NSNull 的实例。</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKey:(NSString *)key</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">对所有的元素调用 setValue:forKey: . 需要注意的是集合对象本身不可以改变，也可以调用这个</span><br><span class="line">方法</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">           forKey:(NSString *)key</span><br></pre></td></tr></table></figure></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/字典/">字典</a><a href="/tags/数组/">数组</a><a href="/tags/键值编码/">键值编码</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

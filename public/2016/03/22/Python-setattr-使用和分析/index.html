@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python setattr 使用和分析 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="setattr 讲解123456setattr(	object, name, value)# 参数就是一个对象，name是可能是现有的属性或者是一个可以新建的属性，value为该属性的值。## 这样，我们可以动态的生成属性# 记住，name 和 value 都是字符串值哦。
+setattr 实践  ">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Python setattr 使用和分析</h1>
+  
+
+    <time datetime="2016-03-22T02:13:33.000Z">
+  <span class="day">22</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="setattr-讲解"><a href="#setattr-讲解" class="headerlink" title="setattr 讲解"></a>setattr 讲解</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">setattr(	object, name, value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数就是一个对象，name是可能是现有的属性或者是一个可以新建的属性，value为该属性的值。</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 这样，我们可以动态的生成属性</span></span><br><span class="line"><span class="comment"># 记住，name 和 value 都是字符串值哦。</span></span><br></pre></td></tr></table></figure>
+<h2 id="setattr-实践"><a href="#setattr-实践" class="headerlink" title="setattr 实践"></a>setattr 实践</h2><p>  <a href="https://raw.githubusercontent.com/scofieldWyq/wyqBlog/master/code/py_setattr.py" target="_blank" rel="external">代码来源</a><br>  首先，去掉 第15行的注释运行,结果显示如下<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python py_setattr.py</span><br><span class="line">attr4 exists?</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"py_setattr.py"</span>, line 15, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span> T.attr4</span><br><span class="line">AttributeError: <span class="string">'test'</span> object has no attribute <span class="string">'attr4'</span></span><br></pre></td></tr></table></figure></p>
+<p>  再加上注释，运行<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python py_setattr.py                        </span><br><span class="line">attr4 exists?</span><br><span class="line">create new attribute &lt;attr4&gt; <span class="built_in">test</span>4</span><br><span class="line">attribute &lt;attr3&gt;:<span class="built_in">test</span>3</span><br><span class="line">changed attribute &lt;attr3&gt; :<span class="built_in">test</span>3_changed</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.cnblogs.com/zhangjing0502/archive/2012/05/16/2503702.html" target="_blank" rel="external">Python的getattr(),setattr(),delattr(),hasattr()</a></li>
+<li><a href="http://www.tuicool.com/articles/YNV3QnR" target="_blank" rel="external">Python 类 setattr、getattr、hasattr 的使用</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Python/">Python</a><a href="/tags/setattr/">setattr</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

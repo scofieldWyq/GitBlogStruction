@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 目录内容的结构 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="从帮助中查信息  1234567891011$ man -k direct | grep readreaddir              (2)  - read directory entryreaddir              (3p)  - read a directoryreaddir ">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Linux 目录内容的结构</h1>
+  
+
+    <time datetime="2016-03-08T07:41:10.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="从帮助中查信息"><a href="#从帮助中查信息" class="headerlink" title="从帮助中查信息"></a>从帮助中查信息</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ man -k direct | grep <span class="built_in">read</span></span><br><span class="line">readdir              (2)  - <span class="built_in">read</span> directory entry</span><br><span class="line">readdir              (3p)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir              (3)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir_r [readdir]  (3p)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir_r [readdir]  (3)  - <span class="built_in">read</span> a directory</span><br><span class="line">readlinkat           (2)  - <span class="built_in">read</span> value of a symbolic link relative to a directory file descriptor</span><br><span class="line">seekdir              (3)  - <span class="built_in">set</span> the position of the next readdir() call <span class="keyword">in</span> the directory stream</span><br><span class="line"></span><br><span class="line">$ man 3 readdir</span><br><span class="line">...(内容省略)</span><br></pre></td></tr></table></figure>
+<h2 id="目录结构所在的头文件"><a href="#目录结构所在的头文件" class="headerlink" title="目录结构所在的头文件"></a>目录结构所在的头文件</h2><ul>
+<li>dirent.h<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;dirent.h&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="保存目录内容的结构体"><a href="#保存目录内容的结构体" class="headerlink" title="保存目录内容的结构体"></a>保存目录内容的结构体</h2><ul>
+<li>结构体 - <code>dirent</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct dirent &#123;</span><br><span class="line">              ino_t          d_ino;       /* inode number */</span><br><span class="line">              off_t          d_off;       /* offset to the next dirent */</span><br><span class="line">              unsigned short d_reclen;    /* length of this record */</span><br><span class="line">              unsigned char  d_<span class="built_in">type</span>;      /* <span class="built_in">type</span> of file; not supported</span><br><span class="line">                                             by all file system types */</span><br><span class="line">              char           d_name[256]; /* filename */</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/struct/">struct</a><a href="/tags/Directory/">Directory</a><a href="/tags/dirent/">dirent</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

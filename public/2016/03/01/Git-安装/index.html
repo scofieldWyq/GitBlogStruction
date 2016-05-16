@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Git 安装 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="Git 官网
+
+
+
+Mac 安装 Git
+Windows 安装 Git
+Linux 安装 Git
+
+Mac 安装 GitMac 本身就有 Git 了1234$ which git/usr/bin/git$ git --versiongit version 2.5.4 (Apple Git-61)
+M">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Git 安装</h1>
+  
+
+    <time datetime="2016-03-01T03:14:49.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p><img src="http://git-scm.com/images/logo@2x.png" alt=""></p>
+<blockquote>
+<p><a href="http://git-scm.com/" target="_blank" rel="external">Git 官网</a></p>
+</blockquote>
+<hr>
+<ul>
+<li><a href="#mac">Mac 安装 Git</a></li>
+<li><a href="#windows">Windows 安装 Git</a></li>
+<li><a href="#linux">Linux 安装 Git</a></li>
+</ul>
+<h1 id="Mac-安装-Git"><a href="#Mac-安装-Git" class="headerlink" title="Mac 安装 Git"></a><span id="mac">Mac 安装 Git</span></h1><h2 id="Mac-本身就有-Git-了"><a href="#Mac-本身就有-Git-了" class="headerlink" title="Mac 本身就有 Git 了"></a>Mac 本身就有 Git 了</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line">$ git --version</span><br><span class="line">git version 2.5.4 (Apple Git-61)</span><br></pre></td></tr></table></figure>
+<h2 id="Mac-还没有安装-Git"><a href="#Mac-还没有安装-Git" class="headerlink" title="Mac 还没有安装 Git"></a>Mac 还没有安装 Git</h2><p>  <strong>使用homebrew来安装 Git - command line</strong></p>
+<h3 id="安装-homebrew"><a href="#安装-homebrew" class="headerlink" title="安装 homebrew"></a>安装 homebrew</h3><ul>
+<li><p><a href="http://brew.sh/" target="_blank" rel="external">安装 homebrew</a>,安装后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $ which brew</span><br><span class="line">/usr/local/bin/brew</span><br><span class="line">$ brew --version</span><br><span class="line">Homebrew 0.9.5 (git revision e15a; last commit 2016-02-03)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后就安装好了。。。</p>
+<h2 id="Git-官网的方式安装"><a href="#Git-官网的方式安装" class="headerlink" title="Git 官网的方式安装"></a>Git 官网的方式安装</h2><p><img src="http://git-scm.com/images/logo@2x.png" alt="git"><br><a href="http://git-scm.com/download/" target="_blank" rel="external">官方文档的方式安装 － http://git-scm.com/</a></p>
+<hr>
+<h1 id="Windows-安装-Git"><a href="#Windows-安装-Git" class="headerlink" title="Windows 安装 Git"></a><span id="windows">Windows 安装 Git</span></h1><h2 id="1-来源于廖雪峰的Git教学网站"><a href="#1-来源于廖雪峰的Git教学网站" class="headerlink" title="1. 来源于廖雪峰的Git教学网站"></a>1. 来源于<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">廖雪峰的Git教学网站</a></h2><blockquote>
+<p>实话实说，Windows是最烂的开发平台，如果不是开发Windows游戏或者在IE里调试页面，一般不推荐用Windows。不过，既然已经上了微软的贼船，也是有办法安装Git的。<br>– 来源于<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">廖雪峰的  Git 教学</a></p>
+</blockquote>
+<p>Windows下要使用很多Linux/Unix的工具时，需要Cygwin这样的模拟环境，Git也一样。Cygwin的安装和配置都比较复杂，就不建议你折腾了。不过，有高人已经把模拟环境和Git都打包好了，名叫msysgit，只需要下载一个单独的exe安装程序，其他什么也不用装，绝对好用。</p>
+<p>msysgit是Windows版的Git，从<a href="http://msysgit.github.io/下载，然后按默认选项安装即可。" target="_blank" rel="external">http://msysgit.github.io/下载，然后按默认选项安装即可。</a></p>
+<p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！<br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/git_install_1.jpeg?raw=true" alt="image"><br>安装完成后，还需要最后一步设置，在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。</p>
+<p>注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+<h2 id="2-官网的教学方法"><a href="#2-官网的教学方法" class="headerlink" title="2.官网的教学方法"></a>2.官网的教学方法</h2><p><img src="http://git-scm.com/images/logo@2x.png" alt="image"><br><a href="http://git-scm.com/download/win" target="_blank" rel="external">下载链接</a></p>
+<p><a href="http://jingyan.baidu.com/article/7f766dafba84f04101e1d0b0.html" target="_blank" rel="external">Git安装教程</a></p>
+<h1 id="Linux-安装-Git"><a href="#Linux-安装-Git" class="headerlink" title="Linux 安装 Git"></a><span id="linux">Linux 安装 Git</span></h1><ul>
+<li>不同的版本有不同包管理工具</li>
+<li>我使用的是<code>Centos</code></li>
+</ul>
+<p><strong>安装Git</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y git //然后输入你的 password</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装过程</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.btte.net</span><br><span class="line"> * extras: mirrors.pubyun.com</span><br><span class="line"> * updates: mirrors.btte.net</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package git.x86_64 0:1.7.1-3.el6_4.1 will be installed</span><br><span class="line">--&gt; Processing Dependency: perl-Git = 1.7.1-3.el6_4.1 for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: rsync for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Git) for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Error) for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: openssh-clients for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssh-clients.x86_64 0:5.3p1-112.el6_7 will be installed</span><br><span class="line">--&gt; Processing Dependency: openssh = 5.3p1-112.el6_7 for package: openssh-clients-5.3p1-112.el6_7.x86_64</span><br><span class="line">--&gt; Processing Dependency: libedit.so.0()(64bit) for package: openssh-clients-5.3p1-112.el6_7.x86_64</span><br><span class="line">---&gt; Package perl-Error.noarch 1:0.17015-4.el6 will be installed</span><br><span class="line">---&gt; Package perl-Git.noarch 0:1.7.1-3.el6_4.1 will be installed</span><br><span class="line">---&gt; Package rsync.x86_64 0:3.0.6-12.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libedit.x86_64 0:2.11-4.20080712cvs.1.el6 will be installed</span><br><span class="line">---&gt; Package openssh.x86_64 0:5.3p1-94.el6 will be updated</span><br><span class="line">--&gt; Processing Dependency: openssh = 5.3p1-94.el6 for package: openssh-server-5.3p1-94.el6.x86_64</span><br><span class="line">---&gt; Package openssh.x86_64 0:5.3p1-112.el6_7 will be an update</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssh-server.x86_64 0:5.3p1-94.el6 will be updated</span><br><span class="line">---&gt; Package openssh-server.x86_64 0:5.3p1-112.el6_7 will be an update</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line"> Package             Arch       Version                       Repository   Size</span><br><span class="line">================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> git                 x86_64     1.7.1-3.el6_4.1               base        4.6 M</span><br><span class="line">Installing for dependencies:</span><br><span class="line"> libedit             x86_64     2.11-4.20080712cvs.1.el6      base         74 k</span><br><span class="line"> openssh-clients     x86_64     5.3p1-112.el6_7               updates     438 k</span><br><span class="line"> perl-Error          noarch     1:0.17015-4.el6               base         29 k</span><br><span class="line"> perl-Git            noarch     1.7.1-3.el6_4.1               base         28 k</span><br><span class="line"> rsync               x86_64     3.0.6-12.el6                  base        335 k</span><br><span class="line">Updating for dependencies:</span><br><span class="line"> openssh             x86_64     5.3p1-112.el6_7               updates     274 k</span><br><span class="line"> openssh-server      x86_64     5.3p1-112.el6_7               updates     324 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">================================================================================</span><br><span class="line">Install       6 Package(s)</span><br><span class="line">Upgrade       2 Package(s)</span><br><span class="line"></span><br><span class="line">Total download size: 6.1 M</span><br><span class="line">Downloading Packages:</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Total                                           1.8 MB/s | 6.1 MB     00:03     </span><br><span class="line">Running rpm_check_debug</span><br><span class="line">Running Transaction Test</span><br><span class="line">Transaction Test Succeeded</span><br><span class="line">Running Transaction</span><br><span class="line"></span><br><span class="line">  Updating   : openssh-5.3p1-112.el6_7.x86_64                              1/10</span><br><span class="line"></span><br><span class="line">  Installing : 1:perl-Error-0.17015-4.el6.noarch                           2/10</span><br><span class="line"></span><br><span class="line">  Installing : libedit-2.11-4.20080712cvs.1.el6.x86_64                     3/10</span><br><span class="line"></span><br><span class="line">  Installing : openssh-clients-5.3p1-112.el6_7.x86_64                      4/10</span><br><span class="line"></span><br><span class="line">  Installing : rsync-3.0.6-12.el6.x86_64                                   5/10</span><br><span class="line"></span><br><span class="line">  Installing : perl-Git-1.7.1-3.el6_4.1.noarch                             6/10</span><br><span class="line"></span><br><span class="line">  Installing : git-1.7.1-3.el6_4.1.x86_64                                  7/10</span><br><span class="line"></span><br><span class="line">  Updating   : openssh-server-5.3p1-112.el6_7.x86_64                       8/10</span><br><span class="line"></span><br><span class="line">  Cleanup    : openssh-server-5.3p1-94.el6.x86_64                          9/10</span><br><span class="line"></span><br><span class="line">  Cleanup    : openssh-5.3p1-94.el6.x86_64                                10/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-clients-5.3p1-112.el6_7.x86_64                      1/10</span><br><span class="line"></span><br><span class="line">  Verifying  : perl-Git-1.7.1-3.el6_4.1.noarch                             2/10</span><br><span class="line"></span><br><span class="line">  Verifying  : 1:perl-Error-0.17015-4.el6.noarch                           3/10</span><br><span class="line"></span><br><span class="line">  Verifying  : rsync-3.0.6-12.el6.x86_64                                   4/10</span><br><span class="line"></span><br><span class="line">  Verifying  : libedit-2.11-4.20080712cvs.1.el6.x86_64                     5/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-5.3p1-112.el6_7.x86_64                              6/10</span><br><span class="line"></span><br><span class="line">  Verifying  : git-1.7.1-3.el6_4.1.x86_64                                  7/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-server-5.3p1-112.el6_7.x86_64                       8/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-5.3p1-94.el6.x86_64                                 9/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-server-5.3p1-94.el6.x86_64                         10/10</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  git.x86_64 0:1.7.1-3.el6_4.1                                                  </span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  libedit.x86_64 0:2.11-4.20080712cvs.1.el6                                     </span><br><span class="line">  openssh-clients.x86_64 0:5.3p1-112.el6_7                                      </span><br><span class="line">  perl-Error.noarch 1:0.17015-4.el6                                             </span><br><span class="line">  perl-Git.noarch 0:1.7.1-3.el6_4.1                                             </span><br><span class="line">  rsync.x86_64 0:3.0.6-12.el6                                                   </span><br><span class="line"></span><br><span class="line">Dependency Updated:</span><br><span class="line">  openssh.x86_64 0:5.3p1-112.el6_7    openssh-server.x86_64 0:5.3p1-112.el6_7   </span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装完成后</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line">$ git --version</span><br><span class="line">git version 1.7.1</span><br></pre></td></tr></table></figure>
+<p><strong>OK, 其他版本的Linux大概也就是这样的了</strong></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">http://git-scm.com/</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官方网站</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git - 简易指南</a></li>
+<li><a href="http://blog.jobbole.com/25775/" target="_blank" rel="external">Git详解之一：Git起步</a></li>
+<li><a href="http://baike.baidu.com/link?url=IWINhIXDsfMCThAtC_aHb8bPWrwsgwBuZfwPzbGBjoOeOT6F6GYyTV8F4Jn4JnpP90laupdcCRcCn9z--V02mobrOnLMr2Q1H5h4aNJEfRC" target="_blank" rel="external">GIT</a></li>
+<li><a href="http://blog.jobbole.com/78960/" target="_blank" rel="external">推荐！手把手教你使用Git</a></li>
+<li><a href="http://jingyan.baidu.com/article/90895e0fb3495f64ed6b0b50.html" target="_blank" rel="external">如何在windows下安装GIT</a></li>
+<li><a href="https://guides.github.com/activities/hello-world/" target="_blank" rel="external">GitHub Guides</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Git/">Git</a><a href="/tags/install/">install</a><a href="/tags/Mac/">Mac</a><a href="/tags/Windows/">Windows</a><a href="/tags/Linux/">Linux</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

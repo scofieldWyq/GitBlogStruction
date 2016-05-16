@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 文件属性的结构体 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="从帮助中查信息  123456789101112$ man -k file | grep -i statusfileno [ferror]      (3)  - check and reset stream statusfstat                (3p)  - get file s">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Linux 文件属性的结构体</h1>
+  
+
+    <time datetime="2016-03-08T07:57:28.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="从帮助中查信息"><a href="#从帮助中查信息" class="headerlink" title="从帮助中查信息"></a>从帮助中查信息</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ man -k file | grep -i status</span><br><span class="line">fileno [ferror]      (3)  - check and reset stream status</span><br><span class="line">fstat                (3p)  - get file status</span><br><span class="line">fstatat              (2)  - get file status relative to a directory file descriptor</span><br><span class="line">fstat [<span class="built_in">stat</span>]         (2)  - get file status</span><br><span class="line">lstat [<span class="built_in">stat</span>]         (2)  - get file status</span><br><span class="line"><span class="built_in">stat</span>                 (1)  - display file or file system status</span><br><span class="line"><span class="built_in">stat</span>                 (2)  - get file status</span><br><span class="line"><span class="built_in">stat</span>                 (3p)  - get file status</span><br><span class="line"></span><br><span class="line">$ man 2 <span class="built_in">stat</span></span><br><span class="line">...(内容省略)</span><br></pre></td></tr></table></figure>
+<h2 id="文件结构体所在的头文件"><a href="#文件结构体所在的头文件" class="headerlink" title="文件结构体所在的头文件"></a>文件结构体所在的头文件</h2><ul>
+<li>sys/stat.h<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;sys/stat.h&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文件结构体"><a href="#文件结构体" class="headerlink" title="文件结构体"></a>文件结构体</h2><ul>
+<li>结构体 - <code>stat</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">struct <span class="built_in">stat</span> &#123;</span><br><span class="line">              dev_t     st_dev;     /* ID of device containing file */</span><br><span class="line">              ino_t     st_ino;     /* inode number */</span><br><span class="line">              mode_t    st_mode;    /* protection */</span><br><span class="line">              nlink_t   st_nlink;   /* number of hard links */</span><br><span class="line">              uid_t     st_uid;     /* user ID of owner */</span><br><span class="line">              gid_t     st_gid;     /* group ID of owner */</span><br><span class="line">              dev_t     st_rdev;    /* device ID (<span class="keyword">if</span> special file) */</span><br><span class="line">              off_t     st_size;    /* total size, <span class="keyword">in</span> bytes */</span><br><span class="line">              blksize_t st_blksize; /* blocksize <span class="keyword">for</span> file system I/O */</span><br><span class="line">              blkcnt_t  st_blocks;  /* number of 512B blocks allocated */</span><br><span class="line">              time_t    st_atime;   /* time of last access */</span><br><span class="line">              time_t    st_mtime;   /* time of last modification */</span><br><span class="line">              time_t    st_ctime;   /* time of last status change */</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/file/">file</a><a href="/tags/struct/">struct</a><a href="/tags/stat/">stat</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

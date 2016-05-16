@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IOS_Storyboard | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="简介
+简单介绍一下 Storyboard ，然后对其进行创建和配置，使得可以最干净(干净的意思是没有任何代码的实现，类似于什么都没有做的一个View)的启动。
+然后理解 segue ,对其进行使用
+使用 segue 中去传递数据
+最后是对于 Storyboard 的一些讨论
+
+Index
+Story">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">IOS_Storyboard</h1>
+  
+
+    <time datetime="2016-03-02T12:13:16.000Z">
+  <span class="day">2</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>简单介绍一下 <code>Storyboard</code> ，然后对其进行创建和配置，使得可以最干净(干净的意思是没有任何代码的实现，类似于什么都没有做的一个View)的启动。</li>
+<li>然后理解 <code>segue</code> ,对其进行使用</li>
+<li>使用 <code>segue</code> 中去传递数据</li>
+<li>最后是对于 <code>Storyboard</code> 的一些讨论</li>
+</ul>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#intro">Storyboard</a></li>
+<li><a href="#start">创建和配置 Storyboard</a></li>
+<li><a href="#segue">Segue</a></li>
+<li><a href="#data">传递数据</a></li>
+<li><a href="#consum">讨论 Storyboard</a></li>
+</ol>
+<h2 id="Storyboard"><a href="#Storyboard" class="headerlink" title="Storyboard"></a><span id="intro">Storyboard</span></h2><p> <strong>Storyboard is IOS 的一个特性功能， 它可以让你所有的初始化和布局视图控制器(View Controller)在一个类似于 XIB 的文件中。</strong></p>
+<p> <code>StoryBoard</code> 是苹果在 <code>iOS 5</code> 中引入的新技术方案，目的是给纷繁复杂的 <code>nib</code>、<code>xib</code> 们一个温暖的家，让他们之间的关系更直观地展示出来，并提供了一种新的页面间跳转方式 segue。</p>
+<p> <code>StoryBoard</code> 的本质是一个 <code>XML</code> 文件，<strong>描述了若干窗体、组件、Auto Layout 约束等关键信息</strong>。</p>
+<p> 苹果官方是推荐我们将所有的UI都使用Storyboard去搭建，Storyboard也是一个很成熟的工具了。使用Storyboard去搭建所有界面，我们可以很迅捷地搭建出复杂的界面，也就是说能为我们节省大量的时间。我们还可以很直观地看出各个界面之间的关系，修改起来也很方便。将来如果遇到需要作修改的地方，我们只需要找到相对应的Storyboard就可以了，比起以前来说，快捷了不少。</p>
+<h2 id="创建和配置-Storyboard"><a href="#创建和配置-Storyboard" class="headerlink" title="创建和配置 Storyboard"></a><span id="start">创建和配置 Storyboard</span></h2><h3 id="1-创建一个空工程"><a href="#1-创建一个空工程" class="headerlink" title="1.创建一个空工程"></a>1.创建一个空工程</h3><p>><br>  <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_1.png?raw=true" alt="p_1"><br>><br>  <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_2.png?raw=true" alt="p_2"></p>
+<h3 id="2-创建一个StoryBoard"><a href="#2-创建一个StoryBoard" class="headerlink" title="2.创建一个StoryBoard"></a>2.创建一个StoryBoard</h3><ul>
+<li><p>为了能够完全的了解启动的步骤，我们把 <code>Main.storyBoard</code> 删掉<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_3.png?raw=true" alt="p_3"></p>
+</li>
+<li><p>删掉后我们来创建一个 <code>StoryBoard</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_4.png?raw=true" alt="p_4"></p>
+</li>
+<li><p>命名为 <code>templeStoryboard</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_5.png?raw=true" alt="p_5"></p>
+</li>
+<li><p>然后拖一个 <code>Navigation Controller</code> 过来<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_6.png?raw=true" alt="p_6"></p>
+</li>
+</ul>
+<h3 id="3-配置StoryBoard"><a href="#3-配置StoryBoard" class="headerlink" title="3.配置StoryBoard"></a>3.配置StoryBoard</h3><ul>
+<li>把 <code>navigation</code> 作为入口的 <code>controller</code> ,点击 <code>navigation</code> 的 <code>view</code> ,然后设置<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_7.png?raw=true" alt="p_7"></li>
+</ul>
+<ul>
+<li><p>启动前设置一下 <code>Main interface</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_8.png?raw=true" alt="p_8"></p>
+</li>
+<li><p>效果<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_9.PNG?raw=true" alt="p_9"></p>
+<p><strong>这个时候，简单的配置就完成了</strong></p>
+<hr>
+</li>
+</ul>
+<h2 id="Segue"><a href="#Segue" class="headerlink" title="Segue"></a><span id="segue">Segue</span></h2><ul>
+<li><p>拖出两个 View Controller<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_10.png?raw=true" alt="p_10"></p>
+</li>
+<li><p>从 table view 那边，按住 Control 键，使用鼠标拖到某一个 view controller<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_11.png?raw=true" alt="p_11"></p>
+</li>
+<li><p>松开后就会出现一个列表,选择 push,或者 modal,然后就可以实现简单的事件出发了。</p>
+</li>
+<li><p>对于 modal 的视图来说没有返回，所以需要代码来使它消失</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self.presentingViewController dismissViewControllerAnimated:YES</span><br><span class="line">                                                     completion:nil];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="传递数据"><a href="#传递数据" class="headerlink" title="传递数据"></a><span id="data">传递数据</span></h2><ul>
+<li>传递数据，也就是点击事件出发的方法来做到的，segue 的触发会调用这个方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 这个方法就是segue点击后触发的方法</span><br><span class="line"></span><br><span class="line"> @param segue storyboard的segue</span><br><span class="line"> @param sender 尖头目的指向的类实例</span><br><span class="line">*/</span><br><span class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="讨论-Storyboard"><a href="#讨论-Storyboard" class="headerlink" title="讨论 Storyboard "></a><span id="consum">讨论 Storyboard </span></h2><p><strong>storyboard 在我们看起来挺不错的, 但是并不是非常的有用.</strong></p>
+<ul>
+<li><p>优势</p>
+<ul>
+<li>Storyboards can be used to easily show off the flow of an application to a client or a colleague.</li>
+<li>Storyboards remove some simple code from your source files.</li>
+<li>Tables with static content are easy to create.</li>
+<li>Prototype cells replace the need to create separate XIBs for custom table view cells.</li>
+<li>Storyboards sure do look pretty.</li>
+</ul>
+</li>
+<li><p>劣势</p>
+<ul>
+<li>Storyboards are difficult to work with in a team. Typically, a team of iOS programmers breaks up the work by having each member focus on a particular view controller. With a storyboard, everyone has to do their work in the same storyboard file. This can quickly lead to clutter and difficulties with version control.</li>
+<li><p>Storyboards disrupt the flow of programming. Let’s say you are writing a view controller and adding the code for a button that presents a view controller modally.</p>
+<p>You can do that pretty easily in code – alloc and init the view controller, and send presentViewController:animated:completion: to self. With storyboards, you have to load up the storyboard file, drag some stuff onto the canvas, set the Class in the identity inspector, connect the segue, and then configure the segue.</p>
+</li>
+<li><p>Storyboards sacrifice flexibility and control for ease of use. The work required to add advanced functionality to the basic functionality of a storyboard is often more than the work required to put together the advanced and basic functionality in code.</p>
+</li>
+<li><p>Storyboards always create new view controller instances. Each time you perform a segue, a new instance of the destination view controller is created. Sometimes, though, you would like to keep a view controller around instead of destroying it each time it disappears off the screen. Storyboarding does not allow you to do this.</p>
+</li>
+</ul>
+<p><strong>Overall, storyboards make easy code easier and difficult code more difficult. We do not use them in this book, and we do not typically use them when writing our own applications. However, Apple seems to be pushing them harder in each release of Xcode, so you might one day decide that a particular application would benefit from storyboarding.</strong></p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><p><a href="http://baike.baidu.com/link?url=PaKASvVjiDKKsllYXhmF_atckp9NhFiEy4qB8pfJPVJI5tP0_PfA8oCyp0EOPLLAG5HwRXVlTI6tCUVJ-oAAv3QOsCQoWWRuDwmoAVpqXGHfrQQI4QhxSMmhtc9y8keceYiSARUyNW0czIaKYfWXgK" target="_blank" rel="external">Storyboard － 百度百科</a></p>
+</li>
+<li><p><a href="http://www.cocoachina.com/ios/20150526/11938.html" target="_blank" rel="external">IOS 开发 UI 搭建心得（一）—— 驾驭 StoryBoard</a></p>
+</li>
+<li><p><a href=""></a></p>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/UIStoryboard/">UIStoryboard</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

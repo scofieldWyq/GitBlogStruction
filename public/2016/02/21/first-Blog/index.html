@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>first_Blog | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="Core Data For IOS - 笔记
+如果不能把一件事用简单的话说清楚， 那就表明你理解得还不够透彻。—– 阿尔伯特＊爱因斯坦
+
+Core Data:
+Core Data 是一个框架， 是的开发者可以把数据当成对象来操作，而不必在乎数据在磁盘中的存储方式。
+
+概念:
+托管对象(managed">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">first_Blog</h1>
+  
+
+    <time datetime="2016-02-21T03:12:02.000Z">
+  <span class="day">21</span><span class="month">Feb</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="Core-Data-For-IOS-笔记"><a href="#Core-Data-For-IOS-笔记" class="headerlink" title="Core Data For IOS - 笔记"></a>Core Data For IOS - 笔记</h1><blockquote>
+<p><strong>如果不能把一件事用简单的话说清楚， 那就表明你理解得还不够透彻。—– 阿尔伯特＊爱因斯坦</strong></p>
+</blockquote>
+<h2 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data:"></a>Core Data:</h2><ul>
+<li>Core Data 是一个框架， 是的开发者可以把数据当成对象来操作，而不必在乎数据在磁盘中的存储方式。</li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h2><ul>
+<li>托管对象(managed object): NSManagedObject 类或者子类。<ul>
+<li>Core Data 提供的数据对象</li>
+</ul>
+</li>
+<li>持久化存储区(persistent store)<ul>
+<li>磁盘内容区域</li>
+</ul>
+</li>
+<li>托管对象模型<ul>
+<li>把数据从托管对象映射到持久化存储区的作用 </li>
+</ul>
+</li>
+<li>托管对象上下文(managed object context)<ul>
+<li>所有托管对象存放的地方</li>
+<li>托管对象上下文位于高速RAM中，有了托管对象上下文之后，对于原来需要读取磁盘才能获取的数据，现在只需访问这个上下文久可以了</li>
+<li>内存和磁盘的桥梁</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>托管对象持有一份对持久化存储区里相关数据的拷贝， 如果数据库作为持久化存储区，那么托管对象就是可能对应于数据库里某张数据表的一行。</p>
+</blockquote>
+<h3 id="持久化存储协调器-Persistent-store-coordinator"><a href="#持久化存储协调器-Persistent-store-coordinator" class="headerlink" title="持久化存储协调器(Persistent store coordinator)"></a>持久化存储协调器(Persistent store coordinator)</h3><ul>
+<li>保存一份持久化存储区</li>
+<li>选用SQLite数据库作为持久化存储区</li>
+<li>可以有多个持久化存储区</li>
+<li>创建持久化存储区的类:<code>NSPersistentStore</code></li>
+<li>创建持久化存储协调器的类:<code>NSPersistentStoreCoordinator</code></li>
+</ul>
+<h3 id="托管对象模型-managed-object-model"><a href="#托管对象模型-managed-object-model" class="headerlink" title="托管对象模型(managed object model)"></a>托管对象模型(managed object model)</h3><ul>
+<li>NSManagedObjectModel</li>
+<li>数据结构的描述或者图示</li>
+<li>类似于类，而不是对象实例</li>
+<li>托管对象是托管对象模型的实例</li>
+</ul>
+<h3 id="托管对象上下文"><a href="#托管对象上下文" class="headerlink" title="托管对象上下文"></a>托管对象上下文</h3><ul>
+<li>包含多个托管对象</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><code>NSManagedObject</code> (托管对象)存放在 <code>NSManagedObjectContext</code> (托管对象上下文)</li>
+<li><code>NSManagedObjectModel</code> (托管对象模型) 作为托管对象实例的模版</li>
+<li><code>NSPersistentStore</code> (持久化存储区) 存放在 <code>NSPersistentStoreCoordinator</code> (持久化存储协调器) 中</li>
+<li><code>NSManagedObjectContext</code> 和 <code>NSPersistentStoreCoordinator</code> 有联系</li>
+<li>所有对象模型绑定在持久化存储协调器</li>
+<li>可以通过模型的标示去获得实例或者直接在托管对象上下文操作数据</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

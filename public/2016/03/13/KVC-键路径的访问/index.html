@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>KVC 键路径的访问 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="路径访问简介   路径访问就是在类中还有类的实例，那么如何深层次的去访问呢？   通过路径访问的方式去实现
+方法调用  1234567891011121314/**以点切分键路径，并使用第一个键接收器发送 valueForKey: 方法，然后再使用键路径的下一个键，向得到的对象发送 valueFor">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">KVC 键路径的访问</h1>
+  
+
+    <time datetime="2016-03-13T15:03:47.000Z">
+  <span class="day">13</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="路径访问简介"><a href="#路径访问简介" class="headerlink" title="路径访问简介"></a>路径访问简介</h2><p>   路径访问就是在类中还有类的实例，那么如何深层次的去访问呢？<br>   通过路径访问的方式去实现</p>
+<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">以点切分键路径，并使用第一个键接收器发送 valueForKey: 方法，然后再使用键路径的下一个键，向</span><br><span class="line">得到的对象发送 valueForKey: 的方法，反复直到返回最后获得的对象。</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (id) valueForKeyPath: (NSString *)keyPath</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">与 valueForKeyPath: 方法同样取出对象，这里只对路径中的最后一个键调用 setValue:forKey:</span><br><span class="line">方法，并设定其属性 value.</span><br><span class="line"></span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>) setValue: (id)value</span><br><span class="line">       forKeyPath: (NSString *) keyPath</span><br></pre></td></tr></table></figure>
+<h2 id="实验证明"><a href="#实验证明" class="headerlink" title="实验证明"></a>实验证明</h2><h3 id="两个类"><a href="#两个类" class="headerlink" title="两个类"></a>两个类</h3><ul>
+<li><p>Person</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> Person: NSObject</span><br><span class="line">&#123;</span><br><span class="line">    NSString  *name;</span><br><span class="line">    NSString *email;</span><br><span class="line">    <span class="keyword">int</span>         age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"><span class="meta">@implementation</span> Person</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WorkingGroup</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> WorkingGroup: NSObject</span><br><span class="line">&#123;</span><br><span class="line">   Person          *leader;   <span class="comment">// the leader</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@implementation</span> WorkingGroup</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="main-m"><a href="#main-m" class="headerlink" title="main.m"></a>main.m</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@autoreleasepool</span>&#123;</span><br><span class="line">        NSLog(@<span class="string">"start"</span>);</span><br><span class="line"></span><br><span class="line">       Person *p = [[Person alloc] init];</span><br><span class="line">       [p setValue:@<span class="string">"hehe"</span> forKey:@<span class="string">"name"</span>];</span><br><span class="line"></span><br><span class="line">       WorkingGroup *aGroup = [[WorkingGroup alloc] init];</span><br><span class="line">       [aGroup setValue:p forKey:@<span class="string">"leader"</span>];</span><br><span class="line"></span><br><span class="line">       NSLog(@<span class="string">"start to move"</span>);</span><br><span class="line"></span><br><span class="line">        id aPerson = [aGroup valueForKey:@<span class="string">"leader"</span>];</span><br><span class="line">        id name = [aPerson valueForKey:@<span class="string">"name"</span>];</span><br><span class="line"></span><br><span class="line">        NSLog(@<span class="string">"without path =&gt; name: %@"</span>, name);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里实现 键路径的查询</span></span><br><span class="line">        id p_name = [aGroup valueForKeyPath:@<span class="string">"leader.name"</span>];</span><br><span class="line"></span><br><span class="line">        NSLog(@<span class="string">"with path =&gt; name: %@"</span>, p_name);</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ clang keyPathOperation.m -framework Foundation</span><br><span class="line">$ ./a.out</span><br><span class="line">2016-03-14 00:30:52.111 a.out[3880:429793] start</span><br><span class="line">2016-03-14 00:30:52.112 a.out[3880:429793] start to move</span><br><span class="line">2016-03-14 00:30:52.113 a.out[3880:429793] without path =&gt; name: hehe</span><br><span class="line">2016-03-14 00:30:52.113 a.out[3880:429793] with path =&gt; name: hehe</span><br></pre></td></tr></table></figure>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/KVC/">KVC</a><a href="/tags/keyPath/">keyPath</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

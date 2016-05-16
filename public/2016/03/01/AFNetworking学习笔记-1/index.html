@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AFNetworking学习笔记-1 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="概览
+版本:3.0.4
+结构图 &amp;gt; 
+
+AFNetworking - Serializer
+关于 Serializer
+
+看一下它的继承结构1234567891011121314151617181920                                              ">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">AFNetworking学习笔记-1</h1>
+  
+
+    <time datetime="2016-03-01T09:04:21.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><ul>
+<li>版本:<code>3.0.4</code></li>
+<li>结构图 &gt; <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/p_afnetworking_inherit.png?raw=true" alt="p_afnetworking_inherit"></li>
+</ul>
+<h1 id="AFNetworking-Serializer"><a href="#AFNetworking-Serializer" class="headerlink" title="AFNetworking - Serializer"></a>AFNetworking - Serializer</h1><blockquote>
+<p>关于 <strong>Serializer</strong></p>
+</blockquote>
+<h2 id="看一下它的继承结构"><a href="#看一下它的继承结构" class="headerlink" title="看一下它的继承结构"></a>看一下它的继承结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">                                                 &lt;NSObject&gt;</span><br><span class="line">                                                      |</span><br><span class="line">                                +------------------------------------------+         </span><br><span class="line">                                |                                          |</span><br><span class="line">                   &lt;AFHTTPRequestSerializer&gt;                  &lt;AFHTTPResponseSerializer&gt;</span><br><span class="line">                                |                                          |</span><br><span class="line">                       +--------+--------+                                 |</span><br><span class="line">                       |                 |                                 |</span><br><span class="line">    &lt;AFJSONRequestSerializer&gt; &lt;AFPropertyListRequestSerializer&gt;            |</span><br><span class="line">                                                                           |</span><br><span class="line">                                                                           |</span><br><span class="line">                                                                           |</span><br><span class="line">                   +-------------------------+-----------------------------+-----------------+------------------+</span><br><span class="line">                   |                         |                             |                 |                  |</span><br><span class="line">&lt;AFPropertyListResponseSerializer&gt; &lt;AFJSONResponseSerializer&gt; &lt;AFImageResponseSerializer&gt;    |  &lt;AFXMLParserResponseSerializer&gt;</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                            &lt;AFXMLDocumentResponseSerializer&gt; * (for mac)</span><br></pre></td></tr></table></figure>
+<h2 id="了解一下"><a href="#了解一下" class="headerlink" title="了解一下"></a>了解一下</h2><blockquote>
+<p>发送数据和接收数据的序列化编码封装</p>
+</blockquote>
+<h3 id="AFHTTP"><a href="#AFHTTP" class="headerlink" title="AFHTTP*"></a>AFHTTP*</h3><ul>
+<li><p><strong>AFHTTPRequestSerializer</strong></p>
+<p><code>AFHTTPRequestSerializer</code> conforms to the <code>AFURLRequestSerialization</code> &amp; <code>AFURLResponseSerialization</code> protocols, offering a concrete base implementation of query string / URL form-encoded parameter serialization and default request headers, as well as response status code and content type validation.</p>
+<p>Any request or response serializer dealing with HTTP is encouraged to subclass <code>AFHTTPRequestSerializer</code> in order to ensure consistent default behavior.</p>
+</li>
+<li><p><strong>AFHTTPResponseSerializer</strong></p>
+<p><code>AFHTTPResponseSerializer</code> conforms to the <code>AFURLRequestSerialization</code> &amp; <code>AFURLResponseSerialization</code> protocols, offering a concrete base implementation of query string / URL form-encoded parameter serialization and default request headers, as well as response status code and content type validation.</p>
+<p>Any request or response serializer dealing with HTTP is encouraged to subclass <code>AFHTTPResponseSerializer</code> in order to ensure consistent default behavior.  </p>
+</li>
+</ul>
+<h3 id="AF-RequestSerializer"><a href="#AF-RequestSerializer" class="headerlink" title="AF*RequestSerializer"></a>AF*RequestSerializer</h3><ul>
+<li><p><strong>AFJSONRequestSerializer</strong></p>
+<p><code>AFJSONRequestSerializer</code> is a subclass of <code>AFHTTPRequestSerializer</code> that <strong>encodes parameters</strong> as <code>JSON</code> using <code>NSJSONSerialization</code>, setting the Content-Type of the encoded request to <code>application/json</code>.</p>
+</li>
+<li><p><strong>AFPropertyListRequestSerializer</strong></p>
+<p><code>AFPropertyListRequestSerializer</code> is a subclass of <code>AFHTTPRequestSerializer</code> that <strong>encodes parameters</strong> as <code>JSON</code> using <code>NSPropertyListSerializer</code>, setting the Content-Type of the encoded request to <code>application/x-plist</code>.</p>
+</li>
+</ul>
+<h3 id="AF-ResponseSerializer"><a href="#AF-ResponseSerializer" class="headerlink" title="AF*ResponseSerializer"></a>AF*ResponseSerializer</h3><ul>
+<li><p><strong>AFPropertyListResponseSerializer</strong></p>
+<p><code>AFPropertyListResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLDocument</code> objects.</p>
+<p>By default, <code>AFPropertyListResponseSerializer</code> accepts the following <code>MIME</code> types:</p>
+<pre><code>- application/x-plist
+</code></pre></li>
+<li><p><strong>AFXMLParserResponseSerializer</strong></p>
+<p><code>AFXMLParserResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLParser</code> objects.</p>
+<p>By default, <code>AFXMLParserResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/xml, as well as other commonly-used types:</p>
+<pre><code>- application/xml
+- text/xml   
+</code></pre></li>
+<li><p><strong>AFXMLDocumentResponseSerializer</strong></p>
+<p><code>AFXMLDocumentResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLDocument</code> objects.</p>
+<p>By default, <code>AFXMLDocumentResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/xml, as well as other commonly-used types:</p>
+<pre><code>- application/xml
+- text/xml     
+</code></pre></li>
+<li><p><strong>AFJSONResponseSerializer</strong></p>
+<p><code>AFJSONResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>JSON</code> responses.</p>
+<p>By default, <code>AFJSONResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/json, as well as other commonly-used types:</p>
+<pre><code>- application/json
+- text/json
+- text/javascript
+</code></pre></li>
+<li><p><strong>AFImageResponseSerializer</strong></p>
+<p><code>AFImageResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>image</code> responses.</p>
+<p>By default, <code>AFImageResponseSerializer</code> accepts the following <code>MIME</code> types, which correspond to the image formats supported by UIImage or NSImage:</p>
+<pre><code>- image/tiff
+- image/jpeg
+- image/gif
+- image/png
+- image/ico
+- image/x-icon
+- image/bmp
+- image/x-bmp
+- image/x-xbitmap
+- image/x-win-bitmap
+</code></pre></li>
+</ul>
+<h2 id="开始剖析吧"><a href="#开始剖析吧" class="headerlink" title="开始剖析吧"></a>开始剖析吧</h2><h1 id="链接参考"><a href="#链接参考" class="headerlink" title="链接参考"></a>链接参考</h1><ul>
+<li><a href="http://cocoadocs.org/docsets/AFNetworking/3.0.4/" target="_blank" rel="external">AFNetworking 官方文档</a></li>
+<li><a href="http://csbzhixing.github.io/blog/2015/10/23/afnetworking-1/" target="_blank" rel="external">AFNetworking 学习笔记 1</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/AFNetworking/">AFNetworking</a><a href="/tags/学习笔记/">学习笔记</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

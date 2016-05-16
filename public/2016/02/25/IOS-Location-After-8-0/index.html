@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IOS_Location_After_8.0 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="&amp;gt;&amp;gt;&amp;gt; IOS 定位失败 &amp;lt;&amp;lt;&amp;lt;目录A - IOS 定位过程中没有任何反应
+B - 现在我大概走一下流程
+C - 问题出现了。。。。。。。。。。。
+D - 开始解决问题
+Warning
+A - IOS 定位过程中没有任何反应
+在你很高兴的按照一些网上的教程设置好你">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">IOS_Location_After_8.0</h1>
+  
+
+    <time datetime="2016-02-25T14:23:55.000Z">
+  <span class="day">25</span><span class="month">Feb</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="gt-gt-gt-IOS-定位失败-lt-lt-lt"><a href="#gt-gt-gt-IOS-定位失败-lt-lt-lt" class="headerlink" title="&gt;&gt;&gt; IOS 定位失败 &lt;&lt;&lt;"></a>&gt;&gt;&gt; IOS 定位失败 &lt;&lt;&lt;</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><a href="#A">A - IOS 定位过程中没有任何反应</a></p>
+<p><a href="#B">B - 现在我大概走一下流程</a></p>
+<p><a href="#C">C - 问题出现了。。。。。。。。。。。</a></p>
+<p><a href="#D">D - 开始解决问题</a></p>
+<p><a href="#Warning">Warning</a></p>
+<h1 id="A-IOS-定位过程中没有任何反应"><a href="#A-IOS-定位过程中没有任何反应" class="headerlink" title="A - IOS 定位过程中没有任何反应"></a><span id="A">A - IOS 定位过程中没有任何反应</span></h1><blockquote>
+<p>在你很高兴的按照一些网上的教程设置好你的location之后，很不幸你却发现你的定位delegate并没有任何的响应。如果你使用button作为测试的时候，点击你的button，就是没有任何反应。</p>
+</blockquote>
+<h2 id="如果不想了解前提，可以直接跳到-问题的解决方案"><a href="#如果不想了解前提，可以直接跳到-问题的解决方案" class="headerlink" title="如果不想了解前提，可以直接跳到 问题的解决方案"></a>如果不想了解前提，可以直接跳到 <a href="#dealing">问题的解决方案</a></h2><h1 id="B-现在我大概走一下流程"><a href="#B-现在我大概走一下流程" class="headerlink" title="B - 现在我大概走一下流程"></a><span id="B">B - 现在我大概走一下流程</span></h1><h2 id="设置好你的代码"><a href="#设置好你的代码" class="headerlink" title="设置好你的代码"></a>设置好你的代码</h2><p>> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_1.png" alt="image"></p>
+<p>> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_2.png" alt="image"></p>
+<p>> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_3.png" alt="image"></p>
+<p>> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_4.png" alt="image"></p>
+<hr>
+<h1 id="C-问题出现了。。。。。。。。。。。"><a href="#C-问题出现了。。。。。。。。。。。" class="headerlink" title="C - 问题出现了。。。。。。。。。。。"></a><span id="C">C - 问题出现了。。。。。。。。。。。</span></h1><h2 id="1-高兴之后却发现定位竟然没有任何反应。。。坑死了"><a href="#1-高兴之后却发现定位竟然没有任何反应。。。坑死了" class="headerlink" title="1.高兴之后却发现定位竟然没有任何反应。。。坑死了 -_-!"></a>1.高兴之后却发现定位竟然没有任何反应。。。坑死了 -_-!</h2><h2 id="2-然后就是一堆问题的搜索"><a href="#2-然后就是一堆问题的搜索" class="headerlink" title="2.然后就是一堆问题的搜索"></a>2.然后就是一堆问题的搜索</h2><p><img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_5.png" alt="image"></p>
+<p><strong>然后就发现这些参考：</strong></p>
+<p> <a href="http://my.oschina.net/zhhzhfya/blog/372653?p=1" target="_blank" rel="external">iOS8中定位服务的变化(CLLocationManager协议方法不响应，无法回掉GPS方法，不出</a><br> <a href="http://blog.csdn.net/nogodoss/article/details/42268295" target="_blank" rel="external">ios8.0下CLLocationManager定位服务需要授权了</a><br> <a href="http://www.2cto.com/kf/201504/393312.html" target="_blank" rel="external">iOS CLLocationManager定位,IOS8注意</a><br> <a href="http://www.tuicool.com/articles/7JBRZn" target="_blank" rel="external">iOS CLLocationManager定位</a><br> <a href="http://www.csdn123.com/html/topnews201408/70/4370.htm" target="_blank" rel="external">iOS8中定位服务的变化(CLLocationManager协议方法不响应，无法回掉GPS方法，不出现获取权限提示)</a></p>
+<p> <strong>收获来啦</strong></p>
+<p> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_6.png" alt="image"></p>
+<h2 id="3-然后定位到-Location-Awareness-PG-Introduction"><a href="#3-然后定位到-Location-Awareness-PG-Introduction" class="headerlink" title="3.然后定位到 Location Awareness PG Introduction"></a>3.然后定位到 <code>Location Awareness PG Introduction</code></h2><p> 好多繁杂的搜索和过滤后，定位到了这个<a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/Introduction/Introduction.html" target="_blank" rel="external">Location and Maps Programming Guide</a></p>
+<p> <img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_7.png" alt="image"></p>
+<p> 但是貌似没有发现 <code>8.0</code> 之后的说法</p>
+<hr>
+<h1 id="D-开始解决问题"><a href="#D-开始解决问题" class="headerlink" title="D - 开始解决问题"></a><span id="D">D - 开始解决问题</span></h1><h2 id="1-IOS-8-0-之后的改变"><a href="#1-IOS-8-0-之后的改变" class="headerlink" title="1.IOS 8.0 之后的改变"></a>1.IOS 8.0 之后的改变</h2><p> 很多的说法就是在 <code>8.0</code> 之后对于这一些安全措施进行了很多的设置，所以在你使用之前，需要去显式的开启它。不知道是真还是假，等以后有时间我在这个，目前还找不到。</p>
+<p> 所以这个就先空白一下。。。。。不好意思！嘻嘻</p>
+<h2 id="2-问题的解决方案"><a href="#2-问题的解决方案" class="headerlink" title="2.问题的解决方案"></a>2.<span id="dealing">问题的解决方案</span></h2><blockquote>
+<p>好，既然问题有了症状，那么就在下药。。。。</p>
+</blockquote>
+<ul>
+<li><p>设置你的info.plist文件，在Surporting files 目录里面。</p>
+</li>
+<li><p>加上两个 <code>Key - Value</code></p>
+<p><img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_8.png" alt="image"></p>
+</li>
+<li><p>在启动视图之前做好一些准备</p>
+<p><img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_9.png" alt="image"></p>
+</li>
+<li><p>现在开始调试</p>
+<p><img src="http://7xiwtw.com1.z0.glb.clouddn.com/code_10.png" alt="image"></p>
+</li>
+</ul>
+<hr>
+<h1 id="E-Ok-我的定位也就-working-了-你呢？"><a href="#E-Ok-我的定位也就-working-了-你呢？" class="headerlink" title="E - Ok,我的定位也就 working 了, 你呢？"></a>E - Ok,我的定位也就 <code>working</code> 了, 你呢？</h1><h1 id="Warning-需要注意的事项"><a href="#Warning-需要注意的事项" class="headerlink" title="Warning - 需要注意的事项"></a><span id="Warning">Warning - 需要注意的事项</span></h1><ul>
+<li><p>如果你没有设置那两个 <code>Key-Value</code>在 info.plist 文件里，授权提示还是会出现，只是效果和没有设置的差不多。</p>
+</li>
+<li><p>然后呢，记得 <code>&lt;CLLocationManagerDelegate&gt;</code> 和 设置 <code>delegate</code> 。</p>
+</li>
+<li><p>如果使用的是模拟器，那么按照上面的步骤还不行的话，是这重置一下模拟器，我就是这么干的，it working!</p>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/CLLocationManager/">CLLocationManager</a><a href="/tags/Location/">Location</a><a href="/tags/Delegate/">Delegate</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

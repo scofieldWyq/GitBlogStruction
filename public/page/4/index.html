@@ -1,0 +1,948 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/08/Linux-文件属性的结构体/">Linux 文件属性的结构体</a></h1>
+  
+
+    <time datetime="2016-03-08T07:57:28.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="从帮助中查信息"><a href="#从帮助中查信息" class="headerlink" title="从帮助中查信息"></a>从帮助中查信息</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ man -k file | grep -i status</span><br><span class="line">fileno [ferror]      (3)  - check and reset stream status</span><br><span class="line">fstat                (3p)  - get file status</span><br><span class="line">fstatat              (2)  - get file status relative to a directory file descriptor</span><br><span class="line">fstat [<span class="built_in">stat</span>]         (2)  - get file status</span><br><span class="line">lstat [<span class="built_in">stat</span>]         (2)  - get file status</span><br><span class="line"><span class="built_in">stat</span>                 (1)  - display file or file system status</span><br><span class="line"><span class="built_in">stat</span>                 (2)  - get file status</span><br><span class="line"><span class="built_in">stat</span>                 (3p)  - get file status</span><br><span class="line"></span><br><span class="line">$ man 2 <span class="built_in">stat</span></span><br><span class="line">...(内容省略)</span><br></pre></td></tr></table></figure>
+<h2 id="文件结构体所在的头文件"><a href="#文件结构体所在的头文件" class="headerlink" title="文件结构体所在的头文件"></a>文件结构体所在的头文件</h2><ul>
+<li>sys/stat.h<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;sys/stat.h&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文件结构体"><a href="#文件结构体" class="headerlink" title="文件结构体"></a>文件结构体</h2><ul>
+<li>结构体 - <code>stat</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">struct <span class="built_in">stat</span> &#123;</span><br><span class="line">              dev_t     st_dev;     /* ID of device containing file */</span><br><span class="line">              ino_t     st_ino;     /* inode number */</span><br><span class="line">              mode_t    st_mode;    /* protection */</span><br><span class="line">              nlink_t   st_nlink;   /* number of hard links */</span><br><span class="line">              uid_t     st_uid;     /* user ID of owner */</span><br><span class="line">              gid_t     st_gid;     /* group ID of owner */</span><br><span class="line">              dev_t     st_rdev;    /* device ID (<span class="keyword">if</span> special file) */</span><br><span class="line">              off_t     st_size;    /* total size, <span class="keyword">in</span> bytes */</span><br><span class="line">              blksize_t st_blksize; /* blocksize <span class="keyword">for</span> file system I/O */</span><br><span class="line">              blkcnt_t  st_blocks;  /* number of 512B blocks allocated */</span><br><span class="line">              time_t    st_atime;   /* time of last access */</span><br><span class="line">              time_t    st_mtime;   /* time of last modification */</span><br><span class="line">              time_t    st_ctime;   /* time of last status change */</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/file/">file</a><a href="/tags/struct/">struct</a><a href="/tags/stat/">stat</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/08/Linux-目录内容的结构/">Linux 目录内容的结构</a></h1>
+  
+
+    <time datetime="2016-03-08T07:41:10.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="从帮助中查信息"><a href="#从帮助中查信息" class="headerlink" title="从帮助中查信息"></a>从帮助中查信息</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ man -k direct | grep <span class="built_in">read</span></span><br><span class="line">readdir              (2)  - <span class="built_in">read</span> directory entry</span><br><span class="line">readdir              (3p)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir              (3)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir_r [readdir]  (3p)  - <span class="built_in">read</span> a directory</span><br><span class="line">readdir_r [readdir]  (3)  - <span class="built_in">read</span> a directory</span><br><span class="line">readlinkat           (2)  - <span class="built_in">read</span> value of a symbolic link relative to a directory file descriptor</span><br><span class="line">seekdir              (3)  - <span class="built_in">set</span> the position of the next readdir() call <span class="keyword">in</span> the directory stream</span><br><span class="line"></span><br><span class="line">$ man 3 readdir</span><br><span class="line">...(内容省略)</span><br></pre></td></tr></table></figure>
+<h2 id="目录结构所在的头文件"><a href="#目录结构所在的头文件" class="headerlink" title="目录结构所在的头文件"></a>目录结构所在的头文件</h2><ul>
+<li>dirent.h<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;dirent.h&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="保存目录内容的结构体"><a href="#保存目录内容的结构体" class="headerlink" title="保存目录内容的结构体"></a>保存目录内容的结构体</h2><ul>
+<li>结构体 - <code>dirent</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct dirent &#123;</span><br><span class="line">              ino_t          d_ino;       /* inode number */</span><br><span class="line">              off_t          d_off;       /* offset to the next dirent */</span><br><span class="line">              unsigned short d_reclen;    /* length of this record */</span><br><span class="line">              unsigned char  d_<span class="built_in">type</span>;      /* <span class="built_in">type</span> of file; not supported</span><br><span class="line">                                             by all file system types */</span><br><span class="line">              char           d_name[256]; /* filename */</span><br><span class="line">          &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/struct/">struct</a><a href="/tags/Directory/">Directory</a><a href="/tags/dirent/">dirent</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/08/IOS-本地音乐播放/">IOS 本地音乐播放</a></h1>
+  
+
+    <time datetime="2016-03-08T02:47:59.000Z">
+  <span class="day">8</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>  首先是了解一下 <code>iPod Library Access</code> ，知道本地音乐文件的来源。接着就是知道如何使用播放器的类实例 <code>MPMusicPlayerController</code> ，去播放本地的音乐文件。这样基本就可以了，为了把Apple的文档使用多一些。尝试使用 <code>Media item picker</code>，深入再操作一下 <code>iPod Library</code>.</p>
+<p>  接触的类有:</p>
+<ul>
+<li>MPMediaItem</li>
+<li>MPMusicPlayerController</li>
+<li>MPMediaQuery</li>
+</ul>
+<p>  其他参考类</p>
+<ul>
+<li>MPMediaGroupingAlbum</li>
+<li>MPMediaLibrary</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#about">关于 iPod Library </a></li>
+<li><a href="#play">使用播放器放音乐</a></li>
+</ul>
+<h2 id="使用前提醒"><a href="#使用前提醒" class="headerlink" title="使用前提醒"></a>使用前提醒</h2><p>   需要头文件</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 在项目的 `General` 的 `Linked Frameworks and Libraries` 里面加入 `MediaPlayer.framework`</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">#import &lt;MediaPlayer/MediaPlayer.h&gt; /* 在你需要播放器的文件里加上这个头文件 */</span><br></pre></td></tr></table></figure>
+<h2 id="About-iPod-Library-Access"><a href="#About-iPod-Library-Access" class="headerlink" title="About iPod Library Access"></a><span id="about"><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/AboutiPodLibraryAccess/AboutiPodLibraryAccess.html#//apple_ref/doc/uid/TP40008765-CH103-SW9" target="_blank" rel="external">About iPod Library Access</a></span></h2><p>  如果你想播放本地的音乐，首先你要知道它存放的位置，iPod Library 就是存放它的地方。</p>
+<p>  而这个地方也是一个数据库</p>
+<hr>
+<ul>
+<li><p>先看图 <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/iPodLibraryAccessOverview.jpg" alt="Using iPod library access"></p>
+<p>然后就是，我们的应用使用 <code>Media Query</code> 去获取 <code>iPod Library</code> 的音乐文件，然后应用交给 <code>Music Player</code> 去播放它们。</p>
+<p>然后在对照上图，就可以大概知道一个情况了。</p>
+<p>了解数据库的状态的改变，这需要 <a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaLibrary_ClassReference/index.html#//apple_ref/c/data/MPMediaLibraryDidChangeNotification" target="_blank" rel="external"><code>MPMediaLibraryDidChangeNotification</code></a> 来作为通知。</p>
+</li>
+</ul>
+<hr>
+<p>  返回的内容是一个 <code>MPMediaItem</code> 的数组，<code>MPMediaItem</code> 包含了一个媒体文件所有信息。</p>
+<p>  获取所有的音乐文件，我们还需要一个 <a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaQuery_ClassReference/index.html#//apple_ref/occ/cl/MPMediaQuery" target="_blank" rel="external"><code>MPMediaQuery</code></a>, 这个类的实例可以用于初始化播放器的播放内容。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MPMediaQuery *mySong = [MPMediaQuery songsQuery]; // 这样我们就可以得到了本地音乐文件的所有内容啦</span><br><span class="line"></span><br><span class="line">MPMediaItem *item =  [mySong items][0]; // 获取本地音乐文件的第一个文件</span><br></pre></td></tr></table></figure>
+<p>  <a href="#mediaQuery">想对 MPMediaQuery 有更多的使用有更多的了解</a><br>  <a href="#moreAboutPlay">更多关于播放队列</a></p>
+<hr>
+<h2 id="Media-playback"><a href="#Media-playback" class="headerlink" title="Media playback"></a><span id="play"><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingMediaPlayback/UsingMediaPlayback.html#//apple_ref/doc/uid/TP40008765-CH100-SW1" target="_blank" rel="external">Media playback</a></span></h2><ul>
+<li>播放的一些概念术语 <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/musicPlayer.jpg" alt="Schematic representation of a music player object"></li>
+</ul>
+<p>   说好的播放器，就需要一个播放器实例啦。那就是 <code>MPMusicPlayerController</code>.<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* 生成一个播放器的实例 */</span><br><span class="line">MPMusicPlayerController *player = [MPMusicPlayerController applicationMusicPlayer];</span><br></pre></td></tr></table></figure></p>
+<p>   但是，有了播放器，还需要播放的文件呢！上面我们的到了播放文件列表的一个 MPMediaQuery 实例。Just do it<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[player setQueueWithQuery: [MPMediaQuery songsQuery]];</span><br><span class="line">/**</span><br><span class="line">或者是</span><br><span class="line">  [player setQueueWithQuery: mySong];</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+<p>   还没有完哦，如果播放器的播放状态改变了，我们也需要这个消息通知<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">( handle_NowPlayingItemChanged: ) 和 ( handle_PlaybackStateChanged: ) 是自定义的方法。</span><br><span class="line"></span><br><span class="line">在注销的时候，记得也把通知给注销掉哦。。。。。</span><br><span class="line">*/</span><br><span class="line">// now playing</span><br><span class="line">[notificationCenter addObserver:self</span><br><span class="line">                       selector:@selector(handle_NowPlayingItemChanged:)</span><br><span class="line">                           name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:_myPlayer];</span><br><span class="line"></span><br><span class="line"> // playback state change</span><br><span class="line"> [notificationCenter addObserver:self</span><br><span class="line">                        selector:@selector(handle_PlaybackStateChanged:)</span><br><span class="line">                            name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:_myPlayer];</span><br><span class="line"></span><br><span class="line"> [player beginGeneratingPlaybackNotifications]; // player set the notification</span><br></pre></td></tr></table></figure></p>
+<p>   然后就可以开始播放了。。。<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">遵循了 `MPMediaPlayback` Delegate,</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">[player play]; // 播放</span><br><span class="line"></span><br><span class="line">[_myPlayer pause]; // 暂停</span><br><span class="line"></span><br><span class="line">[_myPlayer stop]; // 停止</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToBeginning]; // 重新开始播放</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToNextItem]; // 下一首</span><br><span class="line"></span><br><span class="line">[_myPlayer skipToPreviousItem]; // 上一首</span><br><span class="line"></span><br><span class="line">... (还有一些都在这个实例里面的)</span><br></pre></td></tr></table></figure></p>
+<p><strong>到这里基本就没有了,一个简单的没有界面的播放器就完成了</strong></p>
+<hr>
+<h2 id="更多关于-Media-Query"><a href="#更多关于-Media-Query" class="headerlink" title="更多关于 Media Query"></a><span id="mediaQuery">更多关于 Media Query</span></h2><ul>
+<li><p>Using a media query to access the device iPod library <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/mediaQuery.jpg" alt="Using a media query to access the device iPod library"></p>
+<p>上文我们得到的 MPMediaQuery 的实例 mySong.和图中的 myQuery 一样的。</p>
+</li>
+</ul>
+<p>  <code>media query</code> 提供了一个对于 <code>iPod Library</code> 的一个搜索描述，告诉数据库如何去获取相应的 <code>media item</code>，并且还有如何组织这些 <code>item</code></p>
+<p>  有两个配置属性</p>
+<pre><code>- The `filter` is the description of what to retrieve. The filter is optional; a filterless query matches the entire iPod library.
+
+- The `grouping` type is an optional key that specifies the arrangement to use for retrieved collections of media items.
+</code></pre><h2 id="更多关于播放队列"><a href="#更多关于播放队列" class="headerlink" title="更多关于播放队列"></a><span id="moreAboutPlay">更多关于播放队列</span></h2><p><strong>有两种方法去设置播放的队列内容</strong></p>
+<ul>
+<li><p>Use a media item <code>collection</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">musicPlayer 是 MPMusicPlayerController 的实例</span><br><span class="line">*/</span><br><span class="line">[musicPlayer setQueueWithItemCollection: userMediaItemCollection];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use a <code>media query</code>, which implicitly defines a collection</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">musicPlayer 是 MPMusicPlayerController 的实例</span><br><span class="line">*/</span><br><span class="line">[musicPlayer setQueueWithQuery: [MPMediaQuery songsQuery]];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="更多关于使用iPod-Library"><a href="#更多关于使用iPod-Library" class="headerlink" title="更多关于使用iPod Library "></a><span id="moreLibrary">更多关于使用iPod Library </span></h2><ul>
+<li>如何使用更好的使用iPod Library <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/database_access_classes.jpg" alt="Using the iPod library database access classes"><br>参考<a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingTheiPodLibrary/UsingTheiPodLibrary.html" target="_blank" rel="external">官方文档</a></li>
+</ul>
+<h2 id="关于如何使用item-picker"><a href="#关于如何使用item-picker" class="headerlink" title="关于如何使用item picker"></a><span id="itemPicker">关于如何使用item picker</span></h2><ul>
+<li>使用 Item Picker <img src="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Art/mediaPicker.jpg" alt=" The user interface of the media item picker"></li>
+</ul>
+<p><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/UsingtheMediaItemPicker/UsingtheMediaItemPicker.html#//apple_ref/doc/uid/TP40008765-CH104-SW1" target="_blank" rel="external">Using the Media Item Picker</a></p>
+<hr>
+<h2 id="参考链接信息"><a href="#参考链接信息" class="headerlink" title="参考链接信息"></a>参考链接信息</h2><p><a href="https://developer.apple.com/library/ios/documentation/Audio/Conceptual/iPodLibraryAccess_Guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008765" target="_blank" rel="external">iPod Library Access Programming Guide</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MediaPlayer_Framework/index.html#//apple_ref/doc/uid/TP40006952" target="_blank" rel="external">Media Player Framework Reference</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMusicPlayerController_ClassReference/index.html#//apple_ref/occ/cl/MPMusicPlayerController" target="_blank" rel="external">MPMusicPlayerController</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaPlayback_protocol/index.html#//apple_ref/occ/intf/MPMediaPlayback" target="_blank" rel="external">MPMediaPlayback</a></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMediaLibrary_ClassReference/index.html#//apple_ref/occ/cl/MPMediaLibrary" target="_blank" rel="external">MPMediaLibrary</a></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/audio-player/">audio player</a><a href="/tags/local/">local</a><a href="/tags/MPMusicPlayerController/">MPMusicPlayerController</a><a href="/tags/MPMediaQuery/">MPMediaQuery</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/04/Man为什么查不到和书上的相似的结果/">Man为什么查不到和书上的相似的结果</a></h1>
+  
+
+    <time datetime="2016-03-04T02:33:37.000Z">
+  <span class="day">4</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="解决man无法找到你想要的内容"><a href="#解决man无法找到你想要的内容" class="headerlink" title="解决man无法找到你想要的内容"></a>解决man无法找到你想要的内容</h2><ul>
+<li><a href="#q1">安装好man后，发现你查询的内容是 No manual entry for <em>*</em> </a></li>
+<li><a href="#q2">man -k {file} | grep {read} 没有结果</a></li>
+</ul>
+<h2 id="1-安装好-man-后，发现你查询的内容是-No-manual-entry-for"><a href="#1-安装好-man-后，发现你查询的内容是-No-manual-entry-for" class="headerlink" title="1.安装好 man 后，发现你查询的内容是 No manual entry for *** "></a><span id="q1">1.安装好 <code>man</code> 后，发现你查询的内容是 <code>No manual entry for ***</code> </span></h2><p> <strong>原因： 没有安装 <code>man-pages</code></strong></p>
+<p> <strong>解决方案</strong><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y man-pages //如果权限问题，切换到root下</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-man-k-file-grep-read-没有结果"><a href="#2-man-k-file-grep-read-没有结果" class="headerlink" title="2.man -k {file} | grep {read} 没有结果"></a><span id="q2">2.man -k {file} | grep {read} 没有结果</span></h2><p> <strong>原因：本地数据库没有更新</strong></p>
+<p> <strong>解决方案</strong><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo makewhatis //如果权限问题，切换到 root 下</span><br></pre></td></tr></table></figure></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/Man/">Man</a><a href="/tags/command-line/">command line</a><a href="/tags/keyword-k/">keyword -k</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/02/IOS-Storyboard/">IOS_Storyboard</a></h1>
+  
+
+    <time datetime="2016-03-02T12:13:16.000Z">
+  <span class="day">2</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>简单介绍一下 <code>Storyboard</code> ，然后对其进行创建和配置，使得可以最干净(干净的意思是没有任何代码的实现，类似于什么都没有做的一个View)的启动。</li>
+<li>然后理解 <code>segue</code> ,对其进行使用</li>
+<li>使用 <code>segue</code> 中去传递数据</li>
+<li>最后是对于 <code>Storyboard</code> 的一些讨论</li>
+</ul>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#intro">Storyboard</a></li>
+<li><a href="#start">创建和配置 Storyboard</a></li>
+<li><a href="#segue">Segue</a></li>
+<li><a href="#data">传递数据</a></li>
+<li><a href="#consum">讨论 Storyboard</a></li>
+</ol>
+<h2 id="Storyboard"><a href="#Storyboard" class="headerlink" title="Storyboard"></a><span id="intro">Storyboard</span></h2><p> <strong>Storyboard is IOS 的一个特性功能， 它可以让你所有的初始化和布局视图控制器(View Controller)在一个类似于 XIB 的文件中。</strong></p>
+<p> <code>StoryBoard</code> 是苹果在 <code>iOS 5</code> 中引入的新技术方案，目的是给纷繁复杂的 <code>nib</code>、<code>xib</code> 们一个温暖的家，让他们之间的关系更直观地展示出来，并提供了一种新的页面间跳转方式 segue。</p>
+<p> <code>StoryBoard</code> 的本质是一个 <code>XML</code> 文件，<strong>描述了若干窗体、组件、Auto Layout 约束等关键信息</strong>。</p>
+<p> 苹果官方是推荐我们将所有的UI都使用Storyboard去搭建，Storyboard也是一个很成熟的工具了。使用Storyboard去搭建所有界面，我们可以很迅捷地搭建出复杂的界面，也就是说能为我们节省大量的时间。我们还可以很直观地看出各个界面之间的关系，修改起来也很方便。将来如果遇到需要作修改的地方，我们只需要找到相对应的Storyboard就可以了，比起以前来说，快捷了不少。</p>
+<h2 id="创建和配置-Storyboard"><a href="#创建和配置-Storyboard" class="headerlink" title="创建和配置 Storyboard"></a><span id="start">创建和配置 Storyboard</span></h2><h3 id="1-创建一个空工程"><a href="#1-创建一个空工程" class="headerlink" title="1.创建一个空工程"></a>1.创建一个空工程</h3><p>><br>  <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_1.png?raw=true" alt="p_1"><br>><br>  <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_2.png?raw=true" alt="p_2"></p>
+<h3 id="2-创建一个StoryBoard"><a href="#2-创建一个StoryBoard" class="headerlink" title="2.创建一个StoryBoard"></a>2.创建一个StoryBoard</h3><ul>
+<li><p>为了能够完全的了解启动的步骤，我们把 <code>Main.storyBoard</code> 删掉<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_3.png?raw=true" alt="p_3"></p>
+</li>
+<li><p>删掉后我们来创建一个 <code>StoryBoard</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_4.png?raw=true" alt="p_4"></p>
+</li>
+<li><p>命名为 <code>templeStoryboard</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_5.png?raw=true" alt="p_5"></p>
+</li>
+<li><p>然后拖一个 <code>Navigation Controller</code> 过来<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_6.png?raw=true" alt="p_6"></p>
+</li>
+</ul>
+<h3 id="3-配置StoryBoard"><a href="#3-配置StoryBoard" class="headerlink" title="3.配置StoryBoard"></a>3.配置StoryBoard</h3><ul>
+<li>把 <code>navigation</code> 作为入口的 <code>controller</code> ,点击 <code>navigation</code> 的 <code>view</code> ,然后设置<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_7.png?raw=true" alt="p_7"></li>
+</ul>
+<ul>
+<li><p>启动前设置一下 <code>Main interface</code><br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_8.png?raw=true" alt="p_8"></p>
+</li>
+<li><p>效果<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_9.PNG?raw=true" alt="p_9"></p>
+<p><strong>这个时候，简单的配置就完成了</strong></p>
+<hr>
+</li>
+</ul>
+<h2 id="Segue"><a href="#Segue" class="headerlink" title="Segue"></a><span id="segue">Segue</span></h2><ul>
+<li><p>拖出两个 View Controller<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_10.png?raw=true" alt="p_10"></p>
+</li>
+<li><p>从 table view 那边，按住 Control 键，使用鼠标拖到某一个 view controller<br>><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/storyboard_p_11.png?raw=true" alt="p_11"></p>
+</li>
+<li><p>松开后就会出现一个列表,选择 push,或者 modal,然后就可以实现简单的事件出发了。</p>
+</li>
+<li><p>对于 modal 的视图来说没有返回，所以需要代码来使它消失</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[self.presentingViewController dismissViewControllerAnimated:YES</span><br><span class="line">                                                     completion:nil];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="传递数据"><a href="#传递数据" class="headerlink" title="传递数据"></a><span id="data">传递数据</span></h2><ul>
+<li>传递数据，也就是点击事件出发的方法来做到的，segue 的触发会调用这个方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> 这个方法就是segue点击后触发的方法</span><br><span class="line"></span><br><span class="line"> @param segue storyboard的segue</span><br><span class="line"> @param sender 尖头目的指向的类实例</span><br><span class="line">*/</span><br><span class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="讨论-Storyboard"><a href="#讨论-Storyboard" class="headerlink" title="讨论 Storyboard "></a><span id="consum">讨论 Storyboard </span></h2><p><strong>storyboard 在我们看起来挺不错的, 但是并不是非常的有用.</strong></p>
+<ul>
+<li><p>优势</p>
+<ul>
+<li>Storyboards can be used to easily show off the flow of an application to a client or a colleague.</li>
+<li>Storyboards remove some simple code from your source files.</li>
+<li>Tables with static content are easy to create.</li>
+<li>Prototype cells replace the need to create separate XIBs for custom table view cells.</li>
+<li>Storyboards sure do look pretty.</li>
+</ul>
+</li>
+<li><p>劣势</p>
+<ul>
+<li>Storyboards are difficult to work with in a team. Typically, a team of iOS programmers breaks up the work by having each member focus on a particular view controller. With a storyboard, everyone has to do their work in the same storyboard file. This can quickly lead to clutter and difficulties with version control.</li>
+<li><p>Storyboards disrupt the flow of programming. Let’s say you are writing a view controller and adding the code for a button that presents a view controller modally.</p>
+<p>You can do that pretty easily in code – alloc and init the view controller, and send presentViewController:animated:completion: to self. With storyboards, you have to load up the storyboard file, drag some stuff onto the canvas, set the Class in the identity inspector, connect the segue, and then configure the segue.</p>
+</li>
+<li><p>Storyboards sacrifice flexibility and control for ease of use. The work required to add advanced functionality to the basic functionality of a storyboard is often more than the work required to put together the advanced and basic functionality in code.</p>
+</li>
+<li><p>Storyboards always create new view controller instances. Each time you perform a segue, a new instance of the destination view controller is created. Sometimes, though, you would like to keep a view controller around instead of destroying it each time it disappears off the screen. Storyboarding does not allow you to do this.</p>
+</li>
+</ul>
+<p><strong>Overall, storyboards make easy code easier and difficult code more difficult. We do not use them in this book, and we do not typically use them when writing our own applications. However, Apple seems to be pushing them harder in each release of Xcode, so you might one day decide that a particular application would benefit from storyboarding.</strong></p>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><p><a href="http://baike.baidu.com/link?url=PaKASvVjiDKKsllYXhmF_atckp9NhFiEy4qB8pfJPVJI5tP0_PfA8oCyp0EOPLLAG5HwRXVlTI6tCUVJ-oAAv3QOsCQoWWRuDwmoAVpqXGHfrQQI4QhxSMmhtc9y8keceYiSARUyNW0czIaKYfWXgK" target="_blank" rel="external">Storyboard － 百度百科</a></p>
+</li>
+<li><p><a href="http://www.cocoachina.com/ios/20150526/11938.html" target="_blank" rel="external">IOS 开发 UI 搭建心得（一）—— 驾驭 StoryBoard</a></p>
+</li>
+<li><p><a href=""></a></p>
+</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/IOS/">IOS</a><a href="/tags/UIStoryboard/">UIStoryboard</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/01/AFNetworking学习笔记-1/">AFNetworking学习笔记-1</a></h1>
+  
+
+    <time datetime="2016-03-01T09:04:21.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><ul>
+<li>版本:<code>3.0.4</code></li>
+<li>结构图 &gt; <img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/p_afnetworking_inherit.png?raw=true" alt="p_afnetworking_inherit"></li>
+</ul>
+<h1 id="AFNetworking-Serializer"><a href="#AFNetworking-Serializer" class="headerlink" title="AFNetworking - Serializer"></a>AFNetworking - Serializer</h1><blockquote>
+<p>关于 <strong>Serializer</strong></p>
+</blockquote>
+<h2 id="看一下它的继承结构"><a href="#看一下它的继承结构" class="headerlink" title="看一下它的继承结构"></a>看一下它的继承结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">                                                 &lt;NSObject&gt;</span><br><span class="line">                                                      |</span><br><span class="line">                                +------------------------------------------+         </span><br><span class="line">                                |                                          |</span><br><span class="line">                   &lt;AFHTTPRequestSerializer&gt;                  &lt;AFHTTPResponseSerializer&gt;</span><br><span class="line">                                |                                          |</span><br><span class="line">                       +--------+--------+                                 |</span><br><span class="line">                       |                 |                                 |</span><br><span class="line">    &lt;AFJSONRequestSerializer&gt; &lt;AFPropertyListRequestSerializer&gt;            |</span><br><span class="line">                                                                           |</span><br><span class="line">                                                                           |</span><br><span class="line">                                                                           |</span><br><span class="line">                   +-------------------------+-----------------------------+-----------------+------------------+</span><br><span class="line">                   |                         |                             |                 |                  |</span><br><span class="line">&lt;AFPropertyListResponseSerializer&gt; &lt;AFJSONResponseSerializer&gt; &lt;AFImageResponseSerializer&gt;    |  &lt;AFXMLParserResponseSerializer&gt;</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                                             |</span><br><span class="line">                                                                            &lt;AFXMLDocumentResponseSerializer&gt; * (for mac)</span><br></pre></td></tr></table></figure>
+<h2 id="了解一下"><a href="#了解一下" class="headerlink" title="了解一下"></a>了解一下</h2><blockquote>
+<p>发送数据和接收数据的序列化编码封装</p>
+</blockquote>
+<h3 id="AFHTTP"><a href="#AFHTTP" class="headerlink" title="AFHTTP*"></a>AFHTTP*</h3><ul>
+<li><p><strong>AFHTTPRequestSerializer</strong></p>
+<p><code>AFHTTPRequestSerializer</code> conforms to the <code>AFURLRequestSerialization</code> &amp; <code>AFURLResponseSerialization</code> protocols, offering a concrete base implementation of query string / URL form-encoded parameter serialization and default request headers, as well as response status code and content type validation.</p>
+<p>Any request or response serializer dealing with HTTP is encouraged to subclass <code>AFHTTPRequestSerializer</code> in order to ensure consistent default behavior.</p>
+</li>
+<li><p><strong>AFHTTPResponseSerializer</strong></p>
+<p><code>AFHTTPResponseSerializer</code> conforms to the <code>AFURLRequestSerialization</code> &amp; <code>AFURLResponseSerialization</code> protocols, offering a concrete base implementation of query string / URL form-encoded parameter serialization and default request headers, as well as response status code and content type validation.</p>
+<p>Any request or response serializer dealing with HTTP is encouraged to subclass <code>AFHTTPResponseSerializer</code> in order to ensure consistent default behavior.  </p>
+</li>
+</ul>
+<h3 id="AF-RequestSerializer"><a href="#AF-RequestSerializer" class="headerlink" title="AF*RequestSerializer"></a>AF*RequestSerializer</h3><ul>
+<li><p><strong>AFJSONRequestSerializer</strong></p>
+<p><code>AFJSONRequestSerializer</code> is a subclass of <code>AFHTTPRequestSerializer</code> that <strong>encodes parameters</strong> as <code>JSON</code> using <code>NSJSONSerialization</code>, setting the Content-Type of the encoded request to <code>application/json</code>.</p>
+</li>
+<li><p><strong>AFPropertyListRequestSerializer</strong></p>
+<p><code>AFPropertyListRequestSerializer</code> is a subclass of <code>AFHTTPRequestSerializer</code> that <strong>encodes parameters</strong> as <code>JSON</code> using <code>NSPropertyListSerializer</code>, setting the Content-Type of the encoded request to <code>application/x-plist</code>.</p>
+</li>
+</ul>
+<h3 id="AF-ResponseSerializer"><a href="#AF-ResponseSerializer" class="headerlink" title="AF*ResponseSerializer"></a>AF*ResponseSerializer</h3><ul>
+<li><p><strong>AFPropertyListResponseSerializer</strong></p>
+<p><code>AFPropertyListResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLDocument</code> objects.</p>
+<p>By default, <code>AFPropertyListResponseSerializer</code> accepts the following <code>MIME</code> types:</p>
+<pre><code>- application/x-plist
+</code></pre></li>
+<li><p><strong>AFXMLParserResponseSerializer</strong></p>
+<p><code>AFXMLParserResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLParser</code> objects.</p>
+<p>By default, <code>AFXMLParserResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/xml, as well as other commonly-used types:</p>
+<pre><code>- application/xml
+- text/xml   
+</code></pre></li>
+<li><p><strong>AFXMLDocumentResponseSerializer</strong></p>
+<p><code>AFXMLDocumentResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>XML</code> responses as an <code>NSXMLDocument</code> objects.</p>
+<p>By default, <code>AFXMLDocumentResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/xml, as well as other commonly-used types:</p>
+<pre><code>- application/xml
+- text/xml     
+</code></pre></li>
+<li><p><strong>AFJSONResponseSerializer</strong></p>
+<p><code>AFJSONResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>JSON</code> responses.</p>
+<p>By default, <code>AFJSONResponseSerializer</code> accepts the following <code>MIME</code> types, which includes the official standard, application/json, as well as other commonly-used types:</p>
+<pre><code>- application/json
+- text/json
+- text/javascript
+</code></pre></li>
+<li><p><strong>AFImageResponseSerializer</strong></p>
+<p><code>AFImageResponseSerializer</code> is a subclass of <code>AFHTTPResponseSerializer</code> that validates and decodes <code>image</code> responses.</p>
+<p>By default, <code>AFImageResponseSerializer</code> accepts the following <code>MIME</code> types, which correspond to the image formats supported by UIImage or NSImage:</p>
+<pre><code>- image/tiff
+- image/jpeg
+- image/gif
+- image/png
+- image/ico
+- image/x-icon
+- image/bmp
+- image/x-bmp
+- image/x-xbitmap
+- image/x-win-bitmap
+</code></pre></li>
+</ul>
+<h2 id="开始剖析吧"><a href="#开始剖析吧" class="headerlink" title="开始剖析吧"></a>开始剖析吧</h2><h1 id="链接参考"><a href="#链接参考" class="headerlink" title="链接参考"></a>链接参考</h1><ul>
+<li><a href="http://cocoadocs.org/docsets/AFNetworking/3.0.4/" target="_blank" rel="external">AFNetworking 官方文档</a></li>
+<li><a href="http://csbzhixing.github.io/blog/2015/10/23/afnetworking-1/" target="_blank" rel="external">AFNetworking 学习笔记 1</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/AFNetworking/">AFNetworking</a><a href="/tags/学习笔记/">学习笔记</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/01/node-安装/">node 安装</a></h1>
+  
+
+    <time datetime="2016-03-01T03:15:33.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="关于Node"><a href="#关于Node" class="headerlink" title="关于Node"></a>关于Node</h1><blockquote>
+<p>Node 是一个服务器端 JavaScript 解释器，它将改变服务器应该如何工作的概念。它的目标是帮助程序员构建高度可伸缩的应用程序，编写能够处理数万条同时连接到一个（只有一个）物理机的连接代码。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</p>
+</blockquote>
+<hr>
+<h1 id="安装Node"><a href="#安装Node" class="headerlink" title="安装Node"></a>安装Node</h1><h2 id="Node-for-Mac"><a href="#Node-for-Mac" class="headerlink" title="Node for Mac"></a>Node for Mac</h2><ul>
+<li>安装 <code>Homebrew</code><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/node_install_p_2.png?raw=true" alt="node_install_p_2"><br><a href="http://brew.sh/" target="_blank" rel="external">安装Homebrew</a></li>
+<li><p>安装 node</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install node</span><br><span class="line">$ node --version</span><br><span class="line">v5.5.0</span><br></pre></td></tr></table></figure>
+<p><strong>这样在 Mac 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<h2 id="Node-for-Windows"><a href="#Node-for-Windows" class="headerlink" title="Node for Windows"></a>Node for Windows</h2><ul>
+<li><p>下载安装文件</p>
+<p><img src="https://nodejs.org/static/images/logos/nodejs-new-white-pantone.png" alt="image"><br><a href="http://www.nodejs.org/download/" target="_blank" rel="external">官网</a><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/node_install_p_1.png?raw=true" alt="node_install_p_1"></p>
+</li>
+<li><p>安装Node</p>
+<p>双击它，默认是安装在<code>C:\Program Files\nodejs</code>下面</p>
+<p>打开<code>C:\Program Files\nodejs</code>目录你会发现里面自带了npm,直接用npm安装相环境既可进入<code>node.js command prompt</code> 命令窗口进入nodejs 安装目录 <code>C:\Program Files\nodejs</code></p>
+<p>键入命令：<code>cd C:\Program Files\nodejs</code> 既可</p>
+</li>
+<li><p>现在开始安装相关环境</p>
+<p>键入命令：<code>npm install express</code> 回车等待安装 <code>express</code>……..</p>
+<p>键入命令：<code>npm install mysql</code> 回车等待安装 <code>mysql</code>……..</p>
+<p>……..安装什么组件，取决于环境搭建需求</p>
+<p>默认情况下上述组件都是安装在<code>C:\Program Files\nodejs\node_modules</code>文件夹下 这也是nodejs相关组件的自动查找路径</p>
+<p><strong>这样在 Windows 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<h2 id="Node-for-Linux"><a href="#Node-for-Linux" class="headerlink" title="Node for Linux"></a>Node for Linux</h2><ul>
+<li><p>下载 <code>Node</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nodejs.org/dist/v0.8.7/node-v0.8.7.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf node-v0.8.7.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查所需要配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure</span><br><span class="line"></span><br><span class="line"> 出现错误提示：</span><br><span class="line"> Exception: Call to &apos;(echo | $(echo $&#123;CXX_host:-$(which g++)&#125;) -m32 -E -</span><br><span class="line"></span><br><span class="line"> &gt; /dev/null 2&gt;&amp;1) &amp;&amp; echo &quot;-m32&quot; || true&apos; returned exit status 0. while</span><br><span class="line"></span><br><span class="line">loading dependencies of /opt/node-v0.8.7/node.gyp while trying to load</span><br><span class="line"></span><br><span class="line">/opt/node-v0.8.7/node.gyp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如出现以上错误，安装gcc-c++<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install gcc-c++</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>进行安装(时间比较长)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查是否成功安装，输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v5.5.0</span><br></pre></td></tr></table></figure>
+<p><strong>这样在 Linux 下的 Node 就安装好了</strong></p>
+</li>
+</ul>
+<p><strong>安装完 node 后 npm 也就安装完了</strong></p>
+<hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></li>
+<li><a href="https://nodejs.org/en/download/" target="_blank" rel="external">下载Node</a></li>
+<li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="external">Node.js 教程</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/opensource/os-nodejs/" target="_blank" rel="external">Node.js 究竟是什么？</a></li>
+<li><a href="http://www.cnblogs.com/pigtail/archive/2013/01/08/2850486.html" target="_blank" rel="external">windows 下安装nodejs及其配置环境</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/install/">install</a><a href="/tags/node/">node</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/03/01/Git-安装/">Git 安装</a></h1>
+  
+
+    <time datetime="2016-03-01T03:14:49.000Z">
+  <span class="day">1</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p><img src="http://git-scm.com/images/logo@2x.png" alt=""></p>
+<blockquote>
+<p><a href="http://git-scm.com/" target="_blank" rel="external">Git 官网</a></p>
+</blockquote>
+<hr>
+<ul>
+<li><a href="#mac">Mac 安装 Git</a></li>
+<li><a href="#windows">Windows 安装 Git</a></li>
+<li><a href="#linux">Linux 安装 Git</a></li>
+</ul>
+<h1 id="Mac-安装-Git"><a href="#Mac-安装-Git" class="headerlink" title="Mac 安装 Git"></a><span id="mac">Mac 安装 Git</span></h1><h2 id="Mac-本身就有-Git-了"><a href="#Mac-本身就有-Git-了" class="headerlink" title="Mac 本身就有 Git 了"></a>Mac 本身就有 Git 了</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line">$ git --version</span><br><span class="line">git version 2.5.4 (Apple Git-61)</span><br></pre></td></tr></table></figure>
+<h2 id="Mac-还没有安装-Git"><a href="#Mac-还没有安装-Git" class="headerlink" title="Mac 还没有安装 Git"></a>Mac 还没有安装 Git</h2><p>  <strong>使用homebrew来安装 Git - command line</strong></p>
+<h3 id="安装-homebrew"><a href="#安装-homebrew" class="headerlink" title="安装 homebrew"></a>安装 homebrew</h3><ul>
+<li><p><a href="http://brew.sh/" target="_blank" rel="external">安装 homebrew</a>,安装后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $ which brew</span><br><span class="line">/usr/local/bin/brew</span><br><span class="line">$ brew --version</span><br><span class="line">Homebrew 0.9.5 (git revision e15a; last commit 2016-02-03)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后就安装好了。。。</p>
+<h2 id="Git-官网的方式安装"><a href="#Git-官网的方式安装" class="headerlink" title="Git 官网的方式安装"></a>Git 官网的方式安装</h2><p><img src="http://git-scm.com/images/logo@2x.png" alt="git"><br><a href="http://git-scm.com/download/" target="_blank" rel="external">官方文档的方式安装 － http://git-scm.com/</a></p>
+<hr>
+<h1 id="Windows-安装-Git"><a href="#Windows-安装-Git" class="headerlink" title="Windows 安装 Git"></a><span id="windows">Windows 安装 Git</span></h1><h2 id="1-来源于廖雪峰的Git教学网站"><a href="#1-来源于廖雪峰的Git教学网站" class="headerlink" title="1. 来源于廖雪峰的Git教学网站"></a>1. 来源于<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">廖雪峰的Git教学网站</a></h2><blockquote>
+<p>实话实说，Windows是最烂的开发平台，如果不是开发Windows游戏或者在IE里调试页面，一般不推荐用Windows。不过，既然已经上了微软的贼船，也是有办法安装Git的。<br>– 来源于<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">廖雪峰的  Git 教学</a></p>
+</blockquote>
+<p>Windows下要使用很多Linux/Unix的工具时，需要Cygwin这样的模拟环境，Git也一样。Cygwin的安装和配置都比较复杂，就不建议你折腾了。不过，有高人已经把模拟环境和Git都打包好了，名叫msysgit，只需要下载一个单独的exe安装程序，其他什么也不用装，绝对好用。</p>
+<p>msysgit是Windows版的Git，从<a href="http://msysgit.github.io/下载，然后按默认选项安装即可。" target="_blank" rel="external">http://msysgit.github.io/下载，然后按默认选项安装即可。</a></p>
+<p>安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！<br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/git_install_1.jpeg?raw=true" alt="image"><br>安装完成后，还需要最后一步设置，在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line">$ git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。你也许会担心，如果有人故意冒充别人怎么办？这个不必担心，首先我们相信大家都是善良无知的群众，其次，真的有冒充的也是有办法可查的。</p>
+<p>注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+<h2 id="2-官网的教学方法"><a href="#2-官网的教学方法" class="headerlink" title="2.官网的教学方法"></a>2.官网的教学方法</h2><p><img src="http://git-scm.com/images/logo@2x.png" alt="image"><br><a href="http://git-scm.com/download/win" target="_blank" rel="external">下载链接</a></p>
+<p><a href="http://jingyan.baidu.com/article/7f766dafba84f04101e1d0b0.html" target="_blank" rel="external">Git安装教程</a></p>
+<h1 id="Linux-安装-Git"><a href="#Linux-安装-Git" class="headerlink" title="Linux 安装 Git"></a><span id="linux">Linux 安装 Git</span></h1><ul>
+<li>不同的版本有不同包管理工具</li>
+<li>我使用的是<code>Centos</code></li>
+</ul>
+<p><strong>安装Git</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y git //然后输入你的 password</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装过程</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.btte.net</span><br><span class="line"> * extras: mirrors.pubyun.com</span><br><span class="line"> * updates: mirrors.btte.net</span><br><span class="line">Setting up Install Process</span><br><span class="line">Resolving Dependencies</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package git.x86_64 0:1.7.1-3.el6_4.1 will be installed</span><br><span class="line">--&gt; Processing Dependency: perl-Git = 1.7.1-3.el6_4.1 for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: rsync for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Git) for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: perl(Error) for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Processing Dependency: openssh-clients for package: git-1.7.1-3.el6_4.1.x86_64</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssh-clients.x86_64 0:5.3p1-112.el6_7 will be installed</span><br><span class="line">--&gt; Processing Dependency: openssh = 5.3p1-112.el6_7 for package: openssh-clients-5.3p1-112.el6_7.x86_64</span><br><span class="line">--&gt; Processing Dependency: libedit.so.0()(64bit) for package: openssh-clients-5.3p1-112.el6_7.x86_64</span><br><span class="line">---&gt; Package perl-Error.noarch 1:0.17015-4.el6 will be installed</span><br><span class="line">---&gt; Package perl-Git.noarch 0:1.7.1-3.el6_4.1 will be installed</span><br><span class="line">---&gt; Package rsync.x86_64 0:3.0.6-12.el6 will be installed</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package libedit.x86_64 0:2.11-4.20080712cvs.1.el6 will be installed</span><br><span class="line">---&gt; Package openssh.x86_64 0:5.3p1-94.el6 will be updated</span><br><span class="line">--&gt; Processing Dependency: openssh = 5.3p1-94.el6 for package: openssh-server-5.3p1-94.el6.x86_64</span><br><span class="line">---&gt; Package openssh.x86_64 0:5.3p1-112.el6_7 will be an update</span><br><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package openssh-server.x86_64 0:5.3p1-94.el6 will be updated</span><br><span class="line">---&gt; Package openssh-server.x86_64 0:5.3p1-112.el6_7 will be an update</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">================================================================================</span><br><span class="line"> Package             Arch       Version                       Repository   Size</span><br><span class="line">================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> git                 x86_64     1.7.1-3.el6_4.1               base        4.6 M</span><br><span class="line">Installing for dependencies:</span><br><span class="line"> libedit             x86_64     2.11-4.20080712cvs.1.el6      base         74 k</span><br><span class="line"> openssh-clients     x86_64     5.3p1-112.el6_7               updates     438 k</span><br><span class="line"> perl-Error          noarch     1:0.17015-4.el6               base         29 k</span><br><span class="line"> perl-Git            noarch     1.7.1-3.el6_4.1               base         28 k</span><br><span class="line"> rsync               x86_64     3.0.6-12.el6                  base        335 k</span><br><span class="line">Updating for dependencies:</span><br><span class="line"> openssh             x86_64     5.3p1-112.el6_7               updates     274 k</span><br><span class="line"> openssh-server      x86_64     5.3p1-112.el6_7               updates     324 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">================================================================================</span><br><span class="line">Install       6 Package(s)</span><br><span class="line">Upgrade       2 Package(s)</span><br><span class="line"></span><br><span class="line">Total download size: 6.1 M</span><br><span class="line">Downloading Packages:</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Total                                           1.8 MB/s | 6.1 MB     00:03     </span><br><span class="line">Running rpm_check_debug</span><br><span class="line">Running Transaction Test</span><br><span class="line">Transaction Test Succeeded</span><br><span class="line">Running Transaction</span><br><span class="line"></span><br><span class="line">  Updating   : openssh-5.3p1-112.el6_7.x86_64                              1/10</span><br><span class="line"></span><br><span class="line">  Installing : 1:perl-Error-0.17015-4.el6.noarch                           2/10</span><br><span class="line"></span><br><span class="line">  Installing : libedit-2.11-4.20080712cvs.1.el6.x86_64                     3/10</span><br><span class="line"></span><br><span class="line">  Installing : openssh-clients-5.3p1-112.el6_7.x86_64                      4/10</span><br><span class="line"></span><br><span class="line">  Installing : rsync-3.0.6-12.el6.x86_64                                   5/10</span><br><span class="line"></span><br><span class="line">  Installing : perl-Git-1.7.1-3.el6_4.1.noarch                             6/10</span><br><span class="line"></span><br><span class="line">  Installing : git-1.7.1-3.el6_4.1.x86_64                                  7/10</span><br><span class="line"></span><br><span class="line">  Updating   : openssh-server-5.3p1-112.el6_7.x86_64                       8/10</span><br><span class="line"></span><br><span class="line">  Cleanup    : openssh-server-5.3p1-94.el6.x86_64                          9/10</span><br><span class="line"></span><br><span class="line">  Cleanup    : openssh-5.3p1-94.el6.x86_64                                10/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-clients-5.3p1-112.el6_7.x86_64                      1/10</span><br><span class="line"></span><br><span class="line">  Verifying  : perl-Git-1.7.1-3.el6_4.1.noarch                             2/10</span><br><span class="line"></span><br><span class="line">  Verifying  : 1:perl-Error-0.17015-4.el6.noarch                           3/10</span><br><span class="line"></span><br><span class="line">  Verifying  : rsync-3.0.6-12.el6.x86_64                                   4/10</span><br><span class="line"></span><br><span class="line">  Verifying  : libedit-2.11-4.20080712cvs.1.el6.x86_64                     5/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-5.3p1-112.el6_7.x86_64                              6/10</span><br><span class="line"></span><br><span class="line">  Verifying  : git-1.7.1-3.el6_4.1.x86_64                                  7/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-server-5.3p1-112.el6_7.x86_64                       8/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-5.3p1-94.el6.x86_64                                 9/10</span><br><span class="line"></span><br><span class="line">  Verifying  : openssh-server-5.3p1-94.el6.x86_64                         10/10</span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  git.x86_64 0:1.7.1-3.el6_4.1                                                  </span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  libedit.x86_64 0:2.11-4.20080712cvs.1.el6                                     </span><br><span class="line">  openssh-clients.x86_64 0:5.3p1-112.el6_7                                      </span><br><span class="line">  perl-Error.noarch 1:0.17015-4.el6                                             </span><br><span class="line">  perl-Git.noarch 0:1.7.1-3.el6_4.1                                             </span><br><span class="line">  rsync.x86_64 0:3.0.6-12.el6                                                   </span><br><span class="line"></span><br><span class="line">Dependency Updated:</span><br><span class="line">  openssh.x86_64 0:5.3p1-112.el6_7    openssh-server.x86_64 0:5.3p1-112.el6_7   </span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装完成后</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ which git</span><br><span class="line">/usr/bin/git</span><br><span class="line">$ git --version</span><br><span class="line">git version 1.7.1</span><br></pre></td></tr></table></figure>
+<p><strong>OK, 其他版本的Linux大概也就是这样的了</strong></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">http://git-scm.com/</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的官方网站</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="external">git - 简易指南</a></li>
+<li><a href="http://blog.jobbole.com/25775/" target="_blank" rel="external">Git详解之一：Git起步</a></li>
+<li><a href="http://baike.baidu.com/link?url=IWINhIXDsfMCThAtC_aHb8bPWrwsgwBuZfwPzbGBjoOeOT6F6GYyTV8F4Jn4JnpP90laupdcCRcCn9z--V02mobrOnLMr2Q1H5h4aNJEfRC" target="_blank" rel="external">GIT</a></li>
+<li><a href="http://blog.jobbole.com/78960/" target="_blank" rel="external">推荐！手把手教你使用Git</a></li>
+<li><a href="http://jingyan.baidu.com/article/90895e0fb3495f64ed6b0b50.html" target="_blank" rel="external">如何在windows下安装GIT</a></li>
+<li><a href="https://guides.github.com/activities/hello-world/" target="_blank" rel="external">GitHub Guides</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Git/">Git</a><a href="/tags/install/">install</a><a href="/tags/Mac/">Mac</a><a href="/tags/Windows/">Windows</a><a href="/tags/Linux/">Linux</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/02/29/Github图片外链设置/">Github图片外链设置</a></h1>
+  
+
+    <time datetime="2016-02-29T12:58:30.000Z">
+  <span class="day">29</span><span class="month">Feb</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <blockquote>
+<p>尝试在 Github 存储图片，并设置外链提供博客享用</p>
+</blockquote>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><a href="#steps">在Github上面设置图片外链的步骤</a></li>
+<li><a href="#reference">参考链接</a></li>
+</ol>
+<h1 id="在Github上面设置图片外链的步骤"><a href="#在Github上面设置图片外链的步骤" class="headerlink" title="在Github上面设置图片外链的步骤"></a><span id="steps">在Github上面设置图片外链的步骤</span></h1><ol>
+<li><strong>上传图片文件</strong><ul>
+<li><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/git_upload_p_1.png?raw=true" alt="上传好文件"></li>
+<li><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/github_picture_p_2.png?raw=true" alt="确认图片的内容"><br><strong>如果图片没有显示</strong><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/github_picture_p_6.png?raw=true" alt="看这个行不行？"></li>
+</ul>
+</li>
+<li><strong>复制链接</strong><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/github_picture_p_3.png?raw=true" alt="复制链接"></li>
+<li><strong>外链效果</strong><br><img src="https://github.com/scofieldWyq/wyqBlog/blob/master/picture/github_picture_p_5.png?raw=true" alt="链接图片效果"></li>
+<li><strong>然后就是把这个链接放到你想要的地方就好了</strong></li>
+</ol>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a><span id="reference">参考链接</span></h1><ul>
+<li><a href="http://inslow.com/picture-url/" target="_blank" rel="external">免费实用的图片外链</a></li>
+<li><a href="http://fengaili.com/2013/09/08/image-jekyll/" target="_blank" rel="external">利用github上传图片</a></li>
+<li><a href="https://help.github.com/articles/adding-a-file-to-a-repository/" target="_blank" rel="external">Adding a file to a repository</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/github/">github</a><a href="/tags/图片外链/">图片外链</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2016/02/29/git从远程库同步到本地仓库/">git从远程库同步到本地仓库</a></h1>
+  
+
+    <time datetime="2016-02-28T17:38:04.000Z">
+  <span class="day">29</span><span class="month">Feb</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><a href="#d1">远程仓库发生改变，本地仓库没有改变</a></li>
+<li><a href="#d2">远程仓库没有改变，本地仓库发生改变</a></li>
+<li><a href="#d3">远程仓库，本地仓库都发生改变</a></li>
+</ol>
+<h1 id="有三种方式的情况下，如何做到没有Bug的合并代码。。。"><a href="#有三种方式的情况下，如何做到没有Bug的合并代码。。。" class="headerlink" title="有三种方式的情况下，如何做到没有Bug的合并代码。。。"></a>有三种方式的情况下，如何做到没有Bug的合并代码。。。</h1><hr>
+<h2 id="远程仓库发生改变，本地仓库没有改变"><a href="#远程仓库发生改变，本地仓库没有改变" class="headerlink" title="远程仓库发生改变，本地仓库没有改变"></a><span id="d1">远程仓库发生改变，本地仓库没有改变</span></h2><ul>
+<li><p>首先，查看远程仓库 <code>git remote -v</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin	git@github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming.git (fetch)</span><br><span class="line">origin	git@github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming.git (push)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把远程库更新到本地 <code>git fetch origin master</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin master</span><br><span class="line">Warning: Permanently added the RSA host key for IP address &apos;&#123;IP address such as: 192.168.1.1 &#125;&apos; to the list of known hosts.</span><br><span class="line">From github.com:&#123;User&#125;/Understanding_Unix-Linux_Programming</span><br><span class="line"> * branch            master     -&gt; FETCH_HEAD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较远程更新和本地版本库的差异 <code>git log master.. origin/master</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git log master.. origin/master</span><br><span class="line">commit ce39f8b3eeee898a2a038444f897f2aef3673493</span><br><span class="line">Author: &#123;User&#125; &lt;794870409@qq.com&gt;</span><br><span class="line">Date:   Fri Feb 26 14:14:39 2016 +0800</span><br><span class="line"></span><br><span class="line">    &#123;The context origin added ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并远程库 <code>git merge origin/master</code></p>
+<ul>
+<li><p>有差异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line">Updating eb32b20..ce39f8b</span><br><span class="line">Fast-forward</span><br><span class="line"> README.md | 2 +-</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无差异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line">Already up-to-date</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="远程仓库没有改变，本地仓库发生改变"><a href="#远程仓库没有改变，本地仓库发生改变" class="headerlink" title="远程仓库没有改变，本地仓库发生改变"></a><span id="d2">远程仓库没有改变，本地仓库发生改变</span></h2><p><strong>命令推荐</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git status // 查看版本库的状态</span><br><span class="line">git add .|[file you want add like README.md] // 添加修改的文件进入版本库</span><br><span class="line">git commit -m &quot;the content of your modify&quot; // 提交版本库</span><br><span class="line">git push -u origin master // 上传到远程版本库</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>首先你的文件出现了修改 <code>git status</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &apos;origin/master&apos;.</span><br><span class="line">Changes not staged for commit:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span><br><span class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	modified:   README.md</span><br><span class="line"></span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>你的文件被修改后就会出现这样的显示</p>
+<ul>
+<li>添加文件 <code>git add .|[或者某个文件]|like: README.md</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git add README.md</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Your branch is up-to-date with &apos;origin/master&apos;.</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span><br><span class="line"></span><br><span class="line">	modified:   README.md</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>文件添加后，就会出现这种</p>
+<ul>
+<li>提交文件 <code>git commit -m &quot;content&quot;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;update content&quot;</span><br><span class="line">[master 7456161] update content</span><br><span class="line"> Committer: &#123;User&#125; &lt;wuyingqiang@wuyingqiangs-MacBook-Pro.local&gt;</span><br><span class="line">Your name and email address were configured automatically based</span><br><span class="line">on your username and hostname. Please check that they are accurate.</span><br><span class="line">You can suppress this message by setting them explicitly. Run the</span><br><span class="line">following command and follow the instructions in your editor to edit</span><br><span class="line">your configuration file:</span><br><span class="line"></span><br><span class="line">    git config --global --edit</span><br><span class="line"></span><br><span class="line">After doing this, you may fix the identity used for this commit with:</span><br><span class="line"></span><br><span class="line">    git commit --amend --reset-author</span><br><span class="line"></span><br><span class="line"> 1 file changed, 8 insertions(+), 3 deletions(-)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>文件提交到你的版本库，这样本地版本就更新了</p>
+<ul>
+<li>和远程库进行同步 <code>git push -u origin master</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Delta compression using up to 8 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 417 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 1), reused 0 (delta 0)</span><br><span class="line">To git@github.com:scofieldWyq/Understanding_Unix-Linux_Programming.git</span><br><span class="line">   ce39f8b..7456161  master -&gt; master</span><br><span class="line">Branch master set up to track remote branch master from origin.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样我们的版本库同步也就好了。</p>
+<hr>
+<h2 id="远程仓库，本地仓库都发生改变"><a href="#远程仓库，本地仓库都发生改变" class="headerlink" title="远程仓库，本地仓库都发生改变"></a><span id="d3">远程仓库，本地仓库都发生改变</span></h2><p>  以后再说咯。。。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>掌握 <code>git</code> 远程和本地的同步很重要的。</li>
+<li>还有解决同步产生的问题也是锻炼自己的一个机会。</li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/git/">git</a><a href="/tags/远程仓库/">远程仓库</a><a href="/tags/merge/">merge</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+<nav id="pagenavi">
+  
+    <a href="/page/3/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/5/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

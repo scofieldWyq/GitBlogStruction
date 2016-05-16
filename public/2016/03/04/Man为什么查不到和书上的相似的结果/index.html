@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Man为什么查不到和书上的相似的结果 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="解决man无法找到你想要的内容
+安装好man后，发现你查询的内容是 No manual entry for * 
+man -k {file} | grep {read} 没有结果
+
+1.安装好 man 后，发现你查询的内容是 No manual entry for ***  原因： 没有安装 man">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Man为什么查不到和书上的相似的结果</h1>
+  
+
+    <time datetime="2016-03-04T02:33:37.000Z">
+  <span class="day">4</span><span class="month">Mar</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="解决man无法找到你想要的内容"><a href="#解决man无法找到你想要的内容" class="headerlink" title="解决man无法找到你想要的内容"></a>解决man无法找到你想要的内容</h2><ul>
+<li><a href="#q1">安装好man后，发现你查询的内容是 No manual entry for <em>*</em> </a></li>
+<li><a href="#q2">man -k {file} | grep {read} 没有结果</a></li>
+</ul>
+<h2 id="1-安装好-man-后，发现你查询的内容是-No-manual-entry-for"><a href="#1-安装好-man-后，发现你查询的内容是-No-manual-entry-for" class="headerlink" title="1.安装好 man 后，发现你查询的内容是 No manual entry for *** "></a><span id="q1">1.安装好 <code>man</code> 后，发现你查询的内容是 <code>No manual entry for ***</code> </span></h2><p> <strong>原因： 没有安装 <code>man-pages</code></strong></p>
+<p> <strong>解决方案</strong><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y man-pages //如果权限问题，切换到root下</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-man-k-file-grep-read-没有结果"><a href="#2-man-k-file-grep-read-没有结果" class="headerlink" title="2.man -k {file} | grep {read} 没有结果"></a><span id="q2">2.man -k {file} | grep {read} 没有结果</span></h2><p> <strong>原因：本地数据库没有更新</strong></p>
+<p> <strong>解决方案</strong><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo makewhatis //如果权限问题，切换到 root 下</span><br></pre></td></tr></table></figure></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/Linux/">Linux</a><a href="/tags/Man/">Man</a><a href="/tags/command-line/">command line</a><a href="/tags/keyword-k/">keyword -k</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2016 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>
